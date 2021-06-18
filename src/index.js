@@ -31,28 +31,35 @@ import NucleoIcons from "views/NucleoIcons.js";
 import LoginPage from "views/examples/LoginPage.js";
 import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
+import { Provider } from "react-redux";
+import store from "./redux/store.js";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route path="/schools" render={(props) => <Schools {...props} />} />
-      <Route path="/index" render={(props) => <Index {...props} />} />
-      <Route
-        path="/nucleo-icons"
-        render={(props) => <NucleoIcons {...props} />}
-      />
-      <Route
-        path="/landing-page"
-        render={(props) => <LandingPage {...props} />}
-      />
-      <Route
-        path="/profile-page"
-        render={(props) => <ProfilePage {...props} />}
-      />
-      <Route path="/login-page" render={(props) => <LoginPage {...props} />} />
-      <Redirect to="/index" />
-      <Redirect from="/" to="/index" />
-    </Switch>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/schools" render={(props) => <Schools {...props} />} />
+        <Route path="/index" render={(props) => <Index {...props} />} />
+        <Route
+          path="/nucleo-icons"
+          render={(props) => <NucleoIcons {...props} />}
+        />
+        <Route
+          path="/landing-page"
+          render={(props) => <LandingPage {...props} />}
+        />
+        <Route
+          path="/profile-page"
+          render={(props) => <ProfilePage {...props} />}
+        />
+        <Route
+          path="/login-page"
+          render={(props) => <LoginPage {...props} />}
+        />
+        <Redirect to="/index" />
+        <Redirect from="/" to="/index" />
+      </Switch>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );

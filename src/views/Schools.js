@@ -1,10 +1,9 @@
 import React from "react";
-
+import ListSchools from "components/schools/ListSchools";
 // reactstrap components
 // import {
 // } from "reactstrap";
 
-// core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
@@ -31,6 +30,7 @@ function Schools() {
         <LandingPageHeader />
         <div className="main">
           <Tabs />
+          <ListSchools></ListSchools>
         </div>
         <DarkFooter />
       </div>
