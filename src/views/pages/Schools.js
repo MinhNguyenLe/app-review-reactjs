@@ -29,7 +29,6 @@ function Schools() {
       <div className="wrapper">
         <LandingPageHeader />
         <div className="main">
-          <Tabs />
           <ListSchools></ListSchools>
         </div>
         <DarkFooter />
