@@ -4,7 +4,7 @@ import ListSchools from "components/schools/ListSchools";
 // import {
 // } from "reactstrap";
 
-import IndexNavbar from "components/Navbars/IndexNavbar.js";
+import CustomNavbar from "components/Navbars/CustomNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
 
@@ -25,7 +25,7 @@ function Schools() {
   });
   return (
     <>
-      <IndexNavbar />
+      <CustomNavbar />
       <div className="wrapper">
         <LandingPageHeader />
         <div className="main">

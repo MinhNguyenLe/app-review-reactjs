@@ -13,7 +13,7 @@ import Loading from "components/loading/Loading.js";
 import * as func from "javascript/funcGlobal.js";
 import * as rb from "react-bootstrap";
 
-import IndexNavbar from "components/Navbars/IndexNavbar.js";
+import CustomNavbar from "components/Navbars/CustomNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
 import Review from "components/review/Review.js";
@@ -156,7 +156,7 @@ function ReviewPage() {
   };
   return (
     <>
-      <IndexNavbar />
+      <CustomNavbar />
       <div className="wrapper">
         <LandingPageHeader />
         <div className="main">
