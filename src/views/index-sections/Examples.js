@@ -13,7 +13,7 @@ function Examples() {
         <Container className="text-center">
           <Row>
             <div className="col">
-              <a href="examples/landing-page.html" target="_blank">
+              <a href="pages/landing-page.html" target="_blank">
                 <img
                   alt="..."
                   className="img-raised"
@@ -31,7 +31,7 @@ function Examples() {
               </Button>
             </div>
             <div className="col">
-              <a href="examples/profile-page.html" target="_blank">
+              <a href="pages/profile-page.html" target="_blank">
                 <img
                   alt="..."
                   className="img-raised"

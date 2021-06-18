@@ -1,4 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import $ from "jquery";
+import axios from "axios";
+import "moment-timezone";
+import useFormLogin from "javascript/useFormLogin";
+import validateLogin from "javascript/validateLogin";
+import { useLocation, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import * as action from "redux/actions.js";
+import { apiLocal } from "javascript/dataGlobal.js";
 
 // reactstrap components
 import {
@@ -21,9 +31,35 @@ import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "components/Footers/TransparentFooter.js";
 
 function LoginPage() {
+  const dispatch = useDispatch();
+  let location = useLocation();
+  let history = useHistory();
+  const errLogin = useSelector((state) => state.errLogin);
+
+  const { valuesLogin, errorsLogin, handleChangeLogin, handleSubmitLogin } =
+    useFormLogin(login, validateLogin);
+  function login() {
+    Promise.all([
+      axios.post(`${apiLocal}/api/users/login`, {
+        email: valuesLogin.emailLogin,
+        password: valuesLogin.passLogin,
+      }),
+    ])
+      .then(() => {
+        dispatch(action.setErrLogin(false));
+        console.log("success");
+        dispatch(action.setToken(true));
+        dispatch(action.setEmail(valuesLogin.emailLogin));
+        history.push("/schools");
+      })
+      .catch((err) => {
+        if (err) dispatch(action.setErrLogin(true));
+      });
+  }
+
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.classList.add("login-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
@@ -34,6 +70,7 @@ function LoginPage() {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
+
   return (
     <>
       <ExamplesNavbar />
@@ -49,7 +86,12 @@ function LoginPage() {
           <Container>
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
-                <Form action="" className="form" method="">
+                <Form
+                  onSubmit={handleSubmitLogin}
+                  action="submit"
+                  className="form"
+                  method=""
+                >
                   <CardHeader className="text-center">
                     <div className="logo-container">
                       <img
@@ -71,12 +113,19 @@ function LoginPage() {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
-                        placeholder="First Name..."
-                        type="text"
+                        value={valuesLogin.emailLogin || ""}
+                        name="emailLogin"
+                        required
+                        onChange={handleChangeLogin}
+                        placeholder="Email Address..."
+                        type="email"
                         onFocus={() => setFirstFocus(true)}
                         onBlur={() => setFirstFocus(false)}
                       ></Input>
                     </InputGroup>
+                    {errorsLogin.emailLogin && (
+                      <p className="help is-danger">{errorsLogin.emailLogin}</p>
+                    )}
                     <InputGroup
                       className={
                         "no-border input-lg" +
@@ -89,33 +138,34 @@ function LoginPage() {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
-                        placeholder="Last Name..."
-                        type="text"
+                        value={valuesLogin.passLogin || ""}
+                        name="passLogin"
+                        required
+                        onChange={handleChangeLogin}
+                        placeholder="Pass Word..."
+                        type="password"
                         onFocus={() => setLastFocus(true)}
                         onBlur={() => setLastFocus(false)}
                       ></Input>
                     </InputGroup>
+                    {errorsLogin.passLogin && (
+                      <p className="help is-danger">{errorsLogin.passLogin}</p>
+                    )}
+                    {errLogin && (
+                      <p className="help is-danger">
+                        Account is wrong or not exist
+                      </p>
+                    )}
                   </CardBody>
                   <CardFooter className="text-center">
-                    <Button
-                      block
-                      className="btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="lg"
-                    >
+                    <Button block className="btn-round" color="info" size="lg">
                       Get Started
                     </Button>
                     <div className="pull-left">
                       <h6>
-                        <a
-                          className="link"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
+                        <Link className="link" to="/register">
                           Create Account
-                        </a>
+                        </Link>
                       </h6>
                     </div>
                     <div className="pull-right">

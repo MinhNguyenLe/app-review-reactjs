@@ -26,11 +26,12 @@ import "assets/demo/demo.css?v=1.5.0";
 import "assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
 import "./index.css";
 import Index from "views/Index.js";
-import Schools from "views/Schools.js";
+import Schools from "views/pages/Schools.js";
+import Register from "views/pages/Register.js";
 import NucleoIcons from "views/NucleoIcons.js";
-import LoginPage from "views/examples/LoginPage.js";
-import LandingPage from "views/examples/LandingPage.js";
-import ProfilePage from "views/examples/ProfilePage.js";
+import LoginPage from "views/pages/LoginPage.js";
+import LandingPage from "views/pages/LandingPage.js";
+import ProfilePage from "views/pages/ProfilePage.js";
 import { Provider } from "react-redux";
 import store from "./redux/store.js";
 
@@ -38,24 +39,13 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
+        <Route path="/register" render={(props) => <Register {...props} />} />
         <Route path="/schools" render={(props) => <Schools {...props} />} />
         <Route path="/index" render={(props) => <Index {...props} />} />
-        <Route
-          path="/nucleo-icons"
-          render={(props) => <NucleoIcons {...props} />}
-        />
-        <Route
-          path="/landing-page"
-          render={(props) => <LandingPage {...props} />}
-        />
-        <Route
-          path="/profile-page"
-          render={(props) => <ProfilePage {...props} />}
-        />
-        <Route
-          path="/login-page"
-          render={(props) => <LoginPage {...props} />}
-        />
+        <Route path="/nucleo" render={(props) => <NucleoIcons {...props} />} />
+        <Route path="/landing" render={(props) => <LandingPage {...props} />} />
+        <Route path="/profile" render={(props) => <ProfilePage {...props} />} />
+        <Route path="/login" render={(props) => <LoginPage {...props} />} />
         <Redirect to="/index" />
         <Redirect from="/" to="/index" />
       </Switch>

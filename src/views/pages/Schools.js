@@ -8,7 +8,7 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
 
-import Tabs from "./index-sections/Tabs.js";
+import Tabs from "../index-sections/Tabs.js";
 import LandingPageHeader from "components/Headers/LandingPageHeader.js";
 
 function Schools() {

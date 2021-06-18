@@ -10,13 +10,5 @@ export default function validateLogin(values) {
   } else if (values.passLogin.length < 6) {
     errors.passLogin = "Password must be 6 or more characters";
   }
-  // if (!values.name) {
-  //   errors.name = "Name is required";
-  // } else if (values.name.length < 6) {
-  //   errors.name = "Your name must be 6 or more characters";
-  // }
-  // if (!values.username) {
-  //   errors.username = "User is required";
-  // }
   return errors;
 }

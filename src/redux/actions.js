@@ -7,6 +7,15 @@ export const setIdSchool = (id) => {
   };
 };
 
+export const setErrLogin = (bool) => {
+  return {
+    type: "SET-ERR-LOGIN",
+    payload: {
+      errLogin: bool,
+    },
+  };
+};
+
 export const setCmt = (cmt) => {
   return {
     type: "SET-CMT",
