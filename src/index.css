@@ -1,0 +1,363 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+i {
+  outline: none;
+  text-decoration: none;
+}
+body {
+  background: #f7f7f7;
+}
+a {
+  outline: none;
+  text-decoration: none;
+  color: black;
+}
+button {
+  outline: none;
+}
+input {
+  outline: none;
+}
+.frame {
+  justify-content: center;
+  display: flex;
+}
+.frame-width {
+  width: 1200px;
+}
+textarea {
+  resize: none;
+  padding: 0;
+  outline: none;
+}
+.hover-shadow:hover {
+  box-shadow: 1px 4px 12px 4px #d6d6d6;
+}
+/* .hover-shadow:hover .user{
+  box-shadow : 1px 4px 12px 4px #95f1a2;
+} */
+.hover-scale:hover {
+  opacity: 1;
+  transform: scale(1.05);
+  transition: all 1.6s;
+}
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+span {
+  margin: 0;
+  padding: 0;
+}
+body {
+  position: relative;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.f-de-re {
+  border: none !important;
+  box-shadow: none;
+}
+.rate-re {
+  font-size: 24px;
+}
+.n-cmt {
+  font-size: 22px;
+  font-weight: 500;
+  color: #333;
+}
+.ske-cmt-c {
+  border-bottom: 1px solid rgb(223, 222, 222);
+  margin: 8px 0;
+  border-radius: 4px;
+  padding: 16px 28px;
+}
+.cmt-name {
+  margin-right: 8px;
+  color: rgb(75, 35, 250);
+  font-size: 14px;
+  font-weight: 500;
+}
+.cmt-content {
+  color: rgb(44, 44, 44);
+  font-size: 16px;
+  font-weight: 500;
+}
+.btn-add-cmt {
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+  color: rgb(175, 175, 175);
+}
+.hidden {
+  display: none;
+}
+.up-page {
+  z-index: 999;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: calc(100% - 76px);
+  right: 0;
+  margin-right: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 24%;
+  border: 1px solid #7878da;
+}
+.up-page:hover {
+  background-color: #7878da;
+}
+.up-page:hover i {
+  color: white !important;
+}
+.cover-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: #00000080;
+}
+.review-name {
+  color: rgb(73, 73, 73);
+  font-weight: 700;
+  font-size: 16px;
+}
+.review-title {
+  font-size: 22px;
+}
+.date-content {
+  font-size: 14px;
+  font-weight: normal;
+}
+.review-content {
+  display: -webkit-box;
+  color: #383838;
+  font-size: 16px;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.review-detail-content {
+  margin-bottom: 20px !important;
+  display: -webkit-box;
+  margin-left: 12px;
+  color: #686868;
+  font-size: 17px;
+}
+.review-name-school {
+  color: black;
+  font-weight: 500;
+  color: black;
+  font-size: 24px;
+}
+.icon-user {
+  background-color: transparent;
+  width: 32px;
+  height: 32px;
+  color: rgb(99, 99, 99);
+  border: 1px solid rgb(99, 99, 99);
+  font-size: 16px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+.edit-review {
+  display: flex;
+  font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  min-width: 36px;
+  width: auto;
+  height: 36px;
+}
+.editor {
+  padding: 20px;
+  top: 40px;
+  background: white;
+  position: absolute;
+  z-index: 1000;
+  width: 50%;
+  border: 1px solid #333;
+  border: none;
+  border-radius: 4px;
+}
+.edit-content {
+  font-size: 14px;
+  width: 100%;
+}
+.small-title {
+  font-size: 20px;
+  color: rgb(131, 131, 131);
+}
+.big-title {
+  font-size: 28px;
+  color: rgb(100, 94, 94);
+  font-weight: bold;
+}
+/* design review */
+.user {
+  display: flex;
+  min-height: 172px;
+  border-bottom: 1px solid #dbdee0;
+  border-top: 1px solid #dbdee0;
+}
+.btn-stack {
+  margin-right: 20px;
+  display: flex;
+  height: 48px;
+  width: 76px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.btn-stack-a {
+  background-color: #fff;
+  color: #799fc1;
+  border: none;
+  border-radius: 4px;
+}
+.btn-stack-b {
+  background-color: #5eba7d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+.tx-a {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+}
+.tx-b {
+  font-size: 14px;
+}
+.card-text {
+  margin: 0;
+}
+
+.link-card:hover {
+  text-decoration: none;
+}
+.school-name {
+  color: rgb(68, 68, 68);
+  font-size: 17px;
+}
+.school-logo {
+  max-width: 44px;
+  max-height: 44px;
+  overflow: hidden;
+  object-fit: contain;
+}
+.school-img {
+  width: 200px;
+  height: 200px;
+  max-width: 300px;
+  max-height: 300px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.school-badge {
+  margin-right: 6px;
+  width: 40px;
+  height: 40px;
+  font-size: 16px !important;
+}
+@keyframes ldio-ju28meytq5-r {
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.2 0 0.8 0.8);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.2 0.2 0.8 1);
+  }
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ldio-ju28meytq5-s {
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.2 0 0.8 0.8);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.2 0.2 0.8 1);
+  }
+  0% {
+    transform: translate(-30px, -30px) scale(0);
+  }
+  50% {
+    transform: translate(-30px, -30px) scale(1);
+  }
+  100% {
+    transform: translate(-30px, -30px) scale(0);
+  }
+}
+.ldio-ju28meytq5 > div {
+  transform: translate(0px, -15px);
+}
+.ldio-ju28meytq5 > div > div {
+  animation: ldio-ju28meytq5-r 1s linear infinite;
+  transform-origin: 100px 100px;
+}
+.ldio-ju28meytq5 > div > div > div {
+  position: absolute;
+  transform: translate(100px, 82px);
+}
+.ldio-ju28meytq5 > div > div > div > div {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #fe718d;
+  animation: ldio-ju28meytq5-s 1s linear infinite;
+}
+.ldio-ju28meytq5 > div > div:last-child {
+  animation-delay: -0.5s;
+}
+.ldio-ju28meytq5 > div > div:last-child > div > div {
+  animation-delay: -0.5s;
+  background: #46dff0;
+}
+.loadingio-spinner-interwind-aeivkm0p0pl {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  overflow: hidden;
+  background: #ffffff;
+}
+.ldio-ju28meytq5 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-ju28meytq5 div {
+  box-sizing: content-box;
+}
+/* generated by https://loading.io/ */
