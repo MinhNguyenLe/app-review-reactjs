@@ -27,6 +27,7 @@ import "assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
 import "./index.css";
 import Index from "views/Index.js";
 import Schools from "views/pages/Schools.js";
+import DetailReview from "views/pages/DetailReview.js";
 import ReviewPage from "views/pages/Review.js";
 import Register from "views/pages/Register.js";
 import NucleoIcons from "views/NucleoIcons.js";
@@ -41,13 +42,17 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route
+          path="/schools/:id/reviews/:id/detail"
+          render={(props) => <DetailReview {...props} />}
+        />
+        <Route
           path="/schools/:id/reviews"
           render={(props) => <ReviewPage {...props} />}
         />
         <Route path="/register" render={(props) => <Register {...props} />} />
         <Route path="/schools" render={(props) => <Schools {...props} />} />
         <Route path="/index" render={(props) => <Index {...props} />} />
-        <Route path="/nucleo" render={(props) => <NucleoIcons {...props} />} />
+        <Route path="/icon" render={(props) => <NucleoIcons {...props} />} />
         <Route path="/landing" render={(props) => <LandingPage {...props} />} />
         <Route path="/profile" render={(props) => <ProfilePage {...props} />} />
         <Route path="/login" render={(props) => <LoginPage {...props} />} />

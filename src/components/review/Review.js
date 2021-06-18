@@ -1,6 +1,5 @@
 import React from "react";
-
-// reactstrap components
+import { Link, useParams } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -19,7 +18,7 @@ import {
 
 function Review({
   name,
-  key,
+  id,
   idSchool,
   ratePoint,
   positive,
@@ -27,10 +26,11 @@ function Review({
   advice,
   createdAt,
 }) {
+  const params = useParams();
   const [pills, setPills] = React.useState("1");
   return (
     <>
-      <div className="section section-tabs">
+      <div className="section section-tabs" key={id}>
         <Container>
           <Row>
             <Col className="ml-auto mr-auto" md="10" xl="6">
@@ -89,6 +89,17 @@ function Review({
                       >
                         Lời khuyên
                       </NavLink>
+                    </NavItem>
+                    <NavItem
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Link to={`/schools/${params.id}/reviews/${id}/detail`}>
+                        <i class="now-ui-icons ui-1_zoom-bold"></i>
+                      </Link>
                     </NavItem>
                   </Nav>
                 </CardHeader>

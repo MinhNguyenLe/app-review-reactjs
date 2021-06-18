@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 // reactstrap components
 import { Button, Container } from "reactstrap";
@@ -6,7 +6,7 @@ import { Button, Container } from "reactstrap";
 // core components
 
 function LandingPageHeader() {
-  let pageHeader = React.createRef();
+  let pageHeader = useRef();
 
   React.useEffect(() => {
     if (window.innerWidth > 991) {

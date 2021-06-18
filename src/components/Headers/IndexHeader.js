@@ -1,12 +1,12 @@
 /*eslint-disable*/
-import React from "react";
+import React, { useRef } from "react";
 
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
 
 function IndexHeader() {
-  let pageHeader = React.createRef();
+  let pageHeader = useRef();
 
   React.useEffect(() => {
     if (window.innerWidth > 991) {

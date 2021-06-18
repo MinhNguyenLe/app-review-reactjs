@@ -176,7 +176,7 @@ function ReviewPage() {
                     negative={item.negative}
                     advice={item.advice}
                     createdAt={item.createdAt}
-                    key={item._id}
+                    id={item._id}
                     name={item.name}
                     idSchool={item.idSchool}
                     ratePoint={item.ratePoint}
