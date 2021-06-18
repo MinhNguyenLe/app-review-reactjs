@@ -110,6 +110,7 @@ function Review({
                   >
                     <TabPane tabId="pills1">
                       <p>{name}</p>
+                      <p>asdasdasd</p>
                     </TabPane>
                     <TabPane tabId="pills2">
                       <p>{positive}</p>

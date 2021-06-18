@@ -9,7 +9,7 @@ function IndexHeader() {
   let pageHeader = useRef();
 
   React.useEffect(() => {
-    if (window.innerWidth > 991 && pageHeader) {
+    if (window.innerWidth > 991 && pageHeader.current) {
       const updateScroll = () => {
         let windowScrollTop = window.pageYOffset / 3;
         pageHeader.current.style.transform =
