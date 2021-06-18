@@ -28,6 +28,7 @@ import "./index.css";
 import Index from "views/Index.js";
 import ErrPage from "views/pages/Error.js";
 import Schools from "views/pages/Schools.js";
+import MyPage from "views/pages/MyPage.js";
 import DetailReview from "views/pages/DetailReview.js";
 import ReviewPage from "views/pages/Review.js";
 import Register from "views/pages/Register.js";
@@ -45,26 +46,51 @@ ReactDOM.render(
       <AppContainer>
         <Switch>
           <Route
+            exact
             path="/schools/:id/reviews/:id/detail"
             render={(props) => <DetailReview {...props} />}
           />
           <Route
+            exact
+            path="/mypage"
+            render={(props) => <MyPage {...props} />}
+          />
+          <Route
+            exact
             path="/schools/:id/reviews"
             render={(props) => <ReviewPage {...props} />}
           />
-          <Route path="/register" render={(props) => <Register {...props} />} />
-          <Route path="/schools" render={(props) => <Schools {...props} />} />
-          <Route path="/index" render={(props) => <Index {...props} />} />
-          <Route path="/icon" render={(props) => <NucleoIcons {...props} />} />
           <Route
+            exact
+            path="/register"
+            render={(props) => <Register {...props} />}
+          />
+          <Route
+            exact
+            path="/schools"
+            render={(props) => <Schools {...props} />}
+          />
+          <Route exact path="/" render={(props) => <Index {...props} />} />
+          <Route
+            exact
+            path="/icon"
+            render={(props) => <NucleoIcons {...props} />}
+          />
+          <Route
+            exact
             path="/landing"
             render={(props) => <LandingPage {...props} />}
           />
           <Route
+            exact
             path="/profile/:id"
             render={(props) => <ProfilePage {...props} />}
           />
-          <Route path="/login" render={(props) => <LoginPage {...props} />} />
+          <Route
+            exact
+            path="/login"
+            render={(props) => <LoginPage {...props} />}
+          />
           <Route component={ErrPage}></Route>
         </Switch>
       </AppContainer>

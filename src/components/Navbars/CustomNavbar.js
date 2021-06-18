@@ -94,16 +94,7 @@ function CustomNavbar() {
             <Nav navbar>
               {token ? (
                 <NavItem>
-                  <Button
-                    href="/register"
-                    className="nav-link btn-neutral"
-                    color="info"
-                    id="upgrade-to-pro"
-                    target="_blank"
-                  >
-                    <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
-                    <p>aaaaaaaa</p>
-                  </Button>
+                  <Link to="/mypage">My Profile</Link>
                 </NavItem>
               ) : (
                 <>
