@@ -26,6 +26,7 @@ import "assets/demo/demo.css?v=1.5.0";
 import "assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
 import "./index.css";
 import Index from "views/Index.js";
+import ErrPage from "views/pages/Error.js";
 import Schools from "views/pages/Schools.js";
 import DetailReview from "views/pages/DetailReview.js";
 import ReviewPage from "views/pages/Review.js";
@@ -36,29 +37,37 @@ import LandingPage from "views/pages/LandingPage.js";
 import ProfilePage from "views/pages/ProfilePage.js";
 import { Provider } from "react-redux";
 import store from "./redux/store.js";
+import AppContainer from "views/AppContainer.js";
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Switch>
-        <Route
-          path="/schools/:id/reviews/:id/detail"
-          render={(props) => <DetailReview {...props} />}
-        />
-        <Route
-          path="/schools/:id/reviews"
-          render={(props) => <ReviewPage {...props} />}
-        />
-        <Route path="/register" render={(props) => <Register {...props} />} />
-        <Route path="/schools" render={(props) => <Schools {...props} />} />
-        <Route path="/index" render={(props) => <Index {...props} />} />
-        <Route path="/icon" render={(props) => <NucleoIcons {...props} />} />
-        <Route path="/landing" render={(props) => <LandingPage {...props} />} />
-        <Route path="/profile" render={(props) => <ProfilePage {...props} />} />
-        <Route path="/login" render={(props) => <LoginPage {...props} />} />
-        <Redirect to="/index" />
-        <Redirect from="/" to="/index" />
-      </Switch>
+      <AppContainer>
+        <Switch>
+          <Route
+            path="/schools/:id/reviews/:id/detail"
+            render={(props) => <DetailReview {...props} />}
+          />
+          <Route
+            path="/schools/:id/reviews"
+            render={(props) => <ReviewPage {...props} />}
+          />
+          <Route path="/register" render={(props) => <Register {...props} />} />
+          <Route path="/schools" render={(props) => <Schools {...props} />} />
+          <Route path="/index" render={(props) => <Index {...props} />} />
+          <Route path="/icon" render={(props) => <NucleoIcons {...props} />} />
+          <Route
+            path="/landing"
+            render={(props) => <LandingPage {...props} />}
+          />
+          <Route
+            path="/profile/:id"
+            render={(props) => <ProfilePage {...props} />}
+          />
+          <Route path="/login" render={(props) => <LoginPage {...props} />} />
+          <Route component={ErrPage}></Route>
+        </Switch>
+      </AppContainer>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")

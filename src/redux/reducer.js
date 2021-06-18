@@ -1,4 +1,5 @@
 const INITIAL_STATE = {
+  errPage: false,
   errLogin: false,
   idSchool: "",
   idReview: "",
@@ -30,6 +31,11 @@ export default function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         idReview: action.payload.id,
+      };
+    case "SET-ERR-PAGE":
+      return {
+        ...state,
+        errPage: action.payload.errPage,
       };
     case "SET-ERR-LOGIN":
       return {
