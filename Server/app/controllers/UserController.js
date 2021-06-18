@@ -1,10 +1,39 @@
 const User = require("../models/User");
+const Review = require("../models/Review");
+const Comment = require("../models/Comment");
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 const { json } = require("express");
 
 const userController = {
+  getSumReview(req, res) {
+    const id = req.params.id;
+    Review.find({ idUser: id })
+      .then((data) => {
+        return res.json({
+          sumReview: data.length,
+          data: data,
+        });
+      })
+      .catch((err) => {
+        return res.status(500).json({ msg: err.message });
+      });
+  },
+  getSumCmt(req, res) {
+    const id = req.params.id;
+    Review.find({ idUser: id })
+      .then((data) => {
+        return res.json({
+          sumCmt: data.length,
+          data: data,
+        });
+      })
+      .catch((err) => {
+        return res.status(500).json({ msg: err.message });
+      });
+  },
   getAll(req, res) {
     User.find({})
       .then((users) => {

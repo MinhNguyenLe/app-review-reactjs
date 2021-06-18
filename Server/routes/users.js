@@ -1,33 +1,37 @@
-const router = require('express').Router();
-const userController = require('../app/controllers/UserController');
-const multer = require('multer');
-const fileUploader = require('../app/middleware/uploadMiddleware');
-const auth = require('../app/middleware/auth');
+const router = require("express").Router();
+const userController = require("../app/controllers/UserController");
+const multer = require("multer");
+const fileUploader = require("../app/middleware/uploadMiddleware");
+const auth = require("../app/middleware/auth");
 
 router.post(
-    '/register',
-    fileUploader.single('avatar'),
-    userController.register
+  "/register",
+  fileUploader.single("avatar"),
+  userController.register
 );
 
 router.use(multer().none());
 
-router.post('/login', userController.login);
+router.get("/:id/sum/reviews", userController.getSumReview);
 
-router.get('/logout', userController.logout);
+router.get("/:id/sum/cmt", userController.getSumCmt);
 
-router.get('/refresh_token', userController.refreshToken);
+router.post("/login", userController.login);
 
-router.get('/me', auth, userController.getMe);
+router.get("/logout", userController.logout);
 
-router.get('/username/:username', userController.getByUsername);
+router.get("/refresh_token", userController.refreshToken);
 
-router.get('/email/:email', userController.getByEmail);
+router.get("/me", auth, userController.getMe);
 
-router.get('/permission/:permission', userController.getByPermission);
+router.get("/username/:username", userController.getByUsername);
 
-router.get('/:id', userController.getById);
+router.get("/email/:email", userController.getByEmail);
 
-router.get('/', userController.getAll);
+router.get("/permission/:permission", userController.getByPermission);
+
+router.get("/:id", userController.getById);
+
+router.get("/", userController.getAll);
 
 module.exports = router;

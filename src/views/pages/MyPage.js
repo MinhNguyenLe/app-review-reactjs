@@ -1,6 +1,11 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
+import $ from "jquery";
+import axios from "axios";
+import "moment-timezone";
 import { useDispatch, useSelector } from "react-redux";
+import * as action from "redux/actions.js";
+import { apiLocal } from "javascript/dataGlobal.js";
 
 // reactstrap components
 import {
@@ -22,7 +27,14 @@ import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "components/Footers/DefaultFooter.js";
 
 function MyPage() {
+  const [sumRe, setSumRe] = useState(0);
+  const [sumCmt, setSumCmt] = useState(0);
+
+  const params = useParams();
   const history = useHistory();
+
+  const dispatch = useDispatch();
+
   const token = useSelector((state) => state.token);
   const user = useSelector((state) => state.user);
 
@@ -30,11 +42,24 @@ function MyPage() {
 
   React.useEffect(() => {
     if (!token) history.push("/login");
+
     document.body.classList.add("profile-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
+
+    Promise.all([
+      axios.get(`${apiLocal}/api/users/${user.id}/sum/reviews`),
+      axios.get(`${apiLocal}/api/users/${user.id}/sum/cmt`),
+    ])
+      .then(([sumRe, sumCmt]) => {
+        setSumRe(sumRe.data.sumReview);
+        setSumCmt(sumCmt.data.sumCmt);
+      })
+      .catch((err) => {
+        if (err) history.push("/err");
+      });
     return function cleanup() {
       document.body.classList.remove("profile-page");
       document.body.classList.remove("sidebar-collapse");
@@ -44,7 +69,7 @@ function MyPage() {
     <>
       <ExamplesNavbar />
       <div className="wrapper">
-        <ProfilePageHeader />
+        <ProfilePageHeader sumRe={sumRe} sumCmt={sumCmt} />
         <div className="section">
           <Container>
             <div className="button-container">

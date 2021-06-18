@@ -11,7 +11,7 @@ const Comment = new Schema(
     idUser: {
       type: String,
       required: true,
-      default: "xxx",
+      default: "Anonymous",
     },
     name: {
       type: String,
