@@ -16,11 +16,9 @@ import * as func from "javascript/funcGlobal.js";
 import * as rb from "react-bootstrap";
 
 import ReviewNav from "components/Navbars/ReviewNav.js";
-import IndexHeader from "components/Headers/IndexHeader.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
 import Review from "components/review/Review.js";
-import Tabs from "../index-sections/Tabs.js";
-import LandingPageHeader from "components/Headers/LandingPageHeader.js";
+import ReviewPageHeader from "components/Headers/ReviewPageHeader.js";
 
 function ReviewPage() {
   React.useEffect(() => {
@@ -170,7 +168,7 @@ function ReviewPage() {
     <>
       <ReviewNav writeReview={writeReview} />
       <div className="wrapper">
-        <LandingPageHeader />
+        <ReviewPageHeader />
         <div className="main">
           {loading ? (
             <div

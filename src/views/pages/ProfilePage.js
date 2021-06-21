@@ -50,10 +50,12 @@ function ProfilePage() {
     Promise.all([
       axios.get(`${apiLocal}/api/comments/users/${params.id}`),
       axios.get(`${apiLocal}/api/reviews/users/${params.id}`),
+      axios.get(`${apiLocal}/api/users/${params.id}`),
     ])
-      .then(([cmt, re]) => {
+      .then(([cmt, re, user]) => {
         setRe(re.data);
         setCmt(cmt.data);
+        dispatch(action.setPeople(user.data));
       })
       .catch((err) => {
         console.log(err);
@@ -104,9 +106,10 @@ function ProfilePage() {
               and records all of his own music, giving it a warm, intimate feel
               with a solid groove structure. An artist of considerable range.
             </h5>
-            {re.map((item) => {
-              return <Review item={item}></Review>;
-            })}
+            {re &&
+              re.map((item) => {
+                return <Review item={item} typePage="profile"></Review>;
+              })}
             <Row>
               <Col className="ml-auto mr-auto" md="6">
                 <h4 className="title text-center">My Portfolio</h4>

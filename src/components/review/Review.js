@@ -1,7 +1,7 @@
 import React from "react";
 import Moment from "react-moment";
 import Avatar from "components/avatar/Avatar.js";
-
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import {
   Card,
@@ -19,9 +19,10 @@ import {
 
 // core components
 
-function Review({ item }) {
+function Review({ item, userName, typePage }) {
   const params = useParams();
   const [pills, setPills] = React.useState("1");
+  const people = useSelector((state) => state.people);
   return (
     <div key={item._id}>
       <div className="section section-tabs">
@@ -106,7 +107,15 @@ function Review({ item }) {
                   >
                     <TabPane tabId="pills1" className="tab-flex">
                       <Link
-                        to={`/profile/${item.idUser ? item.idUser._id : "err"}`}
+                        to={
+                          typePage === "mypage"
+                            ? "/mypage"
+                            : typePage === "profile"
+                            ? `/profile/${params.id}`
+                            : `/profile/${
+                                item.idUser ? item.idUser._id : "err"
+                              }`
+                        }
                         className="review-link-user"
                       >
                         <Avatar
@@ -115,7 +124,13 @@ function Review({ item }) {
                         ></Avatar>
                         <div className="img-tab-review">
                           <p style={{ margin: "0" }}>
-                            {item.idUser ? item.idUser.name : "Anonymous"}
+                            {userName
+                              ? userName
+                              : people
+                              ? people.name
+                              : item.idUser
+                              ? item.idUser.name
+                              : "Anonymous"}
                           </p>
                           <Moment className="date-content" format="YYYY/MM/DD">
                             {item.createdAt}

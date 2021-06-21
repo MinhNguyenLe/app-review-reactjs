@@ -5,11 +5,9 @@ import ListSchools from "components/schools/ListSchools";
 // } from "reactstrap";
 
 import CustomNavbar from "components/Navbars/CustomNavbar.js";
-import IndexHeader from "components/Headers/IndexHeader.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
 
-import Tabs from "../index-sections/Tabs.js";
-import LandingPageHeader from "components/Headers/LandingPageHeader.js";
+import SchoolPageHeader from "components/Headers/SchoolPageHeader.js";
 
 function Schools() {
   React.useEffect(() => {
@@ -27,7 +25,7 @@ function Schools() {
     <>
       <CustomNavbar />
       <div className="wrapper">
-        <LandingPageHeader />
+        <SchoolPageHeader />
         <div className="main">
           <ListSchools></ListSchools>
         </div>

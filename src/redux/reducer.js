@@ -10,6 +10,14 @@ const INITIAL_STATE = {
   name: "",
   token: false,
   email: "",
+  people: {
+    email: "",
+    permission: "",
+    id: "",
+    username: "",
+    name: "",
+    createdAt: "",
+  },
   user: {
     email: "",
     permission: "",
@@ -73,6 +81,18 @@ export default function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         cmt: action.payload.cmt,
+      };
+    case "SET-PEOPLE":
+      return {
+        ...state,
+        people: {
+          email: action.payload.email,
+          permission: action.payload.permission,
+          id: action.payload.id,
+          username: action.payload.username,
+          name: action.payload.name,
+          createdAt: action.payload.createdAt,
+        },
       };
     case "SET-USER":
       return {

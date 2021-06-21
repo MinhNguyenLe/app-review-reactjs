@@ -23,7 +23,7 @@ import {
 
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
-import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
+import MypageHeader from "components/Headers/MypageHeader.js";
 import DefaultFooter from "components/Footers/DefaultFooter.js";
 
 function MyPage() {
@@ -69,7 +69,7 @@ function MyPage() {
     <>
       <ExamplesNavbar />
       <div className="wrapper">
-        <ProfilePageHeader re={re} cmt={cmt} />
+        <MypageHeader re={re} cmt={cmt} />
         <div className="section">
           <Container>
             <div className="button-container">
@@ -106,9 +106,16 @@ function MyPage() {
               and records all of his own music, giving it a warm, intimate feel
               with a solid groove structure. An artist of considerable range.
             </h5>
-            {re.map((item) => {
-              return <Review item={item}></Review>;
-            })}
+            {re &&
+              re.map((item) => {
+                return (
+                  <Review
+                    item={item}
+                    userName={user.name}
+                    typePage="mypage"
+                  ></Review>
+                );
+              })}
             <Row>
               <Col className="ml-auto mr-auto" md="6">
                 <h4 className="title text-center">My Portfolio</h4>

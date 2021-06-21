@@ -1,12 +1,13 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
+
 // reactstrap components
 import { Container } from "reactstrap";
 
 // core components
 
-function ProfilePageHeader({ re, cmt }) {
-  const people = useSelector((state) => state.people);
+function MypageHeader({ re, cmt }) {
+  const user = useSelector((state) => state.user);
   // let pageHeader = useRef();
 
   // React.useEffect(() => {
@@ -41,13 +42,12 @@ function ProfilePageHeader({ re, cmt }) {
             <img
               alt="..."
               src={
-                people.avatar ||
-                require("assets/img/default-avatar.png").default
+                user.avatar || require("assets/img/default-avatar.png").default
               }
             ></img>
           </div>
-          <h3 className="title">{people.name}</h3>
-          <p className="category">{people.school || "No information"}</p>
+          <h3 className="title">{user.name}</h3>
+          <p className="category">{user.school || "No information"}</p>
           <div className="content">
             <div className="social-description">
               <h2>{re.length || "0"}</h2>
@@ -64,4 +64,4 @@ function ProfilePageHeader({ re, cmt }) {
   );
 }
 
-export default ProfilePageHeader;
+export default MypageHeader;
