@@ -42,13 +42,11 @@ const ListComment = () => {
         content: refCmt.current.value,
         idUser: user.id,
       });
-      console.log("dmmmmmmmmmmmmmmmmmmmmm");
     } else {
       await axios.post(`${apiLocal}/api/comments`, {
         idReview: params.id,
         content: refCmt.current.value,
       });
-      console.log("asdaiusdhuiasd");
     }
     setAddCmt(addCmt + 1);
   };

@@ -81,24 +81,19 @@ const commentCtrl = {
       await Comment.deleteOne(id);
       return res.json({ msg: "Deleted comment" });
     } catch (err) {
-      res.status(500).status(200).json({ msg: err.message });
+      res.status(500).json({ msg: err.message });
     }
   },
   getCommentsByIdUser: async (req, res) => {
-    try {
-      let id = res.params;
-      const comments = await Comment.find({ idUser: id });
-      if (
-        comments === null ||
-        comments.length === 0 ||
-        comments === undefined
-      ) {
-        return res.status(404).json({ mes: "Can't find comment." });
-      }
-      return res.json(comments);
-    } catch (err) {
-      res.status(500).json({ msg: err.message });
-    }
+    let id = req.params.id;
+    Comment.find({ idUser: id })
+      .then((data) => {
+        console.log(id, data);
+        res.status(200).json(data);
+      })
+      .catch((err) => {
+        res.status(500).json({ msg: err.message });
+      });
   },
 };
 
