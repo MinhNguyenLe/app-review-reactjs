@@ -1,4 +1,7 @@
 import React from "react";
+import Moment from "react-moment";
+import Avatar from "components/avatar/Avatar.js";
+
 import { Link, useParams } from "react-router-dom";
 import {
   Card,
@@ -17,7 +20,7 @@ import {
 // core components
 
 function Review({
-  name,
+  idUser,
   id,
   idSchool,
   ratePoint,
@@ -108,9 +111,21 @@ function Review({
                     className="text-center"
                     activeTab={"pills" + pills}
                   >
-                    <TabPane tabId="pills1">
-                      <p>{name}</p>
-                      <p>asdasdasd</p>
+                    <TabPane tabId="pills1" className="tab-flex">
+                      <Link
+                        to={`/profile/${idUser}`}
+                        className="review-link-user"
+                      >
+                        <Avatar></Avatar>
+                        <div className="img-tab-review">
+                          <p style={{ margin: "0" }}>
+                            {idUser.name || "Anonymous"}
+                          </p>
+                          <Moment className="date-content" format="YYYY/MM/DD">
+                            {createdAt}
+                          </Moment>
+                        </div>
+                      </Link>
                     </TabPane>
                     <TabPane tabId="pills2">
                       <p>{positive}</p>

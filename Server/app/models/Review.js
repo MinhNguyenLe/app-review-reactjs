@@ -9,13 +9,9 @@ const Review = new Schema(
       required: true,
     },
     idUser: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
-      default: "Anonymous",
-    },
-    name: {
-      type: String,
-      default: "Anonymous",
     },
     ratePoint: {
       type: Number,

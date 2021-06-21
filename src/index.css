@@ -409,3 +409,18 @@ code {
     transform: rotate(-6deg);
   }
 }
+.tab-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-tab-review {
+  margin-left: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.review-link-user {
+  display: flex;
+  align-items: center;
+}

@@ -26,6 +26,7 @@ import "assets/demo/demo.css?v=1.5.0";
 import "assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
 import "./index.css";
 import Index from "views/Index.js";
+import Avatar from "components/avatar/Avatar.js";
 import ErrPage from "views/pages/Error.js";
 import Schools from "views/pages/Schools.js";
 import MyPage from "views/pages/MyPage.js";
@@ -45,6 +46,11 @@ ReactDOM.render(
     <BrowserRouter>
       <AppContainer>
         <Switch>
+          <Route
+            exact
+            path="/avatar"
+            render={(props) => <Avatar {...props} />}
+          />
           <Route
             exact
             path="/schools/:id/reviews/:id/detail"
