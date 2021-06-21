@@ -13,10 +13,6 @@ const Comment = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    name: {
-      type: String,
-      default: "Anonymous",
-    },
     content: {
       type: String,
       required: true,

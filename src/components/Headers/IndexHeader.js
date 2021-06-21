@@ -6,21 +6,21 @@ import { Container } from "reactstrap";
 // core components
 
 function IndexHeader() {
-  let pageHeader = useRef();
+  // let pageHeader = useRef();
 
-  React.useEffect(() => {
-    if (window.innerWidth > 991 && pageHeader.current) {
-      const updateScroll = () => {
-        let windowScrollTop = window.pageYOffset / 3;
-        pageHeader.current.style.transform =
-          "translate3d(0," + windowScrollTop + "px,0)";
-      };
-      window.addEventListener("scroll", updateScroll);
-      return function cleanup() {
-        window.removeEventListener("scroll", updateScroll);
-      };
-    }
-  });
+  // React.useEffect(() => {
+  //   if (window.innerWidth > 991 && pageHeader.current) {
+  //     const updateScroll = () => {
+  //       let windowScrollTop = window.pageYOffset / 3;
+  //       pageHeader.current.style.transform =
+  //         "translate3d(0," + windowScrollTop + "px,0)";
+  //     };
+  //     window.addEventListener("scroll", updateScroll);
+  //     return function cleanup() {
+  //       window.removeEventListener("scroll", updateScroll);
+  //     };
+  //   }
+  // });
 
   return (
     <>
@@ -31,7 +31,7 @@ function IndexHeader() {
             backgroundImage:
               "url(" + require("assets/img/header.jpg").default + ")",
           }}
-          ref={pageHeader}
+          // ref={pageHeader}
         ></div>
         <Container>
           <div className="content-center brand">

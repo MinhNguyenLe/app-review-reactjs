@@ -50,12 +50,12 @@ function MyPage() {
     document.body.scrollTop = 0;
 
     Promise.all([
-      axios.get(`${apiLocal}/api/users/${user.id}/sum/reviews`),
-      axios.get(`${apiLocal}/api/users/${user.id}/sum/cmt`),
+      axios.get(`${apiLocal}/api/comments/users/${user.id}`),
+      axios.get(`${apiLocal}/api/reviews/users/${user.id}`),
     ])
-      .then(([sumRe, sumCmt]) => {
-        setSumRe(sumRe.data.sumReview);
-        setSumCmt(sumCmt.data.sumCmt);
+      .then(([re, cmt]) => {
+        setSumRe(re.data);
+        setSumCmt(cmt.data);
       })
       .catch((err) => {
         if (err) history.push("/err");
@@ -69,7 +69,7 @@ function MyPage() {
     <>
       <ExamplesNavbar />
       <div className="wrapper">
-        <ProfilePageHeader sumRe={sumRe} sumCmt={sumCmt} />
+        <ProfilePageHeader />
         <div className="section">
           <Container>
             <div className="button-container">

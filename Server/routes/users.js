@@ -12,10 +12,6 @@ router.post(
 
 router.use(multer().none());
 
-router.get("/:id/sum/reviews", userController.getSumReview);
-
-router.get("/:id/sum/cmt", userController.getSumCmt);
-
 router.post("/login", userController.login);
 
 router.get("/logout", userController.logout);

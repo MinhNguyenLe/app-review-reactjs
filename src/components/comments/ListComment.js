@@ -14,7 +14,7 @@ const ListComment = () => {
   const params = useParams();
   const refCmt = useRef();
 
-  const name = useSelector((state) => state.user.name);
+  const user = useSelector((state) => state.user);
   const cmt = useSelector((state) => state.cmt);
   const dispatch = useDispatch();
 
@@ -36,11 +36,20 @@ const ListComment = () => {
   const submitCmt = async (e) => {
     console.log(params);
     e.preventDefault();
-    await axios.post(`${apiLocal}/api/comments`, {
-      idReview: params.id,
-      content: refCmt.current.value,
-      name: name || "anonymous",
-    });
+    if (user) {
+      await axios.post(`${apiLocal}/api/comments`, {
+        idReview: params.id,
+        content: refCmt.current.value,
+        idUser: user.id,
+      });
+      console.log("dmmmmmmmmmmmmmmmmmmmmm");
+    } else {
+      await axios.post(`${apiLocal}/api/comments`, {
+        idReview: params.id,
+        content: refCmt.current.value,
+      });
+      console.log("asdaiusdhuiasd");
+    }
     setAddCmt(addCmt + 1);
   };
   return (

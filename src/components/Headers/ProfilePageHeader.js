@@ -6,21 +6,21 @@ import { Container } from "reactstrap";
 // core components
 
 function ProfilePageHeader({ sumRe, sumCmt }) {
-  let pageHeader = useRef();
+  // let pageHeader = useRef();
 
-  React.useEffect(() => {
-    if (window.innerWidth > 991 && pageHeader.current) {
-      const updateScroll = () => {
-        let windowScrollTop = window.pageYOffset / 3;
-        pageHeader.current.style.transform =
-          "translate3d(0," + windowScrollTop + "px,0)";
-      };
-      window.addEventListener("scroll", updateScroll);
-      return function cleanup() {
-        window.removeEventListener("scroll", updateScroll);
-      };
-    }
-  });
+  // React.useEffect(() => {
+  //   if (window.innerWidth > 991 && pageHeader.current) {
+  //     const updateScroll = () => {
+  //       let windowScrollTop = window.pageYOffset / 3;
+  //       pageHeader.current.style.transform =
+  //         "translate3d(0," + windowScrollTop + "px,0)";
+  //     };
+  //     window.addEventListener("scroll", updateScroll);
+  //     return function cleanup() {
+  //       window.removeEventListener("scroll", updateScroll);
+  //     };
+  //   }
+  // });
   return (
     <>
       <div
@@ -33,7 +33,7 @@ function ProfilePageHeader({ sumRe, sumCmt }) {
             backgroundImage:
               "url(" + require("assets/img/bg5.jpg").default + ")",
           }}
-          ref={pageHeader}
+          // ref={pageHeader}
         ></div>
         <Container>
           <div className="photo-container">

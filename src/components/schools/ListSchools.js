@@ -30,7 +30,7 @@ const ListSchool = () => {
 
   useEffect(() => {
     const axiosData = async () => {
-      const result = await axios.get(`${apiLocal}/api/users/${email}`);
+      const result = await axios.get(`${apiLocal}/api/users/email/${email}`);
       setUser(result.data);
       dispatch(action.setUser(result.data));
       console.log(result.data);

@@ -171,7 +171,7 @@ function ReviewPage() {
             <>
               {listReview.map((item, index) => (
                 <>
-                  <Review item={item}></Review>
+                  <Review item={item} key={item._id}></Review>
                 </>
               ))}
             </>

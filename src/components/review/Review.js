@@ -23,8 +23,8 @@ function Review({ item }) {
   const params = useParams();
   const [pills, setPills] = React.useState("1");
   return (
-    <>
-      <div className="section section-tabs" key={item.id}>
+    <div key={item._id}>
+      <div className="section section-tabs">
         <Container>
           <Row>
             <Col className="ml-auto mr-auto" md="10" xl="6">
@@ -92,9 +92,9 @@ function Review({ item }) {
                       }}
                     >
                       <Link
-                        to={`/schools/${params.id}/reviews/${item.id}/detail`}
+                        to={`/schools/${params.id}/reviews/${item._id}/detail`}
                       >
-                        <i class="now-ui-icons ui-1_zoom-bold"></i>
+                        <i className="now-ui-icons ui-1_zoom-bold"></i>
                       </Link>
                     </NavItem>
                   </Nav>
@@ -139,7 +139,7 @@ function Review({ item }) {
           </Row>
         </Container>
       </div>
-    </>
+    </div>
   );
 }
 
