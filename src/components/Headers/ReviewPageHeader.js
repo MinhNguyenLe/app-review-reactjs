@@ -5,7 +5,7 @@ import { Button, Container } from "reactstrap";
 
 // core components
 
-function ReviewPageHeader() {
+function ReviewPageHeader({ school }) {
   // let pageHeader = useRef();
 
   // useEffect(() => {
@@ -26,15 +26,31 @@ function ReviewPageHeader() {
       <div className="page-header page-header-small">
         <div
           className="page-header-image"
-          style={{
-            backgroundImage:
-              "url(" + require("assets/img/bg6.jpg").default + ")",
-          }}
+          style={
+            school.images
+              ? {
+                  backgroundImage: "url(" + school.images[0] + ")",
+                }
+              : {
+                  backgroundImage:
+                    "url(" + require("assets/img/bg7.jpg").default + ")",
+                }
+          }
           // ref={pageHeader}
         ></div>
-        <div className="content-center">
+        <div
+          className="content-center"
+          style={{ background: "rgb(3 3 3 / 60%)" }}
+        >
           <Container>
-            <h1 className="title">Read, write or discuss some reviews.</h1>
+            <h1 className="title">{school.name}</h1>
+            <a
+              style={{ color: "white" }}
+              href={school.website}
+              className="small-title"
+            >
+              {school.website}
+            </a>
             <div className="text-center">
               <Button
                 className="btn-icon btn-round"

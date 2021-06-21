@@ -25,80 +25,15 @@ import "assets/scss/now-ui-kit.scss?v=1.5.0";
 import "assets/demo/demo.css?v=1.5.0";
 import "assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
 import "./index.css";
-import Index from "views/Index.js";
-import Avatar from "components/avatar/Avatar.js";
-import ErrPage from "views/pages/Error.js";
-import Schools from "views/pages/Schools.js";
-import MyPage from "views/pages/MyPage.js";
-import DetailReview from "views/pages/DetailReview.js";
-import ReviewPage from "views/pages/Review.js";
-import Register from "views/pages/Register.js";
-import NucleoIcons from "views/NucleoIcons.js";
-import LoginPage from "views/pages/LoginPage.js";
-import LandingPage from "views/pages/LandingPage.js";
-import ProfilePage from "views/pages/ProfilePage.js";
 import { Provider } from "react-redux";
 import store from "./redux/store.js";
 import AppContainer from "views/AppContainer.js";
-
+import App from "./App";
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <AppContainer>
-        <Switch>
-          <Route
-            exact
-            path="/avatar"
-            render={(props) => <Avatar {...props} />}
-          />
-          <Route
-            exact
-            path="/schools/:id/reviews/:id/detail"
-            render={(props) => <DetailReview {...props} />}
-          />
-          <Route
-            exact
-            path="/mypage"
-            render={(props) => <MyPage {...props} />}
-          />
-          <Route
-            exact
-            path="/schools/:id/reviews"
-            render={(props) => <ReviewPage {...props} />}
-          />
-          <Route
-            exact
-            path="/register"
-            render={(props) => <Register {...props} />}
-          />
-          <Route
-            exact
-            path="/schools"
-            render={(props) => <Schools {...props} />}
-          />
-          <Route exact path="/" render={(props) => <Index {...props} />} />
-          <Route
-            exact
-            path="/icon"
-            render={(props) => <NucleoIcons {...props} />}
-          />
-          <Route
-            exact
-            path="/landing"
-            render={(props) => <LandingPage {...props} />}
-          />
-          <Route
-            exact
-            path="/profile/:id"
-            render={(props) => <ProfilePage {...props} />}
-          />
-          <Route
-            exact
-            path="/login"
-            render={(props) => <LoginPage {...props} />}
-          />
-          <Route component={ErrPage}></Route>
-        </Switch>
+        <App></App>
       </AppContainer>
     </BrowserRouter>
   </Provider>,

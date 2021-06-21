@@ -168,7 +168,7 @@ function ReviewPage() {
     <>
       <ReviewNav writeReview={writeReview} />
       <div className="wrapper">
-        <ReviewPageHeader />
+        <ReviewPageHeader school={school} />
         <div className="main">
           {loading ? (
             <div
@@ -297,18 +297,6 @@ function ReviewPage() {
                     />
                   </div>
                   <rb.Button onClick={saveAddReview}>Save</rb.Button>
-                </div>
-              </div>
-              <div>
-                <div className="d-flex flex-column align-items-center">
-                  <span className="big-title">{school.name}</span>
-                  <a
-                    href={school.website}
-                    style={{ color: "#9696ff" }}
-                    className="small-title"
-                  >
-                    {school.website}
-                  </a>
                 </div>
               </div>
               {listReview.map((item, index) => (
