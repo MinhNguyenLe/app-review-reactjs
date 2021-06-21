@@ -34,16 +34,11 @@ const commentCtrl = {
       // if(captchaValue === false){
       //     return res.status(400).json({msg: "Invalid token"});
       // }
-      const {
-        idReview,
-        // idUser,
-        name,
-        content,
-      } = req.body;
+      const { idReview, idUser, name, content } = req.body;
 
       const newComment = new Comment({
         idReview: idReview,
-        // idUser: idUser,
+        idUser: idUser,
         name: name,
         content: content,
       });
@@ -85,7 +80,7 @@ const commentCtrl = {
     }
   },
   getCommentsByIdUser: async (req, res) => {
-    let id = req.params.id;
+    let id = req.params._id;
     Comment.findOne({ id })
       .then((data) => {
         res.status(200).json(data);
