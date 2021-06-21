@@ -58,7 +58,7 @@ function MyPage() {
         setCmt(cmt.data);
       })
       .catch((err) => {
-        console.log(err);
+        history.push("/error");
       });
     return function cleanup() {
       document.body.classList.remove("profile-page");

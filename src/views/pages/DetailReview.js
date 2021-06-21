@@ -36,6 +36,7 @@ function DetailReview() {
   const [loading, setLoading] = useState(true);
   const [review, setReview] = useState({});
   const params = useParams();
+  const history = useHistory();
   useEffect(() => {
     const axiosData = () => {
       Promise.all([axios.get(`${apiLocal}/api/reviews/${params.id}`)])
@@ -43,7 +44,7 @@ function DetailReview() {
           setReview(review.data);
           setLoading(false);
         })
-        .catch();
+        .catch(() => history.push("/error"));
     };
     axiosData();
   }, [params.id]);

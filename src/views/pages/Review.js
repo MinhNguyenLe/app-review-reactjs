@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
 import TextareaAutosize from "react-textarea-autosize";
@@ -7,7 +6,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import "moment-timezone";
 import useFormLogin from "javascript/useFormLogin";
 import validateLogin from "javascript/validateLogin";
-import { useLocation, useHistory, useParams } from "react-router-dom";
+import { Link, useLocation, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "redux/actions.js";
 import { apiLocal } from "javascript/dataGlobal.js";
@@ -32,8 +31,8 @@ function ReviewPage() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
-  let params = useParams();
-
+  const params = useParams();
+  const history = useHistory();
   const [loading, setLoading] = useState(true);
 
   const refPositive = useRef();
@@ -70,7 +69,7 @@ function ReviewPage() {
           setListReview(listReview.data);
           setLoading(false);
         })
-        .catch();
+        .catch((err) => history.push("/error"));
     };
     axiosData();
   }, [success, params.id]);
@@ -84,7 +83,7 @@ function ReviewPage() {
           refNegative.current.value = dataDetailReview.data.negative;
           refAdvice.current.value = dataDetailReview.data.advice;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => history.push("/error"));
     };
     axiosData();
   }, [showEdit]);

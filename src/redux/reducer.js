@@ -27,6 +27,12 @@ const INITIAL_STATE = {
     createdAt: "",
   },
   cmt: [],
+  arrId: {
+    schools: [],
+    reviews: [],
+    comments: [],
+    users: [],
+  },
 };
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -39,6 +45,16 @@ export default function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         idReview: action.payload.id,
+      };
+    case "SET-ID-APP":
+      return {
+        ...state,
+        arrId: {
+          schools: action.payload.arrId.schools,
+          reviews: action.payload.arrId.reviews,
+          comments: action.payload.arrId.comments,
+          users: action.payload.arrId.users,
+        },
       };
     case "SET-ERR-PAGE":
       return {

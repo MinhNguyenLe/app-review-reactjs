@@ -7,11 +7,12 @@ import * as func from "javascript/funcGlobal.js";
 import Moment from "react-moment";
 import "moment-timezone";
 import $ from "jquery";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { apiLocal } from "javascript/dataGlobal.js";
 
 const ListComment = () => {
   const params = useParams();
+  const history = useHistory();
   const refCmt = useRef();
 
   const user = useSelector((state) => state.user);
@@ -27,7 +28,7 @@ const ListComment = () => {
           console.log(cmt.data);
           dispatch(action.setCmt(cmt.data));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => history.push("/error"));
     };
     axiosData();
     refCmt.current.value = "";
@@ -36,7 +37,7 @@ const ListComment = () => {
   const submitCmt = async (e) => {
     console.log(params);
     e.preventDefault();
-    if (user) {
+    if (user.id) {
       await axios.post(`${apiLocal}/api/comments`, {
         idReview: params.id,
         content: refCmt.current.value,

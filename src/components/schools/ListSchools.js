@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as rb from "react-bootstrap";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "redux/actions.js";
 import * as func from "javascript/funcGlobal.js";
@@ -11,6 +11,10 @@ import { apiLocal } from "javascript/dataGlobal.js";
 const ListSchool = () => {
   const email = useSelector((state) => state.email);
   const token = useSelector((state) => state.token);
+  const arrId = useSelector((state) => state.arrId);
+
+  const params = useParams();
+  const history = useHistory();
 
   const [user, setUser] = useState({});
 
@@ -19,24 +23,35 @@ const ListSchool = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const axiosData = async () => {
-      const result = await axios.get(`${apiLocal}/api/schools`);
-      setData(result.data);
-      setLoading(false);
+    const axiosData = () => {
+      Promise.all([axios.get(`${apiLocal}/api/schools`)])
+        .then(([result]) => {
+          setData(result.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          // history.push("/error");
+        });
     };
     axiosData();
     func.scrollTop();
   }, []);
 
   useEffect(() => {
-    const axiosData = async () => {
-      const result = await axios.get(`${apiLocal}/api/users/email/${email}`);
-      setUser(result.data);
-      dispatch(action.setUser(result.data));
-      console.log(result.data);
-    };
-    axiosData();
-  }, [email, token]);
+    if (token) {
+      const axiosData = () => {
+        Promise.all([axios.get(`${apiLocal}/api/users/email/${email}`)])
+          .then(([result]) => {
+            setUser(result.data);
+            dispatch(action.setUser(result.data));
+          })
+          .catch((err) => {
+            // history.push("/error");
+          });
+      };
+      axiosData();
+    }
+  }, [email]);
 
   const goReview = (id) => {
     dispatch(action.setIdSchool(id));

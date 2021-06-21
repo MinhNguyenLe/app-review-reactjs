@@ -16,6 +16,15 @@ export const setErrPage = (bool) => {
   };
 };
 
+export const setIdApp = (arrId) => {
+  return {
+    type: "SET-ID-APP",
+    payload: {
+      arrId: arrId,
+    },
+  };
+};
+
 export const setErrLogin = (bool) => {
   return {
     type: "SET-ERR-LOGIN",
