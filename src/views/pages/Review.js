@@ -171,16 +171,7 @@ function ReviewPage() {
             <>
               {listReview.map((item, index) => (
                 <>
-                  <Review
-                    idUser={item.idUser}
-                    positive={item.positive}
-                    negative={item.negative}
-                    advice={item.advice}
-                    createdAt={item.createdAt}
-                    id={item._id}
-                    idSchool={item.idSchool}
-                    ratePoint={item.ratePoint}
-                  ></Review>
+                  <Review item={item}></Review>
                 </>
               ))}
             </>

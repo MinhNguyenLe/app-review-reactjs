@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
 // reactstrap components
 import { Button, Container } from "reactstrap";
@@ -8,7 +8,7 @@ import { Button, Container } from "reactstrap";
 function LandingPageHeader() {
   let pageHeader = useRef();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (window.innerWidth > 991 && pageHeader.current) {
       const updateScroll = () => {
         let windowScrollTop = window.pageYOffset / 3;

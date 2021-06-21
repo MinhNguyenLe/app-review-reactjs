@@ -1,12 +1,18 @@
 import React from "react";
+import imgDefault from "assets/img/default-avatar.png";
 
-const Avatar = () => {
+const Avatar = ({ linkImg, type }) => {
   return (
-    <div style={{ width: "36px" }}>
+    <div>
       <img
+        style={
+          type === "review"
+            ? { width: "44px", height: "44px" }
+            : { width: "36px", height: "36px" }
+        }
         alt="..."
         className="rounded-circle img-fluid"
-        src={require("assets/img/avatar.jpg").default}
+        src={linkImg ? linkImg : imgDefault}
       ></img>
     </div>
   );

@@ -51,6 +51,7 @@ const schoolController = {
   getReviewsByIdSchool(req, res) {
     const id = req.params.id;
     Review.find({ idSchool: id })
+      .populate("idUser")
       .then((reviews) => {
         return res.json(reviews);
       })

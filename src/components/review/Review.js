@@ -19,21 +19,12 @@ import {
 
 // core components
 
-function Review({
-  idUser,
-  id,
-  idSchool,
-  ratePoint,
-  positive,
-  negative,
-  advice,
-  createdAt,
-}) {
+function Review({ item }) {
   const params = useParams();
   const [pills, setPills] = React.useState("1");
   return (
     <>
-      <div className="section section-tabs" key={id}>
+      <div className="section section-tabs" key={item.id}>
         <Container>
           <Row>
             <Col className="ml-auto mr-auto" md="10" xl="6">
@@ -100,7 +91,9 @@ function Review({
                         justifyContent: "center",
                       }}
                     >
-                      <Link to={`/schools/${params.id}/reviews/${id}/detail`}>
+                      <Link
+                        to={`/schools/${params.id}/reviews/${item.id}/detail`}
+                      >
                         <i class="now-ui-icons ui-1_zoom-bold"></i>
                       </Link>
                     </NavItem>
@@ -113,28 +106,31 @@ function Review({
                   >
                     <TabPane tabId="pills1" className="tab-flex">
                       <Link
-                        to={`/profile/${idUser}`}
+                        to={`/profile/${item.idUser ? item.idUser._id : "err"}`}
                         className="review-link-user"
                       >
-                        <Avatar></Avatar>
+                        <Avatar
+                          type="review"
+                          linkImg={item.idUser ? item.idUser.avatar : ""}
+                        ></Avatar>
                         <div className="img-tab-review">
                           <p style={{ margin: "0" }}>
-                            {idUser.name || "Anonymous"}
+                            {item.idUser ? item.idUser.name : "Anonymous"}
                           </p>
                           <Moment className="date-content" format="YYYY/MM/DD">
-                            {createdAt}
+                            {item.createdAt}
                           </Moment>
                         </div>
                       </Link>
                     </TabPane>
                     <TabPane tabId="pills2">
-                      <p>{positive}</p>
+                      <p>{item.positive}</p>
                     </TabPane>
                     <TabPane tabId="pills3">
-                      <p>{negative}</p>
+                      <p>{item.negative}</p>
                     </TabPane>
                     <TabPane tabId="pills4">
-                      <p>{advice}</p>
+                      <p>{item.advice}</p>
                     </TabPane>
                   </TabContent>
                 </CardBody>

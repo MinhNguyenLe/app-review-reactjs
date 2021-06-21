@@ -11,7 +11,6 @@ const Review = new Schema(
     idUser: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
     ratePoint: {
       type: Number,
