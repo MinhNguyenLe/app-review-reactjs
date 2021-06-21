@@ -86,9 +86,8 @@ const commentCtrl = {
   },
   getCommentsByIdUser: async (req, res) => {
     let id = req.params.id;
-    Comment.find({ idUser: id })
+    Comment.findOne({ id })
       .then((data) => {
-        console.log(id, data);
         res.status(200).json(data);
       })
       .catch((err) => {

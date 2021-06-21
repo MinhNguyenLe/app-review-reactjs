@@ -4,16 +4,14 @@ const User = require("../models/User");
 
 const reviewCtrl = {
   getReviewsByIdUser: async (req, res) => {
-    try {
-      let id = res.params;
-      const reviews = await Review.find({ idUser: id });
-      if (reviews === null || reviews.length === 0 || reviews === undefined) {
-        return res.status(404).json({ mes: "Can't find comment." });
-      }
-      return res.json(reviews);
-    } catch (err) {
-      res.status(500).json({ msg: err.message });
-    }
+    let id = req.params.id;
+    Review.findOne({ id })
+      .then((data) => {
+        res.status(200).json(data);
+      })
+      .catch((err) => {
+        res.status(500).json({ msg: err.message });
+      });
   },
   getAll: async (req, res) => {
     try {
