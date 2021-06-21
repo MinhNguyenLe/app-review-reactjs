@@ -5,7 +5,7 @@ const User = require("../models/User");
 const reviewCtrl = {
   getReviewsByIdUser: async (req, res) => {
     let id = req.params._id;
-    Review.findOne({ id })
+    Review.find({ idUser: id })
       .then((data) => {
         res.status(200).json(data);
       })
@@ -52,13 +52,12 @@ const reviewCtrl = {
   },
   createAuth: async (req, res) => {
     try {
-      const { idSchool, name, ratePoint, positive, negative, advice } =
+      const { idSchool, idUser, ratePoint, positive, negative, advice } =
         req.body;
 
       const newReview = new Review({
         idSchool: idSchool,
-        idUser: req.user.id,
-        name: name,
+        idUser: idUser,
         ratePoint: ratePoint,
         positive: positive,
         negative: negative,

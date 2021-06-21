@@ -6,7 +6,7 @@ import "moment-timezone";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "redux/actions.js";
 import { apiLocal } from "javascript/dataGlobal.js";
-
+import Review from "components/review/Review";
 // reactstrap components
 import {
   Button,
@@ -27,8 +27,8 @@ import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "components/Footers/DefaultFooter.js";
 
 function MyPage() {
-  const [sumRe, setSumRe] = useState(0);
-  const [sumCmt, setSumCmt] = useState(0);
+  const [re, setRe] = useState(0);
+  const [cmt, setCmt] = useState(0);
 
   const params = useParams();
   const history = useHistory();
@@ -53,12 +53,12 @@ function MyPage() {
       axios.get(`${apiLocal}/api/comments/users/${user.id}`),
       axios.get(`${apiLocal}/api/reviews/users/${user.id}`),
     ])
-      .then(([re, cmt]) => {
-        setSumRe(re.data);
-        setSumCmt(cmt.data);
+      .then(([cmt, re]) => {
+        setRe(re.data);
+        setCmt(cmt.data);
       })
       .catch((err) => {
-        if (err) history.push("/err");
+        console.log(err);
       });
     return function cleanup() {
       document.body.classList.remove("profile-page");
@@ -69,7 +69,7 @@ function MyPage() {
     <>
       <ExamplesNavbar />
       <div className="wrapper">
-        <ProfilePageHeader />
+        <ProfilePageHeader re={re} cmt={cmt} />
         <div className="section">
           <Container>
             <div className="button-container">
@@ -106,6 +106,9 @@ function MyPage() {
               and records all of his own music, giving it a warm, intimate feel
               with a solid groove structure. An artist of considerable range.
             </h5>
+            {re.map((item) => {
+              return <Review item={item}></Review>;
+            })}
             <Row>
               <Col className="ml-auto mr-auto" md="6">
                 <h4 className="title text-center">My Portfolio</h4>

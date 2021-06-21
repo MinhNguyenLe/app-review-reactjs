@@ -58,13 +58,17 @@ const ListComment = () => {
           borderBottom: "1px solid rgb(223, 222, 222)",
         }}
       >
-        <button onClick={() => $("#writeCmt").toggle()} className="btn-add-cmt">
+        <button
+          style={{ marginBottom: "6px" }}
+          onClick={() => $("#writeCmt").toggle()}
+          className="btn-add-cmt"
+        >
           Add a comment
         </button>
         <rb.Form
           id="writeCmt"
           onSubmit={submitCmt}
-          style={{ marginTop: "8px", display: "none" }}
+          style={{ marginTop: "8px", display: "none", marginBottom: "8px" }}
         >
           <rb.Form.Control
             ref={refCmt}

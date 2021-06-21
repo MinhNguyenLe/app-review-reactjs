@@ -192,11 +192,12 @@ code {
 }
 .editor {
   padding: 20px;
-  top: 40px;
+  top: -600px;
   background: white;
   position: absolute;
-  z-index: 1000;
+  z-index: 1200;
   width: 50%;
+  margin-left: 25%;
   border: 1px solid #333;
   border: none;
   border-radius: 4px;

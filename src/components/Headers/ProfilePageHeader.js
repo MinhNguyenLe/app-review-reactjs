@@ -5,7 +5,7 @@ import { Container } from "reactstrap";
 
 // core components
 
-function ProfilePageHeader({ sumRe, sumCmt }) {
+function ProfilePageHeader({ re, cmt }) {
   // let pageHeader = useRef();
 
   // React.useEffect(() => {
@@ -43,11 +43,11 @@ function ProfilePageHeader({ sumRe, sumCmt }) {
           <p className="category">Photographer</p>
           <div className="content">
             <div className="social-description">
-              <h2>{sumRe}</h2>
+              <h2>{re.length || "0"}</h2>
               <p>Reviews</p>
             </div>
             <div className="social-description">
-              <h2>{sumCmt}</h2>
+              <h2>{cmt.length || "0"}</h2>
               <p>Comments</p>
             </div>
           </div>
