@@ -37,9 +37,6 @@ import NucleoIcons from "views/NucleoIcons.js";
 import LoginPage from "views/pages/LoginPage.js";
 import LandingPage from "views/pages/LandingPage.js";
 import ProfilePage from "views/pages/ProfilePage.js";
-import { Provider } from "react-redux";
-import store from "./redux/store.js";
-import AppContainer from "views/AppContainer.js";
 
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";

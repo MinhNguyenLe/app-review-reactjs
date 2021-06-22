@@ -1,3 +1,12 @@
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
+
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["user"],
+};
+
 const INITIAL_STATE = {
   errPage: false,
   errLogin: false,
@@ -34,7 +43,7 @@ const INITIAL_STATE = {
     users: [],
   },
 };
-export default function reducer(state = INITIAL_STATE, action) {
+function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "SET-ID-SCHOOL":
       return {
@@ -126,3 +135,4 @@ export default function reducer(state = INITIAL_STATE, action) {
       return state;
   }
 }
+export default persistReducer(persistConfig, reducer);
