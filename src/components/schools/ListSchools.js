@@ -38,7 +38,7 @@ const ListSchool = () => {
   }, []);
 
   useEffect(() => {
-    if (userRedux.id) {
+    if (email) {
       const axiosData = () => {
         Promise.all([axios.get(`${apiLocal}/api/users/email/${email}`)])
           .then(([result]) => {

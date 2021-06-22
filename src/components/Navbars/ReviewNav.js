@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as rb from "react-bootstrap";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "redux/actions.js";
 import * as func from "javascript/funcGlobal.js";
@@ -27,6 +27,7 @@ import {
 
 function ReviewNav({ writeReview }) {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
@@ -53,7 +54,9 @@ function ReviewNav({ writeReview }) {
   const logOut = () => {
     Promise.all([axios.get(`${apiLocal}/api/users/logout`)])
       .then(() => {
+        history.push("/login");
         dispatch(action.setClear());
+        localStorage.removeItem();
       })
       .catch(() => {});
   };
