@@ -7,6 +7,7 @@ import * as action from "redux/actions.js";
 import * as func from "javascript/funcGlobal.js";
 import Loading from "components/loading/Loading.js";
 import { apiLocal } from "javascript/dataGlobal.js";
+import Avatar from "components/avatar/Avatar";
 
 import {
   Button,
@@ -25,6 +26,8 @@ import {
 } from "reactstrap";
 
 function ReviewNav({ writeReview }) {
+  const dispatch = useDispatch();
+
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   useEffect(() => {
@@ -46,6 +49,15 @@ function ReviewNav({ writeReview }) {
       window.removeEventListener("scroll", updateNavbarColor);
     };
   });
+
+  const logOut = () => {
+    Promise.all([axios.get(`${apiLocal}/api/users/logout`)])
+      .then(() => {
+        dispatch(action.setClear());
+      })
+      .catch(() => {});
+  };
+
   const user = useSelector((state) => state.user);
   return (
     <>
@@ -95,12 +107,69 @@ function ReviewNav({ writeReview }) {
               {user.id ? (
                 <div className="d-flex flex-row align-items-center justify-content-between">
                   <NavItem>
-                    <Link to="/mypage">My Profile</Link>
-                  </NavItem>
-                  <NavItem>
                     <div>
                       <rb.Button onClick={writeReview}>Viết đánh giá</rb.Button>
                     </div>
+                  </NavItem>
+                  <NavItem
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Avatar linkImg={user.avatar} type="profile"></Avatar>
+                    <UncontrolledDropdown
+                      className="button-dropdown"
+                      style={{ marginLeft: "12px" }}
+                    >
+                      <DropdownToggle
+                        caret
+                        data-toggle="dropdown"
+                        href="#pablo"
+                        id="navbarDropdown"
+                        tag="a"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <span className="button-bar"></span>
+                        <span className="button-bar"></span>
+                        <span className="button-bar"></span>
+                      </DropdownToggle>
+                      <DropdownMenu aria-labelledby="navbarDropdown">
+                        <DropdownItem header tag="a">
+                          Dropdown header
+                        </DropdownItem>
+                        <DropdownItem href="#pablo" onClick={(e) => logOut()}>
+                          Logout
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Another action
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Something else here
+                        </DropdownItem>
+                        <DropdownItem divider></DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Separated link
+                        </DropdownItem>
+                        <DropdownItem divider></DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          One more separated link
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
                   </NavItem>
                 </div>
               ) : (

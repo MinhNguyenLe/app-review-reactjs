@@ -20,6 +20,7 @@ const INITIAL_STATE = {
   token: false,
   email: "",
   people: {
+    avatar: "",
     email: "",
     permission: "",
     id: "",
@@ -28,6 +29,7 @@ const INITIAL_STATE = {
     createdAt: "",
   },
   user: {
+    avatar: "",
     email: "",
     permission: "",
     id: "",
@@ -111,6 +113,7 @@ function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         people: {
+          avatar: action.payload.avatar,
           email: action.payload.email,
           permission: action.payload.permission,
           id: action.payload.id,
@@ -123,6 +126,7 @@ function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         user: {
+          avatar: action.payload.avatar,
           email: action.payload.email,
           permission: action.payload.permission,
           id: action.payload.id,
@@ -132,7 +136,7 @@ function reducer(state = INITIAL_STATE, action) {
         },
       };
     case "SET-CLEAR":
-      return state;
+      return INITIAL_STATE;
     default:
       return state;
   }

@@ -1,9 +1,10 @@
 import React from "react";
 import imgDefault from "assets/img/default-avatar.png";
+import { Link } from "react-router-dom";
 
 const Avatar = ({ linkImg, type }) => {
   return (
-    <div>
+    <Link to="/mypage" style={{ cursor: "pointer" }}>
       <img
         style={
           type === "review"
@@ -14,7 +15,7 @@ const Avatar = ({ linkImg, type }) => {
         className="rounded-circle img-fluid"
         src={linkImg ? linkImg : imgDefault}
       ></img>
-    </div>
+    </Link>
   );
 };
 

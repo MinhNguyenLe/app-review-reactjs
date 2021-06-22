@@ -47,6 +47,7 @@ export const setUser = (user) => {
   return {
     type: "SET-USER",
     payload: {
+      avatar: user.avatar,
       email: user.email,
       permission: user.permission,
       id: user._id,

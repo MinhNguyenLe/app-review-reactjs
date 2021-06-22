@@ -7,6 +7,7 @@ import * as action from "redux/actions.js";
 import * as func from "javascript/funcGlobal.js";
 import Loading from "components/loading/Loading.js";
 import { apiLocal } from "javascript/dataGlobal.js";
+import Avatar from "components/avatar/Avatar";
 
 import {
   Button,
@@ -94,7 +95,7 @@ function CustomNavbar() {
             <Nav navbar>
               {user.id ? (
                 <NavItem>
-                  <Link to="/mypage">My Profile</Link>
+                  <Avatar linkImg={user.avatar} type="profile"></Avatar>
                 </NavItem>
               ) : (
                 <>
