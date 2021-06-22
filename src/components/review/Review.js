@@ -132,7 +132,10 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
                         </div>
                         <div
                           className={
-                            user && item.idUser && user.id === item.idUser._id
+                            typePage !== "detail" &&
+                            user &&
+                            item.idUser &&
+                            user.id === item.idUser._id
                               ? ""
                               : "hidden"
                           }
@@ -149,14 +152,17 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            marginLeft: "6px",
+                            marginLeft: "8px",
                           }}
                         >
                           <i className="now-ui-icons files_single-copy-04"></i>
                         </div>
                         <div
                           className={
-                            user && item.idUser && user.id === item.idUser._id
+                            typePage !== "detail" &&
+                            user &&
+                            item.idUser &&
+                            user.id === item.idUser._id
                               ? ""
                               : "hidden"
                           }
@@ -166,10 +172,18 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            marginLeft: "6px",
+                            marginLeft: "8px",
                           }}
                         >
                           <i className="now-ui-icons design_scissors"></i>
+                        </div>
+                        <div>
+                          {" "}
+                          <i
+                            style={{ marginLeft: "8px" }}
+                            id={`icon_loading_${item._id}`}
+                            className="hidden now-ui-icons loader_refresh spin"
+                          ></i>
                         </div>
                       </div>
                     </TabPane>

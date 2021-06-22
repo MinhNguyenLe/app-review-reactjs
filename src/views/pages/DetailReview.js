@@ -63,6 +63,7 @@ function DetailReview() {
         <DetailPageHeader name={review.idUser && review.idUser.name} />
         <div className="main">
           <Review
+            typePage="detail"
             item={review}
             name={review.idUser && review.idUser.name}
           ></Review>

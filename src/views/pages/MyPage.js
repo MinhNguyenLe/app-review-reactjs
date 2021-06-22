@@ -94,6 +94,7 @@ function MyPage() {
     func.disableScrolling();
   };
   const saveEdit = async () => {
+    $(`#icon_loading_4`).removeClass("hidden");
     dispatch(
       action.setReview(
         refPositive.current.value,
@@ -109,11 +110,14 @@ function MyPage() {
     setSuccess(success + 1);
     setShowEdit(false);
     func.enableScrolling();
+    $(`#icon_loading_4`).addClass("hidden");
   };
   const deleteReview = (id) => {
+    $(`#icon_loading_${id}`).removeClass("hidden");
     Promise.all([axios.delete(`${apiLocal}/api/reviews/${id}`)])
       .then(() => {
         setSuccess(success + 1);
+        $(`#icon_loading_${id}`).addClass("hidden");
       })
       .catch(() => {});
   };
@@ -169,7 +173,14 @@ function MyPage() {
               className="edit-content"
             />
           </div>
-          <rb.Button onClick={saveEdit}>Save</rb.Button>
+          <rb.Button onClick={saveEdit}>
+            Save{" "}
+            <i
+              style={{ margin: "0 8px" }}
+              id="icon_loading_4"
+              className="hidden now-ui-icons loader_refresh spin"
+            ></i>
+          </rb.Button>
         </div>
       </div>
       <ExamplesNavbar />

@@ -87,6 +87,7 @@ function ReviewPage() {
     func.disableScrolling();
   };
   const saveEdit = async () => {
+    $(`#icon_loading_2`).removeClass("hidden");
     dispatch(
       action.setReview(
         refPositive.current.value,
@@ -102,11 +103,14 @@ function ReviewPage() {
     setSuccess(success + 1);
     setShowEdit(false);
     func.enableScrolling();
+    $(`#icon_loading_2`).addClass("hidden");
   };
   const deleteReview = (id) => {
+    $(`#icon_loading_${id}`).removeClass("hidden");
     Promise.all([axios.delete(`${apiLocal}/api/reviews/${id}`)])
       .then(() => {
         setSuccess(success + 1);
+        $(`#icon_loading_${id}`).addClass("hidden");
       })
       .catch(() => {});
   };
@@ -128,6 +132,7 @@ function ReviewPage() {
     func.enableScrolling();
   };
   const saveAddReview = async () => {
+    $(`#icon_loading_1`).removeClass("hidden");
     dispatch(
       action.setReview(
         refPositive.current.value,
@@ -135,7 +140,7 @@ function ReviewPage() {
         refAdvice.current.value
       )
     );
-    if (user) {
+    if (user.id) {
       await axios.post(`${apiLocal}/api/reviews/auth`, {
         idSchool: params.id,
         idUser: user.id,
@@ -156,12 +161,7 @@ function ReviewPage() {
     setSuccess(success + 1);
     setShowWriteReview(false);
     func.enableScrolling();
-  };
-  const goDetailReview = (id, positive, negative, advice, name, createdAt) => {
-    dispatch(
-      action.setDetailReview(id, positive, negative, advice, name, createdAt)
-    );
-    func.scrollTop();
+    $(`#icon_loading_1`).addClass("hidden");
   };
   return (
     <>
@@ -234,7 +234,13 @@ function ReviewPage() {
                       className="edit-content"
                     />
                   </div>
-                  <rb.Button onClick={saveEdit}>Save</rb.Button>
+                  <rb.Button onClick={saveEdit}>
+                    Save{" "}
+                    <i
+                      id="icon_loading_2"
+                      className="hidden now-ui-icons loader_refresh spin"
+                    ></i>
+                  </rb.Button>
                 </div>
               </div>
               <div
@@ -291,7 +297,13 @@ function ReviewPage() {
                       className="edit-content"
                     />
                   </div>
-                  <rb.Button onClick={saveAddReview}>Save</rb.Button>
+                  <rb.Button onClick={saveAddReview}>
+                    Save{" "}
+                    <i
+                      id="icon_loading_1"
+                      className="hidden now-ui-icons loader_refresh spin"
+                    ></i>
+                  </rb.Button>
                 </div>
               </div>
               {listReview.map((item, index) => (

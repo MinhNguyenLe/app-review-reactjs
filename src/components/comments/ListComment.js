@@ -38,8 +38,8 @@ const ListComment = () => {
   }, [addCmt]);
 
   const submitCmt = async (e) => {
-    console.log(params);
     e.preventDefault();
+    $(`#icon_loading_3`).removeClass("hidden");
     if (user.id) {
       await axios.post(`${apiLocal}/api/comments`, {
         idReview: params.id,
@@ -53,12 +53,15 @@ const ListComment = () => {
       });
     }
     setAddCmt(addCmt + 1);
+    $(`#icon_loading_3`).addClass("hidden");
   };
 
   const deleteCmt = (id) => {
+    $(`#icon_loading_${id}`).removeClass("hidden");
     Promise.all([axios.delete(`${apiLocal}/api/comments/${id}`)])
       .then(() => {
         setAddCmt(addCmt + 1);
+        $(`#icon_loading_${id}`).addClass("hidden");
       })
       .catch(() => {});
   };
@@ -69,11 +72,12 @@ const ListComment = () => {
 
     $(`#edit_comment_${id}`).removeClass("hidden");
     $(`#comment_content_${id}`).addClass("hidden");
-    console.log($(`#value_${id}`).val(contentBeforeEdit));
+    $(`#value_${id}`).val(contentBeforeEdit);
   };
 
   const saveEditCmt = (e, id) => {
     e.preventDefault();
+    $(`#icon_loading_${id}`).removeClass("hidden");
     Promise.all([
       axios.put(`${apiLocal}/api/comments/${id}`, {
         content: $(`#value_${id}`).val(),
@@ -83,6 +87,7 @@ const ListComment = () => {
         $(".cmt-content").removeClass("hidden");
         $(".edit-cmt").addClass("hidden");
         setAddCmt(addCmt + 1);
+        $(`#icon_loading_${id}`).addClass("hidden");
       })
       .catch(() => {});
   };
@@ -111,12 +116,19 @@ const ListComment = () => {
           onSubmit={submitCmt}
           style={{ marginTop: "8px", display: "none", marginBottom: "8px" }}
         >
-          <rb.Form.Control
-            ref={refCmt}
-            onClick={() => dispatch(action.setIdReview(params.id))}
-            type="text"
-            style={{ width: "100%", fontSize: "18px" }}
-          />
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <i
+              style={{ margin: "0 8px" }}
+              id="icon_loading_3"
+              className="hidden now-ui-icons loader_refresh spin"
+            ></i>
+            <rb.Form.Control
+              ref={refCmt}
+              onClick={() => dispatch(action.setIdReview(params.id))}
+              type="text"
+              style={{ width: "100%", fontSize: "18px" }}
+            />
+          </div>
         </rb.Form>
       </div>
       <div className="ske-cmt">
@@ -134,6 +146,11 @@ const ListComment = () => {
                 alignItems: "center",
               }}
             >
+              <i
+                style={{ marginRight: "8px" }}
+                id={`icon_loading_${item._id}`}
+                className="hidden now-ui-icons loader_refresh spin"
+              ></i>
               <i
                 onClick={() => editCmt(item._id, item.content)}
                 style={{ marginRight: "8px", cursor: "pointer" }}
