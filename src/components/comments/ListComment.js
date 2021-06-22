@@ -143,7 +143,6 @@ const ListComment = () => {
               style={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center",
               }}
             >
               <i
@@ -192,9 +191,9 @@ const ListComment = () => {
                 className="now-ui-icons ui-1_simple-remove"
               ></i>
             </rb.Form>
-            <div id={`comment_content_${item._id}`} className="cmt-content">
+            <p id={`comment_content_${item._id}`} className="cmt-content">
               {item.content}
-            </div>
+            </p>
           </div>
         ))}
       </div>

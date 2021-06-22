@@ -92,9 +92,9 @@ code {
   font-weight: 500;
 }
 .cmt-content {
-  color: rgb(44, 44, 44);
-  font-size: 16px;
-  font-weight: 500;
+  max-width: 1000px;
+  overflow-wrap: break-word;
+  font-size: 18px;
 }
 .btn-add-cmt {
   border: none;
@@ -431,7 +431,7 @@ code {
 .tab-flex-avatar {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .img-tab-review {
   margin-left: 6px;

@@ -75,15 +75,6 @@ function DetailReview() {
             item={review}
             name={(review.idUser && review.idUser.name) || "Anonymous"}
           ></Review>
-          <div
-            className="n-cmt"
-            style={{
-              paddingBottom: "8px",
-              width: "100%",
-            }}
-          >
-            {listCmt.length} comments
-          </div>
           <ListComment></ListComment>
         </div>
         <DarkFooter />
