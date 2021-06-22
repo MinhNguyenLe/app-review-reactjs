@@ -79,7 +79,7 @@ const App = () => {
         <Route exact path="/avatar" render={(props) => <Avatar {...props} />} />
         <Route
           exact
-          path="/schools/:id/reviews/:id/detail"
+          path="/reviews/:id/detail"
           render={(props) => <DetailReview {...props} />}
         />
         <Route exact path="/mypage" render={(props) => <MyPage {...props} />} />

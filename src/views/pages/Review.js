@@ -2,10 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import $ from "jquery";
 import axios from "axios";
 import TextareaAutosize from "react-textarea-autosize";
-
+import ErrPage from "views/pages/Error.js";
 import "moment-timezone";
-import useFormLogin from "javascript/useFormLogin";
-import validateLogin from "javascript/validateLogin";
 import { Link, useLocation, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "redux/actions.js";
@@ -49,6 +47,7 @@ function ReviewPage() {
   const idReview = useSelector((state) => state.idReview);
   const user = useSelector((state) => state.user);
   const state = useSelector((state) => state);
+  const arrIdSchool = useSelector((state) => state.arrId.schools);
 
   const dispatch = useDispatch();
 
@@ -163,7 +162,9 @@ function ReviewPage() {
     func.enableScrolling();
     $(`#icon_loading_1`).addClass("hidden");
   };
-  return (
+  return !arrIdSchool.includes(params.id) ? (
+    <ErrPage></ErrPage>
+  ) : (
     <>
       <div
         className={`${!showWriteReview ? "hidden" : "cover-background"}`}

@@ -124,9 +124,7 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
                             justifyContent: "center",
                           }}
                         >
-                          <Link
-                            to={`/schools/${params.id}/reviews/${item._id}/detail`}
-                          >
+                          <Link to={`/reviews/${item._id}/detail`}>
                             <i className="now-ui-icons ui-1_zoom-bold"></i>
                           </Link>
                         </div>

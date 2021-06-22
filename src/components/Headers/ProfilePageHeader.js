@@ -50,10 +50,20 @@ function ProfilePageHeader({ re, cmt }) {
           <p className="category">{people.school || "No information"}</p>
           <div className="content">
             <div className="social-description">
+              <i
+                style={{ fontSize: "32px !important" }}
+                id="icon_loading_re"
+                className="hidden now-ui-icons loader_refresh spin"
+              ></i>
               <h2>{re.length || "0"}</h2>
               <p>Reviews</p>
             </div>
             <div className="social-description">
+              <i
+                style={{ fontSize: "32px !important" }}
+                id="icon_loading_cmt"
+                className="hidden now-ui-icons loader_refresh spin"
+              ></i>
               <h2>{cmt.length || "0"}</h2>
               <p>Comments</p>
             </div>

@@ -34,7 +34,9 @@ function DetailPageHeader({ name }) {
         ></div>
         <div className="content-center">
           <Container style={{ background: "rgb(3 3 3 / 60%)" }}>
-            <h1 className="title">{`Detail review of user '${name}'`}</h1>
+            <h1 className="title">{`Detail review of user '${
+              name || "anonymous"
+            }'`}</h1>
             <div className="text-center">
               <Button
                 className="btn-icon btn-round"

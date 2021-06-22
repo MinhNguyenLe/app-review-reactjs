@@ -14,7 +14,7 @@ import ListComment from "components/comments/ListComment";
 // reactstrap components
 // import {
 // } from "reactstrap";
-
+import ErrPage from "views/pages/Error.js";
 import CustomNavbar from "components/Navbars/CustomNavbar.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
 import Review from "components/review/Review";
@@ -32,11 +32,16 @@ function DetailReview() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+
   const listCmt = useSelector((state) => state.cmt);
+  const arrIdReview = useSelector((state) => state.arrId.reviews);
+
   const [loading, setLoading] = useState(true);
   const [review, setReview] = useState({});
+
   const params = useParams();
   const history = useHistory();
+
   useEffect(() => {
     const axiosData = () => {
       Promise.all([axios.get(`${apiLocal}/api/reviews/${params.id}`)])
@@ -49,7 +54,10 @@ function DetailReview() {
     };
     axiosData();
   }, [params.id]);
-  return loading ? (
+
+  return !arrIdReview.includes(params.id) ? (
+    <ErrPage></ErrPage>
+  ) : loading ? (
     <div
       className="d-flex align-items-center justify-content-center"
       style={{ height: "500px" }}
@@ -65,7 +73,7 @@ function DetailReview() {
           <Review
             typePage="detail"
             item={review}
-            name={review.idUser && review.idUser.name}
+            name={(review.idUser && review.idUser.name) || "Anonymous"}
           ></Review>
           <div
             className="n-cmt"

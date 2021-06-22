@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as action from "redux/actions.js";
 import { apiLocal } from "javascript/dataGlobal.js";
 import Review from "components/review/Review";
-// reactstrap components
+import Loading from "components/loading/Loading";
 import {
   Button,
   NavItem,
@@ -21,7 +21,7 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
-// core components
+import ErrPage from "views/pages/Error.js";
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "components/Footers/DefaultFooter.js";
@@ -29,6 +29,7 @@ import DefaultFooter from "components/Footers/DefaultFooter.js";
 function ProfilePage() {
   const [re, setRe] = useState(0);
   const [cmt, setCmt] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const params = useParams();
   const history = useHistory();
@@ -37,6 +38,7 @@ function ProfilePage() {
 
   const token = useSelector((state) => state.token);
   const user = useSelector((state) => state.user);
+  const arrIdUser = useSelector((state) => state.arrId.users);
 
   const [pills, setPills] = React.useState("2");
 
@@ -47,15 +49,21 @@ function ProfilePage() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
 
+    $(`#icon_loading_re`).removeClass("hidden");
+    $(`#icon_loading_cmt`).removeClass("hidden");
+
     Promise.all([
       axios.get(`${apiLocal}/api/comments/users/${params.id}`),
       axios.get(`${apiLocal}/api/reviews/users/${params.id}`),
       axios.get(`${apiLocal}/api/users/${params.id}`),
     ])
       .then(([cmt, re, user]) => {
+        $(`#icon_loading_re`).addClass("hidden");
+        $(`#icon_loading_cmt`).addClass("hidden");
         setRe(re.data);
         setCmt(cmt.data);
         dispatch(action.setPeople(user.data));
+        setLoading(false);
       })
       .catch((err) => {
         // history.push("/error");
@@ -65,7 +73,17 @@ function ProfilePage() {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
-  return (
+
+  return !arrIdUser.includes(params.id) ? (
+    <ErrPage></ErrPage>
+  ) : loading ? (
+    <div
+      className="d-flex align-items-center justify-content-center"
+      style={{ height: "500px" }}
+    >
+      <Loading />
+    </div>
+  ) : (
     <>
       <ExamplesNavbar />
       <div className="wrapper">
