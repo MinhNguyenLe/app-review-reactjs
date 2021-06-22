@@ -86,6 +86,11 @@ const ListComment = () => {
       })
       .catch(() => {});
   };
+
+  const exitEditCmt = () => {
+    $(".cmt-content").removeClass("hidden");
+    $(".edit-cmt").addClass("hidden");
+  };
   return (
     <div>
       <div
@@ -164,6 +169,11 @@ const ListComment = () => {
                 type="text"
                 style={{ width: "100%", fontSize: "18px" }}
               />
+              <i
+                onClick={() => exitEditCmt()}
+                style={{ marginLeft: "8px", cursor: "pointer" }}
+                className="now-ui-icons ui-1_simple-remove"
+              ></i>
             </rb.Form>
             <div id={`comment_content_${item._id}`} className="cmt-content">
               {item.content}

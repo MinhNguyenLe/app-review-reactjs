@@ -443,3 +443,7 @@ code {
   display: flex;
   align-items: center;
 }
+.edit-cmt {
+  display: flex;
+  align-items: center;
+}

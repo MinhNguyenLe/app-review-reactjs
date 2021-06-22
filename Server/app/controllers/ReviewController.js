@@ -24,17 +24,15 @@ const reviewCtrl = {
     }
   },
   getById: async (req, res) => {
-    try {
-      let id = req.params.id;
-      const review = await Review.findById(id);
-
-      if (review === null || review.length === 0 || review === undefined) {
-        return res.status(404).json({ msg: "Can't find review" });
-      }
-      return res.json(review);
-    } catch (err) {
-      res.status(500).json({ msg: err.message });
-    }
+    let id = req.params.id;
+    Review.findById(id)
+      .populate("idUser")
+      .then((review) => {
+        return res.json(review);
+      })
+      .catch((err) => {
+        res.status(500).json({ msg: err.message });
+      });
   },
   getCommentsByIdReview: async (req, res) => {
     const id = req.params.id;

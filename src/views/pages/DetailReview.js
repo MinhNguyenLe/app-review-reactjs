@@ -18,7 +18,7 @@ import ListComment from "components/comments/ListComment";
 import CustomNavbar from "components/Navbars/CustomNavbar.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
 import Review from "components/review/Review";
-import LandingPageHeader from "components/Headers/LandingPageHeader.js";
+import DetailPageHeader from "components/Headers/DetailPageHeader.js";
 
 function DetailReview() {
   React.useEffect(() => {
@@ -60,9 +60,12 @@ function DetailReview() {
     <>
       <CustomNavbar />
       <div className="wrapper">
-        <LandingPageHeader />
+        <DetailPageHeader name={review.idUser && review.idUser.name} />
         <div className="main">
-          <Review item={review}></Review>
+          <Review
+            item={review}
+            name={review.idUser && review.idUser.name}
+          ></Review>
           <div
             className="n-cmt"
             style={{
