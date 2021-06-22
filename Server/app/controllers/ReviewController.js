@@ -37,19 +37,15 @@ const reviewCtrl = {
     }
   },
   getCommentsByIdReview: async (req, res) => {
-    try {
-      let id = req.params.id;
-      const review = await Review.findById(id);
-
-      if (review === null || review.length === 0 || review === undefined) {
-        return res.status(404).json({ msg: "Can't find review" });
-      }
-
-      const comments = await Comment.find({ idReview: id });
-      return res.json(comments);
-    } catch (err) {
-      res.status(500).json({ msg: err.message });
-    }
+    const id = req.params.id;
+    Comment.find({ idReview: id })
+      .populate("idUser")
+      .then((cmt) => {
+        return res.json(cmt);
+      })
+      .catch((err) => {
+        res.status(500).json({ msg: err.message });
+      });
   },
   createAuth: async (req, res) => {
     try {

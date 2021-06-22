@@ -9,6 +9,7 @@ import "moment-timezone";
 import $ from "jquery";
 import { useParams, useHistory } from "react-router-dom";
 import { apiLocal } from "javascript/dataGlobal.js";
+import Avatar from "components/avatar/Avatar";
 
 const ListComment = () => {
   const params = useParams();
@@ -52,6 +53,26 @@ const ListComment = () => {
     }
     setAddCmt(addCmt + 1);
   };
+
+  const deleteCmt = (id) => {
+    Promise.all([axios.delete(`${apiLocal}/api/comments/${id}`)])
+      .then(() => {
+        setAddCmt(addCmt + 1);
+      })
+      .catch(() => {});
+  };
+
+  const editCmt = (id) => {
+    Promise.all([
+      axios.put(`${apiLocal}/api/comments/${id}`, {
+        content: "abcxyz",
+      }),
+    ])
+      .then(() => {
+        setAddCmt(addCmt + 1);
+      })
+      .catch(() => {});
+  };
   return (
     <div>
       <div
@@ -83,7 +104,31 @@ const ListComment = () => {
       <div className="ske-cmt">
         {cmt.map((item, index) => (
           <div key={index} className="d-flex flex-row ske-cmt-c">
-            <div>
+            <div
+              className={
+                user && item.idUser && user.id === item.idUser._id
+                  ? ""
+                  : "hidden"
+              }
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <i
+                onClick={() => editCmt(item._id)}
+                style={{ marginLeft: "4px", cursor: "pointer" }}
+                className="now-ui-icons files_single-copy-04"
+              ></i>
+              <i
+                onClick={() => deleteCmt(item._id)}
+                style={{ marginLeft: "4px", cursor: "pointer" }}
+                className="now-ui-icons design_scissors"
+              ></i>
+            </div>
+            <Avatar linkImg={item.idUser && item.idUser.avatar}></Avatar>
+            <div className="img-tab-review">
               <Moment
                 className="date-content"
                 format="YYYY/MM/DD"
@@ -91,9 +136,11 @@ const ListComment = () => {
               >
                 {item.createdAt}
               </Moment>
-              <span className="cmt-name">{item.name || "anonymous"}</span>
-              <span className="cmt-content">{item.content}</span>
+              <span className="cmt-name">
+                {(item.idUser && item.idUser.name) || "anonymous"}
+              </span>
             </div>
+            <div className="cmt-content">{item.content}</div>
           </div>
         ))}
       </div>

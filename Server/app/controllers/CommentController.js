@@ -52,13 +52,12 @@ const commentCtrl = {
   update: async (req, res) => {
     try {
       let id = req.params;
-      const { idReview, idUser, name, content } = req.body;
+      const { content } = req.body;
       const comment = await Comment.findById(id);
 
       if (comment === null || comment.length === 0 || comment === undefined) {
         return res.status(404).json({ msg: "Can't find comment" });
       }
-      comment.name = name;
       comment.content = content;
       await comment.save();
       return res.status(200).json({ msg: "Updated comment" });
