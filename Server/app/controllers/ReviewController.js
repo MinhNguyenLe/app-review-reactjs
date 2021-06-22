@@ -116,7 +116,7 @@ const reviewCtrl = {
       if (review === null || review.length === 0 || review === undefined) {
         return res.status(404).json({ msg: "Can't find review" });
       }
-      await Review.deleteOne(id);
+      await Review.deleteOne(review);
       return res.json({ msg: "Deleted review" });
     } catch (err) {
       res.status(500).json({ msg: err.message });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import * as action from "redux/actions.js";
 import { apiLocal } from "javascript/dataGlobal.js";
 import Review from "components/review/Review";
-// reactstrap components
+import * as rb from "react-bootstrap";
+import TextareaAutosize from "react-textarea-autosize";
+import * as func from "javascript/funcGlobal.js";
+
 import {
   Button,
   NavItem,
@@ -49,24 +52,126 @@ function MyPage() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
 
-    Promise.all([
-      axios.get(`${apiLocal}/api/comments/users/${user.id}`),
-      axios.get(`${apiLocal}/api/reviews/users/${user.id}`),
-    ])
-      .then(([cmt, re]) => {
-        setRe(re.data);
-        setCmt(cmt.data);
-      })
-      .catch((err) => {
-        // history.push("/error");
-      });
     return function cleanup() {
       document.body.classList.remove("profile-page");
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
+
+  const refPositive = useRef();
+  const refNegative = useRef();
+  const refAdvice = useRef();
+
+  const idSchool = useSelector((state) => state.idSchool);
+  const idReview = useSelector((state) => state.idReview);
+
+  const [success, setSuccess] = useState(0);
+  const [showEdit, setShowEdit] = useState(false);
+
+  useEffect(() => {
+    const axiosData = () => {
+      Promise.all([
+        axios.get(`${apiLocal}/api/comments/users/${user.id}`),
+        axios.get(`${apiLocal}/api/reviews/users/${user.id}`),
+      ])
+        .then(([cmt, re]) => {
+          setRe(re.data);
+          setCmt(cmt.data);
+        })
+        .catch();
+      // .catch((err) => history.push("/error"));
+    };
+    axiosData();
+  }, [success]);
+
+  const editReview = (id, po, ne, ad) => {
+    refPositive.current.value = po;
+    refNegative.current.value = ne;
+    refAdvice.current.value = ad;
+    setShowEdit(true);
+    func.scrollTop();
+    dispatch(action.setIdReview(id));
+    func.disableScrolling();
+  };
+  const saveEdit = async () => {
+    dispatch(
+      action.setReview(
+        refPositive.current.value,
+        refNegative.current.value,
+        refAdvice.current.value
+      )
+    );
+    await axios.put(`${apiLocal}/api/reviews/${idReview}`, {
+      positive: refPositive.current.value,
+      negative: refNegative.current.value,
+      advice: refAdvice.current.value,
+    });
+    setSuccess(success + 1);
+    setShowEdit(false);
+    func.enableScrolling();
+  };
+  const deleteReview = (id) => {
+    Promise.all([axios.delete(`${apiLocal}/api/reviews/${id}`)])
+      .then(() => {
+        setSuccess(success + 1);
+      })
+      .catch(() => {});
+  };
+  const exitEdit = () => {
+    setShowEdit(false);
+    func.enableScrolling();
+  };
+
   return (
     <>
+      <div className={`${!showEdit ? "hidden" : "cover-background"}`}></div>
+      <div
+        style={!showEdit ? { display: "none" } : {}}
+        className="editor-mypage"
+      >
+        <div className="d-flex flex-row align-items-center justify-content-between">
+          <span className="big-title">Editor</span>
+          <i
+            onClick={exitEdit}
+            className="fas fa-times"
+            style={{ cursor: "pointer" }}
+          ></i>
+        </div>
+        <div>
+          <div>
+            <rb.Card.Text className="review-title">Ưu điểm</rb.Card.Text>
+            <TextareaAutosize
+              minRows={3}
+              maxRows={6}
+              ref={refPositive}
+              className="edit-content"
+            />
+          </div>
+          <div>
+            <rb.Card.Text className="review-title">
+              Điểm cần cải thiện
+            </rb.Card.Text>
+            <TextareaAutosize
+              minRows={3}
+              maxRows={6}
+              ref={refNegative}
+              className="edit-content"
+            />
+          </div>
+          <div>
+            <rb.Card.Text className="review-title">
+              Trải nghiệm và lời khuyên
+            </rb.Card.Text>
+            <TextareaAutosize
+              minRows={3}
+              maxRows={6}
+              ref={refAdvice}
+              className="edit-content"
+            />
+          </div>
+          <rb.Button onClick={saveEdit}>Save</rb.Button>
+        </div>
+      </div>
       <ExamplesNavbar />
       <div className="wrapper">
         <MypageHeader re={re} cmt={cmt} />
@@ -110,6 +215,8 @@ function MyPage() {
               re.map((item) => {
                 return (
                   <Review
+                    editReview={editReview}
+                    deleteReview={deleteReview}
                     item={item}
                     name={user.name}
                     typePage="mypage"

@@ -77,24 +77,6 @@ function ReviewPage() {
     axiosData();
   }, [success, params.id]);
 
-  // useEffect(() => {
-  //   // console.log(refAdvice.current);
-  //   // if (refAdvice) {
-  //   //   const axiosData = () => {
-  //   //     Promise.all([axios.get(`${apiLocal}/api/reviews/${idReview}`)])
-  //   //       .then(([dataDetailReview]) => {
-  //   //         setDetailReview(dataDetailReview.data);
-  //   //         refPositive.current.value = dataDetailReview.data.positive;
-  //   //         refNegative.current.value = dataDetailReview.data.negative;
-  //   //         refAdvice.current.value = dataDetailReview.data.advice;
-  //   //       })
-  //   //       .catch();
-  //   //     // .catch((err) => history.push("/error"));
-  //   //   };
-  //   //   axiosData();
-  //   }
-  // }, [showEdit]);
-
   const editReview = (id, po, ne, ad) => {
     refPositive.current.value = po;
     refNegative.current.value = ne;
@@ -120,6 +102,13 @@ function ReviewPage() {
     setSuccess(success + 1);
     setShowEdit(false);
     func.enableScrolling();
+  };
+  const deleteReview = (id) => {
+    Promise.all([axios.delete(`${apiLocal}/api/reviews/${id}`)])
+      .then(() => {
+        setSuccess(success + 1);
+      })
+      .catch(() => {});
   };
   const exitEdit = () => {
     setShowEdit(false);
@@ -176,6 +165,10 @@ function ReviewPage() {
   };
   return (
     <>
+      <div
+        className={`${!showWriteReview ? "hidden" : "cover-background"}`}
+      ></div>
+      <div className={`${!showEdit ? "hidden" : "cover-background"}`}></div>
       <ReviewNav writeReview={writeReview} />
       <div className="wrapper">
         <ReviewPageHeader school={school} />
@@ -195,14 +188,6 @@ function ReviewPage() {
                   className="fas fa-angle-double-up"
                 ></i>
               </div>
-              <div
-                className={`${!showEdit ? "hidden" : "cover-background"}`}
-              ></div>
-              <div
-                className={`${
-                  !showWriteReview ? "hidden" : "cover-background"
-                }`}
-              ></div>
               <div
                 style={!showEdit ? { display: "none" } : {}}
                 className="editor"
@@ -315,6 +300,7 @@ function ReviewPage() {
                     item={item}
                     name={item.idUser ? item.idUser.name : "Anonymous"}
                     editReview={editReview}
+                    deleteReview={deleteReview}
                   ></Review>
                 </div>
               ))}

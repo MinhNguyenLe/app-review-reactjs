@@ -65,7 +65,7 @@ const ListComment = () => {
           onClick={() => $("#writeCmt").toggle()}
           className="btn-add-cmt"
         >
-          Add a comment
+          Click to add a comment
         </button>
         <rb.Form
           id="writeCmt"

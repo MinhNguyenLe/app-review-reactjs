@@ -19,7 +19,7 @@ import {
 
 // core components
 
-function Review({ item, name, typePage, editReview }) {
+function Review({ item, name, typePage, editReview, deleteReview }) {
   const params = useParams();
   const user = useSelector((state) => state.user);
   const [pills, setPills] = React.useState("1");
@@ -153,6 +153,23 @@ function Review({ item, name, typePage, editReview }) {
                           }}
                         >
                           <i className="now-ui-icons files_single-copy-04"></i>
+                        </div>
+                        <div
+                          className={
+                            user && item.idUser && user.id === item.idUser._id
+                              ? ""
+                              : "hidden"
+                          }
+                          onClick={() => deleteReview(item._id)}
+                          style={{
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginLeft: "6px",
+                          }}
+                        >
+                          <i className="now-ui-icons design_scissors"></i>
                         </div>
                       </div>
                     </TabPane>
