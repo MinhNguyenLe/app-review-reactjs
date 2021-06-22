@@ -7,7 +7,7 @@ router.use(multer().none());
 
 router.get("/", reviewController.getAll);
 
-router.get("/users/:_id", reviewController.getReviewsByIdUser);
+router.get("/users/:id", reviewController.getReviewsByIdUser);
 
 router.get("/:id", reviewController.getById);
 

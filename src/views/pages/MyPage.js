@@ -58,7 +58,7 @@ function MyPage() {
         setCmt(cmt.data);
       })
       .catch((err) => {
-        history.push("/error");
+        // history.push("/error");
       });
     return function cleanup() {
       document.body.classList.remove("profile-page");
@@ -111,7 +111,7 @@ function MyPage() {
                 return (
                   <Review
                     item={item}
-                    userName={user.name}
+                    name={user.name}
                     typePage="mypage"
                   ></Review>
                 );

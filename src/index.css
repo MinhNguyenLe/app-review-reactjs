@@ -103,7 +103,7 @@ code {
   color: rgb(175, 175, 175);
 }
 .hidden {
-  display: none;
+  display: none !important;
 }
 .up-page {
   z-index: 999;
@@ -414,6 +414,11 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.tab-flex-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 .img-tab-review {
   margin-left: 6px;

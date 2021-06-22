@@ -28,7 +28,8 @@ const ListComment = () => {
           console.log(cmt.data);
           dispatch(action.setCmt(cmt.data));
         })
-        .catch((err) => history.push("/error"));
+        .catch();
+      // .catch((err) => history.push("/error"));
     };
     axiosData();
     refCmt.current.value = "";

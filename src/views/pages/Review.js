@@ -48,6 +48,8 @@ function ReviewPage() {
   const idSchool = useSelector((state) => state.idSchool);
   const idReview = useSelector((state) => state.idReview);
   const user = useSelector((state) => state.user);
+  const state = useSelector((state) => state);
+
   const dispatch = useDispatch();
 
   const [listReview, setListReview] = useState([]);
@@ -69,26 +71,34 @@ function ReviewPage() {
           setListReview(listReview.data);
           setLoading(false);
         })
-        .catch((err) => history.push("/error"));
+        .catch();
+      // .catch((err) => history.push("/error"));
     };
     axiosData();
   }, [success, params.id]);
 
-  useEffect(() => {
-    const axiosData = () => {
-      Promise.all([axios.get(`${apiLocal}/api/reviews/${idReview}`)])
-        .then(([dataDetailReview]) => {
-          setDetailReview(dataDetailReview.data);
-          refPositive.current.value = dataDetailReview.data.positive;
-          refNegative.current.value = dataDetailReview.data.negative;
-          refAdvice.current.value = dataDetailReview.data.advice;
-        })
-        .catch((err) => history.push("/error"));
-    };
-    axiosData();
-  }, [showEdit]);
+  // useEffect(() => {
+  //   // console.log(refAdvice.current);
+  //   // if (refAdvice) {
+  //   //   const axiosData = () => {
+  //   //     Promise.all([axios.get(`${apiLocal}/api/reviews/${idReview}`)])
+  //   //       .then(([dataDetailReview]) => {
+  //   //         setDetailReview(dataDetailReview.data);
+  //   //         refPositive.current.value = dataDetailReview.data.positive;
+  //   //         refNegative.current.value = dataDetailReview.data.negative;
+  //   //         refAdvice.current.value = dataDetailReview.data.advice;
+  //   //       })
+  //   //       .catch();
+  //   //     // .catch((err) => history.push("/error"));
+  //   //   };
+  //   //   axiosData();
+  //   }
+  // }, [showEdit]);
 
-  const editReview = (id) => {
+  const editReview = (id, po, ne, ad) => {
+    refPositive.current.value = po;
+    refNegative.current.value = ne;
+    refAdvice.current.value = ad;
     setShowEdit(true);
     func.scrollTop();
     dispatch(action.setIdReview(id));
@@ -109,6 +119,7 @@ function ReviewPage() {
     });
     setSuccess(success + 1);
     setShowEdit(false);
+    func.enableScrolling();
   };
   const exitEdit = () => {
     setShowEdit(false);
@@ -299,9 +310,13 @@ function ReviewPage() {
                 </div>
               </div>
               {listReview.map((item, index) => (
-                <>
-                  <Review item={item} key={item._id}></Review>
-                </>
+                <div key={item._id}>
+                  <Review
+                    item={item}
+                    name={item.idUser ? item.idUser.name : "Anonymous"}
+                    editReview={editReview}
+                  ></Review>
+                </div>
               ))}
             </>
           )}

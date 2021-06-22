@@ -19,10 +19,10 @@ import {
 
 // core components
 
-function Review({ item, userName, typePage }) {
+function Review({ item, name, typePage, editReview }) {
   const params = useParams();
+  const user = useSelector((state) => state.user);
   const [pills, setPills] = React.useState("1");
-  const people = useSelector((state) => state.people);
   return (
     <div key={item._id}>
       <div className="section section-tabs">
@@ -85,19 +85,6 @@ function Review({ item, userName, typePage }) {
                         Lời khuyên
                       </NavLink>
                     </NavItem>
-                    <NavItem
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Link
-                        to={`/schools/${params.id}/reviews/${item._id}/detail`}
-                      >
-                        <i className="now-ui-icons ui-1_zoom-bold"></i>
-                      </Link>
-                    </NavItem>
                   </Nav>
                 </CardHeader>
                 <CardBody>
@@ -105,7 +92,7 @@ function Review({ item, userName, typePage }) {
                     className="text-center"
                     activeTab={"pills" + pills}
                   >
-                    <TabPane tabId="pills1" className="tab-flex">
+                    <TabPane tabId="pills1" className="tab-flex-avatar">
                       <Link
                         to={
                           typePage === "mypage"
@@ -123,20 +110,51 @@ function Review({ item, userName, typePage }) {
                           linkImg={item.idUser ? item.idUser.avatar : ""}
                         ></Avatar>
                         <div className="img-tab-review">
-                          <p style={{ margin: "0" }}>
-                            {userName
-                              ? userName
-                              : people
-                              ? people.name
-                              : item.idUser
-                              ? item.idUser.name
-                              : "Anonymous"}
-                          </p>
+                          <p style={{ margin: "0" }}>{name}</p>
                           <Moment className="date-content" format="YYYY/MM/DD">
                             {item.createdAt}
                           </Moment>
                         </div>
                       </Link>
+                      <div className="d-flex ">
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Link
+                            to={`/schools/${params.id}/reviews/${item._id}/detail`}
+                          >
+                            <i className="now-ui-icons ui-1_zoom-bold"></i>
+                          </Link>
+                        </div>
+                        <div
+                          className={
+                            user && item.idUser && user.id === item.idUser._id
+                              ? ""
+                              : "hidden"
+                          }
+                          onClick={() =>
+                            editReview(
+                              item._id,
+                              item.positive,
+                              item.negative,
+                              item.advice
+                            )
+                          }
+                          style={{
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginLeft: "6px",
+                          }}
+                        >
+                          <i className="now-ui-icons files_single-copy-04"></i>
+                        </div>
+                      </div>
                     </TabPane>
                     <TabPane tabId="pills2">
                       <p>{item.positive}</p>

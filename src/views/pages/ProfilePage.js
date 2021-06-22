@@ -58,7 +58,7 @@ function ProfilePage() {
         dispatch(action.setPeople(user.data));
       })
       .catch((err) => {
-        history.push("/error");
+        // history.push("/error");
       });
     return function cleanup() {
       document.body.classList.remove("profile-page");
@@ -108,7 +108,13 @@ function ProfilePage() {
             </h5>
             {re &&
               re.map((item) => {
-                return <Review item={item} typePage="profile"></Review>;
+                return (
+                  <Review
+                    item={item}
+                    typePage="profile"
+                    name={item.idUser.name}
+                  ></Review>
+                );
               })}
             <Row>
               <Col className="ml-auto mr-auto" md="6">

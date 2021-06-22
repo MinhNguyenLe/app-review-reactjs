@@ -4,8 +4,9 @@ const User = require("../models/User");
 
 const reviewCtrl = {
   getReviewsByIdUser: async (req, res) => {
-    let id = req.params._id;
+    let id = req.params.id;
     Review.find({ idUser: id })
+      .populate("idUser")
       .then((data) => {
         res.status(200).json(data);
       })

@@ -82,6 +82,7 @@ const commentCtrl = {
   getCommentsByIdUser: async (req, res) => {
     let id = req.params._id;
     Comment.find({ idUser: id })
+      .populate("idUser")
       .then((data) => {
         res.status(200).json(data);
       })

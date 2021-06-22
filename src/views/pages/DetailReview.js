@@ -44,7 +44,8 @@ function DetailReview() {
           setReview(review.data);
           setLoading(false);
         })
-        .catch(() => history.push("/error"));
+        .catch();
+      // .catch(() => history.push("/error"));
     };
     axiosData();
   }, [params.id]);
