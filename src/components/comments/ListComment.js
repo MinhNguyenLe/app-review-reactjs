@@ -21,6 +21,7 @@ const ListComment = () => {
   const dispatch = useDispatch();
 
   const [addCmt, setAddCmt] = useState(0);
+  const [showEditCmt, setShowEditCmt] = useState(false);
 
   useEffect(() => {
     const axiosData = () => {
@@ -62,13 +63,25 @@ const ListComment = () => {
       .catch(() => {});
   };
 
-  const editCmt = (id) => {
+  const editCmt = (id, contentBeforeEdit) => {
+    $(".cmt-content").removeClass("hidden");
+    $(".edit-cmt").addClass("hidden");
+
+    $(`#edit_comment_${id}`).removeClass("hidden");
+    $(`#comment_content_${id}`).addClass("hidden");
+    console.log($(`#value_${id}`).val(contentBeforeEdit));
+  };
+
+  const saveEditCmt = (e, id) => {
+    e.preventDefault();
     Promise.all([
       axios.put(`${apiLocal}/api/comments/${id}`, {
-        content: "abcxyz",
+        content: $(`#value_${id}`).val(),
       }),
     ])
       .then(() => {
+        $(".cmt-content").removeClass("hidden");
+        $(".edit-cmt").addClass("hidden");
         setAddCmt(addCmt + 1);
       })
       .catch(() => {});
@@ -117,13 +130,13 @@ const ListComment = () => {
               }}
             >
               <i
-                onClick={() => editCmt(item._id)}
-                style={{ marginLeft: "4px", cursor: "pointer" }}
+                onClick={() => editCmt(item._id, item.content)}
+                style={{ marginRight: "8px", cursor: "pointer" }}
                 className="now-ui-icons files_single-copy-04"
               ></i>
               <i
                 onClick={() => deleteCmt(item._id)}
-                style={{ marginLeft: "4px", cursor: "pointer" }}
+                style={{ marginRight: "4px", cursor: "pointer" }}
                 className="now-ui-icons design_scissors"
               ></i>
             </div>
@@ -140,7 +153,21 @@ const ListComment = () => {
                 {(item.idUser && item.idUser.name) || "anonymous"}
               </span>
             </div>
-            <div className="cmt-content">{item.content}</div>
+            <rb.Form
+              className="edit-cmt hidden"
+              id={`edit_comment_${item._id}`}
+              onSubmit={(e) => saveEditCmt(e, item._id)}
+              style={{ width: "100%" }}
+            >
+              <rb.Form.Control
+                id={`value_${item._id}`}
+                type="text"
+                style={{ width: "100%", fontSize: "18px" }}
+              />
+            </rb.Form>
+            <div id={`comment_content_${item._id}`} className="cmt-content">
+              {item.content}
+            </div>
           </div>
         ))}
       </div>
