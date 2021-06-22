@@ -131,6 +131,8 @@ function reducer(state = INITIAL_STATE, action) {
           createdAt: action.payload.createdAt,
         },
       };
+    case "SET-CLEAR":
+      return state;
     default:
       return state;
   }

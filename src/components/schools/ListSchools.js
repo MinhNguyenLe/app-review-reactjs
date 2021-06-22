@@ -10,7 +10,7 @@ import { apiLocal } from "javascript/dataGlobal.js";
 
 const ListSchool = () => {
   const email = useSelector((state) => state.email);
-  const token = useSelector((state) => state.token);
+  const userRedux = useSelector((state) => state.user);
   const arrId = useSelector((state) => state.arrId);
 
   const params = useParams();
@@ -38,7 +38,7 @@ const ListSchool = () => {
   }, []);
 
   useEffect(() => {
-    if (token) {
+    if (userRedux.id) {
       const axiosData = () => {
         Promise.all([axios.get(`${apiLocal}/api/users/email/${email}`)])
           .then(([result]) => {

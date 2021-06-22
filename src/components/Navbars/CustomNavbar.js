@@ -46,7 +46,7 @@ function CustomNavbar() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
   });
-  const token = useSelector((state) => state.token);
+  const user = useSelector((state) => state.user);
   return (
     <>
       {collapseOpen ? (
@@ -92,7 +92,7 @@ function CustomNavbar() {
             navbar
           >
             <Nav navbar>
-              {token ? (
+              {user.id ? (
                 <NavItem>
                   <Link to="/mypage">My Profile</Link>
                 </NavItem>

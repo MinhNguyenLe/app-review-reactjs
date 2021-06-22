@@ -38,13 +38,13 @@ function MyPage() {
 
   const dispatch = useDispatch();
 
-  const token = useSelector((state) => state.token);
+  const userRedux = useSelector((state) => state.user);
   const user = useSelector((state) => state.user);
 
   const [pills, setPills] = React.useState("2");
 
   React.useEffect(() => {
-    if (!token) history.push("/login");
+    if (!userRedux.id) history.push("/login");
 
     document.body.classList.add("profile-page");
     document.body.classList.add("sidebar-collapse");

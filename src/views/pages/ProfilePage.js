@@ -36,7 +36,6 @@ function ProfilePage() {
 
   const dispatch = useDispatch();
 
-  const token = useSelector((state) => state.token);
   const user = useSelector((state) => state.user);
   const arrIdUser = useSelector((state) => state.arrId.users);
 

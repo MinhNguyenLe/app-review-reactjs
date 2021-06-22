@@ -46,7 +46,7 @@ function ReviewNav({ writeReview }) {
       window.removeEventListener("scroll", updateNavbarColor);
     };
   });
-  const token = useSelector((state) => state.token);
+  const user = useSelector((state) => state.user);
   return (
     <>
       {collapseOpen ? (
@@ -92,7 +92,7 @@ function ReviewNav({ writeReview }) {
             navbar
           >
             <Nav navbar>
-              {token ? (
+              {user.id ? (
                 <div className="d-flex flex-row align-items-center justify-content-between">
                   <NavItem>
                     <Link to="/mypage">My Profile</Link>

@@ -80,6 +80,12 @@ export const setEmail = (email) => {
   };
 };
 
+export const setClear = () => {
+  return {
+    type: "SET-CLEAR",
+  };
+};
+
 export const setToken = (bool) => {
   return {
     type: "SET-TOKEN",
