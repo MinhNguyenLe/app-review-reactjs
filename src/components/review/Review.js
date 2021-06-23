@@ -19,7 +19,15 @@ import {
 
 // core components
 
-function Review({ upVote, downVote,item, name, typePage, editReview, deleteReview }) {
+function Review({
+  upVote,
+  downVote,
+  item,
+  name,
+  typePage,
+  editReview,
+  deleteReview,
+}) {
   const params = useParams();
   const user = useSelector((state) => state.user);
   const [pills, setPills] = React.useState("1");
@@ -27,7 +35,7 @@ function Review({ upVote, downVote,item, name, typePage, editReview, deleteRevie
     <div key={item._id}>
       <div className="section section-tabs">
         <Container>
-        <Row>
+          <Row>
             <Col className="ml-auto mr-auto" md="10" xl="6">
               <Card>
                 <CardHeader>
@@ -94,7 +102,6 @@ function Review({ upVote, downVote,item, name, typePage, editReview, deleteRevie
                   >
                     <TabPane tabId="pills1" className="tab-flex-avatar">
                       <Link
-                      
                         to={
                           typePage === "mypage"
                             ? "/mypage"
@@ -104,7 +111,7 @@ function Review({ upVote, downVote,item, name, typePage, editReview, deleteRevie
                                 item.idUser ? item.idUser._id : "err"
                               }`
                         }
-                        style={{flex : "1.5"}}
+                        style={{ flex: "1.5" }}
                         className="review-link-user"
                       >
                         <Avatar
@@ -118,13 +125,31 @@ function Review({ upVote, downVote,item, name, typePage, editReview, deleteRevie
                           </Moment>
                         </div>
                       </Link>
-                      <div style={{flex : "1"}}>
-                        <p style={{margin : "0"}}>{item.comments} comments</p>
-                        <p className={`${typePage === "detail" ? "hidden" : ""}`} style={{margin : "0",fontWeight:"bold",display :"flex",justifyContent:"center",alignItems:"center"}}>
-                        {item.ratePoint} <p style={{fontSize : "13px",margin : "0px 0 0 2px"}}>(voted)</p>
+                      <div style={{ flex: "1" }}>
+                        <p style={{ margin: "0" }}>{item.comments} comments</p>
+                        <p
+                          className={`${typePage === "detail" ? "hidden" : ""}`}
+                          style={{
+                            margin: "0",
+                            fontWeight: "bold",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          {item.rateValue.up.idUser.length -
+                            item.rateValue.down.idUser.length}{" "}
+                          <p
+                            style={{ fontSize: "13px", margin: "0px 0 0 2px" }}
+                          >
+                            (voted)
+                          </p>
                         </p>
                       </div>
-                      <div className="d-flex " style={{flex : "1", justifyContent:"flex-end"}}>
+                      <div
+                        className="d-flex "
+                        style={{ flex: "1", justifyContent: "flex-end" }}
+                      >
                         <div
                           style={{
                             display: "flex",
@@ -194,42 +219,107 @@ function Review({ upVote, downVote,item, name, typePage, editReview, deleteRevie
                       </div>
                     </TabPane>
                     <TabPane tabId="pills2">
-                      <p className={typePage !== "detail" ? "content-hidden" : ""}>{item.positive}</p>
+                      <p
+                        className={
+                          typePage !== "detail" ? "content-hidden" : ""
+                        }
+                      >
+                        {item.positive}
+                      </p>
                     </TabPane>
                     <TabPane tabId="pills3">
-                      <p className={typePage !== "detail" ? "content-hidden" : ""}>{item.negative}</p>
+                      <p
+                        className={
+                          typePage !== "detail" ? "content-hidden" : ""
+                        }
+                      >
+                        {item.negative}
+                      </p>
                     </TabPane>
                     <TabPane tabId="pills4">
-                      <p className={typePage !== "detail" ? "content-hidden" : ""}>{item.advice}</p>
+                      <p
+                        className={
+                          typePage !== "detail" ? "content-hidden" : ""
+                        }
+                      >
+                        {item.advice}
+                      </p>
                     </TabPane>
                   </TabContent>
                 </CardBody>
               </Card>
             </Col>
-          <Col className={`${typePage === "detail" ? "" : "hidden"}`}>
-          <div style={{margin : "10px",display:"flex",flexDirection:"column", alignItems:"center",justifyContent:"center"}}>
-                          <button onClick={()=> upVote()} className={`btn-icon btn-round btn ${!user.id ? "btn-dark prevent-event" : item.rateValue.up.idUser.includes(user.id) ? "btn-success": "btn-info"}`}>
-                          <i className="now-ui-icons arrows-1_minimal-up"></i>
-                          </button>
-                          <div style={{display : "flex",flexDirection:"column", justifyContent:"center",alignItems:"center"}}>
-                            <p
-                            id="scores_id"
-                          className={`${user.id ? "": "dark"}`}  
-                          style={{margin : "0 10px",fontSize  : "27px",fontWeight:"bold",color: '#1beb11'}}>
-                          {item.rateValue.up.idUser.length - item.rateValue.down.idUser.length}
-                          </p>
-                          <i
-                            style={{ margin: "0px",fontSize : "20px" }}
-                            id={`icon_loading_detail-vote`}
-                            className="hidden now-ui-icons loader_refresh spin"
-                          ></i>
-                          <p className={`${user.id ? "hidden" : ""}`} style={{margin : "0"}}>Vote for this review, <Link to="/login">please login at </Link></p>
-                          </div>
-                        <button onClick={()=> downVote()} className={`btn-icon btn-round ${!user.id ? "btn-dark prevent-event" : item.rateValue.down.idUser.includes(user.id) ? "btn-success": "btn-info"} btn`}>
-                          <i className="now-ui-icons arrows-1_minimal-down"></i>
-                          </button>
-                        </div></Col>
-            </Row>
+            <Col className={`${typePage === "detail" ? "" : "hidden"}`}>
+              <div
+                style={{
+                  margin: "10px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <button
+                  onClick={() => upVote()}
+                  className={`btn-icon btn-round btn ${
+                    !user.id
+                      ? "btn-dark prevent-event"
+                      : item.rateValue.up.idUser.includes(user.id)
+                      ? "btn-success"
+                      : "btn-info"
+                  }`}
+                >
+                  <i className="now-ui-icons arrows-1_minimal-up"></i>
+                </button>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <p
+                    id="scores_id"
+                    className={`${user.id ? "" : "dark"}`}
+                    style={{
+                      margin: "0 10px",
+                      fontSize: "27px",
+                      fontWeight: "bold",
+                      color: "#1beb11",
+                    }}
+                  >
+                    {item.rateValue.up.idUser.length -
+                      item.rateValue.down.idUser.length}
+                  </p>
+                  <i
+                    style={{ margin: "0px", fontSize: "20px" }}
+                    id={`icon_loading_detail-vote`}
+                    className="hidden now-ui-icons loader_refresh spin"
+                  ></i>
+                  <p
+                    className={`${user.id ? "hidden" : ""}`}
+                    style={{ margin: "0" }}
+                  >
+                    Vote for this review,{" "}
+                    <Link to="/login">please login at </Link>
+                  </p>
+                </div>
+                <button
+                  onClick={() => downVote()}
+                  className={`btn-icon btn-round ${
+                    !user.id
+                      ? "btn-dark prevent-event"
+                      : item.rateValue.down.idUser.includes(user.id)
+                      ? "btn-success"
+                      : "btn-info"
+                  } btn`}
+                >
+                  <i className="now-ui-icons arrows-1_minimal-down"></i>
+                </button>
+              </div>
+            </Col>
+          </Row>
         </Container>
       </div>
     </div>

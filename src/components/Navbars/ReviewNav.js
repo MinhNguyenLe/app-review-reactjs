@@ -79,7 +79,6 @@ function ReviewNav({ writeReview }) {
           <div className="navbar-translate">
             <NavbarBrand
               style={{ fontSize: "18px" }}
-              href="https://demos.creative-tim.com/now-ui-kit-react/#/index?ref=nukr-index-navbar"
               target="_blank"
               id="navbar-brand"
             >

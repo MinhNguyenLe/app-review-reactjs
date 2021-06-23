@@ -42,7 +42,7 @@ function ReviewPageHeader({ school }) {
           className="content-center"
           style={{ background: "rgb(3 3 3 / 60%)" }}
         >
-          <Container>
+          <Container style={{ paddingBottom: "12px" }}>
             <h1 className="title">
               {school.name || <i className="now-ui-icons loader_gear spin"></i>}
             </h1>
