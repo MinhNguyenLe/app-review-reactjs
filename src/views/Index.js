@@ -5,7 +5,7 @@ import React from "react";
 // } from "reactstrap";
 
 // core components
-import IndexNavbar from "components/Navbars/IndexNavbar.js";
+import CustomNavbar from "components/Navbars/CustomNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
 
@@ -39,24 +39,11 @@ function Index() {
   });
   return (
     <>
-      <IndexNavbar />
+      <CustomNavbar />
       <div className="wrapper">
         <IndexHeader />
         <div className="main">
           <Images />
-          <BasicElements />
-          <Navbars />
-          <Tabs />
-          <Pagination />
-          <Notifications />
-          <Typography />
-          <Javascript />
-          <Carousel />
-          <NucleoIcons />
-          <CompleteExamples />
-          <SignUp />
-          <Examples />
-          <Download />
         </div>
         <DarkFooter />
       </div>

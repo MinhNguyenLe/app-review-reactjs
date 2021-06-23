@@ -43,7 +43,9 @@ function ReviewPageHeader({ school }) {
           style={{ background: "rgb(3 3 3 / 60%)" }}
         >
           <Container>
-            <h1 className="title">{school.name}</h1>
+            <h1 className="title">
+              {school.name || <i className="now-ui-icons loader_gear spin"></i>}
+            </h1>
             <a
               style={{ color: "white" }}
               href={school.website}
@@ -51,32 +53,6 @@ function ReviewPageHeader({ school }) {
             >
               {school.website}
             </a>
-            <div className="text-center">
-              <Button
-                className="btn-icon btn-round"
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-facebook-square"></i>
-              </Button>
-              <Button
-                className="btn-icon btn-round"
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-twitter"></i>
-              </Button>
-              <Button
-                className="btn-icon btn-round"
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-google-plus"></i>
-              </Button>
-            </div>
           </Container>
         </div>
       </div>

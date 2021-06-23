@@ -108,6 +108,12 @@ function ReviewNav({ writeReview }) {
             navbar
           >
             <Nav navbar>
+              <button
+                className="btn btn-primary"
+                style={{ marginRight: "8px" }}
+              >
+                <Link to="/schools">Danh sách trường</Link>
+              </button>
               {user.id ? (
                 <div className="d-flex flex-row align-items-center justify-content-between">
                   <NavItem>

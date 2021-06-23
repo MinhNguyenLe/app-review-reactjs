@@ -22,7 +22,7 @@ import {
 } from "reactstrap";
 
 import ErrPage from "views/pages/Error.js";
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+import CustomNavbar from "components/Navbars/CustomNavbar.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "components/Footers/DefaultFooter.js";
 
@@ -36,6 +36,7 @@ function ProfilePage() {
 
   const dispatch = useDispatch();
 
+  const people = useSelector((state) => state.people);
   const user = useSelector((state) => state.user);
   const arrIdUser = useSelector((state) => state.arrId.users);
 
@@ -55,9 +56,11 @@ function ProfilePage() {
     ])
       .then(([cmt, re, user]) => {
         $(`#loading_1_${params.id}`).addClass("hidden");
-           $(`#loading_2_${params.id}`).addClass("hidden");
-        if(!re.data.length) $(".text-after-loading-1-re").prepend( "<h2>0</h2>" )
-        if(!cmt.data.length) $(".text-after-loading-1-cmt").prepend( "<h2>0</h2>" )
+        $(`#loading_2_${params.id}`).addClass("hidden");
+        if (!re.data.length)
+          $(".text-after-loading-1-re").prepend("<h2>0</h2>");
+        if (!cmt.data.length)
+          $(".text-after-loading-1-cmt").prepend("<h2>0</h2>");
         setRe(re.data);
         setCmt(cmt.data);
         dispatch(action.setPeople(user.data));
@@ -71,40 +74,39 @@ function ProfilePage() {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
-
+  const deleteUser = () => {
+    Promise.all([
+      axios.delete(`${apiLocal}/api/users/${params.id}`),
+      axios.delete(`${apiLocal}/api/reviews/${params.id}/user`),
+      axios.delete(`${apiLocal}/api/comments/${params.id}/user`),
+    ])
+      .then(() => {
+        history.push("/");
+        dispatch(action.setClear());
+      })
+      .catch();
+  };
   return (
     <>
-      <ExamplesNavbar />
+      <CustomNavbar />
       <div className="wrapper">
         <ProfilePageHeader re={re} cmt={cmt} />
         <div className="section">
           <Container>
             <div className="button-container">
-              <Button className="btn-round" color="info" size="lg">
-                Follow
-              </Button>
-              <Button
-                className="btn-round btn-icon"
-                color="default"
-                id="tooltip515203352"
+              <button
+                className={`${
+                  !(user && user.permission === 1 && people.permission === 0)
+                    ? "btn btn-info"
+                    : "btn btn-dark prevent-event"
+                }`}
+                style={{ margin: 0, height: "100%" }}
+                color="info"
                 size="lg"
+                onClick={() => deleteUser()}
               >
-                <i className="fab fa-twitter"></i>
-              </Button>
-              <UncontrolledTooltip delay={0} target="tooltip515203352">
-                Follow me on Twitter
-              </UncontrolledTooltip>
-              <Button
-                className="btn-round btn-icon"
-                color="default"
-                id="tooltip340339231"
-                size="lg"
-              >
-                <i className="fab fa-instagram"></i>
-              </Button>
-              <UncontrolledTooltip delay={0} target="tooltip340339231">
-                Follow me on Instagram
-              </UncontrolledTooltip>
+                Chặn vĩnh viễn tài khoản
+              </button>
             </div>
             <h3 className="title">About me</h3>
             <h5 className="description">
@@ -123,7 +125,7 @@ function ProfilePage() {
                   ></Review>
                 );
               })}
-            </Container>
+          </Container>
         </div>
         <DefaultFooter />
       </div>

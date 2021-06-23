@@ -4,17 +4,17 @@ const User = require("../models/User");
 
 const reviewCtrl = {
   getReviewsByIdUser: async (req, res) => {
-     try {
-            let id = req.params.id;
-            let reviews = await Review.find({idUser: id}).populate("idUser");
-            for (let i = 0; i < reviews.length; i++) {
-                let comments = await Comment.find({ idReview: reviews[i]._id });
-                reviews[i] = { ...reviews[i]._doc, comments: comments.length };
-            }
-            return res.json(reviews);
-        } catch (err) {
-            return res.status(500).json({ msg: err.message });
-        }
+    try {
+      let id = req.params.id;
+      let reviews = await Review.find({ idUser: id }).populate("idUser");
+      for (let i = 0; i < reviews.length; i++) {
+        let comments = await Comment.find({ idReview: reviews[i]._id });
+        reviews[i] = { ...reviews[i]._doc, comments: comments.length };
+      }
+      return res.json(reviews);
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
   },
   getAll: async (req, res) => {
     try {
@@ -27,14 +27,14 @@ const reviewCtrl = {
   },
   getById: async (req, res) => {
     try {
-            let id = req.params.id;
-            let reviews = await Review.findById(id).populate("idUser")
-            let comments = await Comment.find({ idReview: id });
-                reviews = { ...reviews._doc, comments: comments.length };
-            return res.json(reviews);
-        } catch (err) {
-            return res.status(500).json({ msg: err.message });
-        }
+      let id = req.params.id;
+      let reviews = await Review.findById(id).populate("idUser");
+      let comments = await Comment.find({ idReview: id });
+      reviews = { ...reviews._doc, comments: comments.length };
+      return res.json(reviews);
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
   },
   getCommentsByIdReview: async (req, res) => {
     const id = req.params.id;
@@ -59,7 +59,7 @@ const reviewCtrl = {
         positive: positive,
         negative: negative,
         advice: advice,
-        ratePoint : 0,
+        ratePoint: 0,
       });
       await newReview.save();
 
@@ -77,7 +77,7 @@ const reviewCtrl = {
         positive: positive,
         negative: negative,
         advice: advice,
-        ratePoint : 0,
+        ratePoint: 0,
       });
       await newReview.save();
 
@@ -114,6 +114,15 @@ const reviewCtrl = {
       }
       await Review.deleteOne(review);
       return res.json({ msg: "Deleted review" });
+    } catch (err) {
+      res.status(500).json({ msg: err.message });
+    }
+  },
+  deteleUserReview: async (req, res) => {
+    try {
+      let id = req.params.id;
+      await Review.deleteMany({ idUser: id });
+      return res.json({ msg: "Deleted all reviews of user" });
     } catch (err) {
       res.status(500).json({ msg: err.message });
     }

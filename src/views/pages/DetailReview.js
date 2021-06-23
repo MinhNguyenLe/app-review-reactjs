@@ -33,7 +33,7 @@ function DetailReview() {
     };
   });
 
-  const user = useSelector(state=>state.user)
+  const user = useSelector((state) => state.user);
 
   const [success, setSuccess] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -55,32 +55,36 @@ function DetailReview() {
     axiosData();
   }, [success]);
 
-  const upVote=()=>{
-    $(`#icon_loading_detail-vote`).removeClass("hidden")
-    $('#scores_id').addClass("hidden")
-    Promise.all([axios.patch(`${apiLocal}/api/reviews/${params.id}/upvote`,{
-      id : user.id
-    })])
-    .then(()=>{
- setSuccess(success + 1)
- $(`#icon_loading_detail-vote`).addClass("hidden")
- $('#scores_id').removeClass("hidden")
-    })
-    .catch()
-  }
-const downVote=()=>{
-  $('#scores_id').addClass("hidden")
-  $(`#icon_loading_detail-vote`).removeClass("hidden")
-    Promise.all([axios.patch(`${apiLocal}/api/reviews/${params.id}/downvote`,{
-      id : user.id
-    })])
-    .then(()=>{
-      setSuccess(success + 1)
-      $(`#icon_loading_detail-vote`).addClass("hidden")
-      $('#scores_id').removeClass("hidden")
-    })
-    .catch()
-  }
+  const upVote = () => {
+    $(`#icon_loading_detail-vote`).removeClass("hidden");
+    $("#scores_id").addClass("hidden");
+    Promise.all([
+      axios.patch(`${apiLocal}/api/reviews/${params.id}/upvote`, {
+        id: user.id,
+      }),
+    ])
+      .then(() => {
+        setSuccess(success + 1);
+        $(`#icon_loading_detail-vote`).addClass("hidden");
+        $("#scores_id").removeClass("hidden");
+      })
+      .catch();
+  };
+  const downVote = () => {
+    $("#scores_id").addClass("hidden");
+    $(`#icon_loading_detail-vote`).removeClass("hidden");
+    Promise.all([
+      axios.patch(`${apiLocal}/api/reviews/${params.id}/downvote`, {
+        id: user.id,
+      }),
+    ])
+      .then(() => {
+        setSuccess(success + 1);
+        $(`#icon_loading_detail-vote`).addClass("hidden");
+        $("#scores_id").removeClass("hidden");
+      })
+      .catch();
+  };
   return loading ? (
     <div
       className="d-flex align-items-center justify-content-center"
@@ -95,8 +99,8 @@ const downVote=()=>{
         <DetailPageHeader name={review.idUser && review.idUser.name} />
         <div className="main">
           <Review
-          upVote={upVote}
-          downVote={downVote}
+            upVote={upVote}
+            downVote={downVote}
             typePage="detail"
             item={review}
             name={(review.idUser && review.idUser.name) || "Anonymous"}

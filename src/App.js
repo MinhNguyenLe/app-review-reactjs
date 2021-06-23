@@ -26,7 +26,6 @@ import "assets/demo/demo.css?v=1.5.0";
 import "assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
 import "./index.css";
 import Index from "views/Index.js";
-import UpLoadImg from "components/input/UploadImg.js";
 import ErrPage from "views/pages/Error.js";
 import Schools from "views/pages/Schools.js";
 import MyPage from "views/pages/MyPage.js";
@@ -37,12 +36,13 @@ import NucleoIcons from "views/NucleoIcons.js";
 import LoginPage from "views/pages/LoginPage.js";
 import LandingPage from "views/pages/LandingPage.js";
 import ProfilePage from "views/pages/ProfilePage.js";
+import Navbars from "views/index-sections/Navbars.js";
 
 const App = () => {
   return (
     <>
       <Switch>
-        <Route exact path="/avatar" render={(props) => <UpLoadImg {...props} />} />
+        <Route exact path="/nav" render={(props) => <Navbars {...props} />} />
         <Route
           exact
           path="/reviews/:id/detail"

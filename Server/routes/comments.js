@@ -20,4 +20,6 @@ router.put("/:_id", commentController.update);
 
 router.delete("/:_id", commentController.detele);
 
+router.delete("/:_id/user", commentController.deteleUserCmt);
+
 module.exports = router;
