@@ -25,8 +25,8 @@ function DetailReview() {
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
+    // window.scrollTo(0, 0);
+    // document.body.scrollTop = 0;
     return function cleanup() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
@@ -36,6 +36,7 @@ function DetailReview() {
   const listCmt = useSelector((state) => state.cmt);
   const arrIdReview = useSelector((state) => state.arrId.reviews);
 
+  const [success, setSuccess] = useState(0);
   const [loading, setLoading] = useState(true);
   const [review, setReview] = useState({});
 
@@ -45,7 +46,7 @@ function DetailReview() {
   useEffect(() => {
     const axiosData = () => {
       Promise.all([axios.get(`${apiLocal}/api/reviews/${params.id}`)])
-        .then(([review, comment]) => {
+        .then(([review]) => {
           setReview(review.data);
           setLoading(false);
         })
@@ -53,7 +54,7 @@ function DetailReview() {
       // .catch(() => history.push("/error"));
     };
     axiosData();
-  }, [params.id]);
+  }, [success]);
 
   return !arrIdReview.includes(params.id) ? (
     <ErrPage></ErrPage>
@@ -75,7 +76,7 @@ function DetailReview() {
             item={review}
             name={(review.idUser && review.idUser.name) || "Anonymous"}
           ></Review>
-          <ListComment></ListComment>
+          <ListComment success={success} setSuccess={setSuccess}></ListComment>
         </div>
         <DarkFooter />
       </div>

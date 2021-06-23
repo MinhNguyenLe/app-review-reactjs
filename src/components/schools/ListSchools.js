@@ -107,12 +107,6 @@ const ListSchool = () => {
                 </span>
                 {item.location}
               </rb.Card.Text>
-              <a href={item.website} className="school-name">
-                <span style={{ fontWeight: "500", fontSize: "19px" }}>
-                  Website:{" "}
-                </span>{" "}
-                {item.website}
-              </a>
               <div className="d-flex flex-row align-items-center">
                 <rb.Badge
                   variant="success"
@@ -121,8 +115,7 @@ const ListSchool = () => {
                   9.9
                 </rb.Badge>
                 <div>
-                  <rb.Card.Text className="school-name">Tốt</rb.Card.Text>
-                  <rb.Card.Text>n bài đánh giá</rb.Card.Text>
+                  <rb.Card.Text>{item.review} bài đánh giá</rb.Card.Text>
                 </div>
               </div>
             </rb.Card.Body>

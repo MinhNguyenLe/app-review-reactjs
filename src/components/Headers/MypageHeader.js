@@ -50,11 +50,21 @@ function MypageHeader({ re, cmt }) {
           <p className="category">{user.school || "No information"}</p>
           <div className="content">
             <div className="social-description">
-              <h2>{re.length || "0"}</h2>
+              {
+                re.length ? (<h2>{re.length}</h2>) :  (<i
+                style={{ fontSize: "32px !important" }}
+                className="now-ui-icons loader_refresh spin"
+              ></i>)
+              }
               <p>Reviews</p>
             </div>
             <div className="social-description">
-              <h2>{cmt.length || "0"}</h2>
+            {
+                cmt.length ? (<h2>{cmt.length}</h2>) :  (<i
+                style={{ fontSize: "32px !important" }}
+                className="now-ui-icons loader_refresh spin"
+              ></i>)
+              }
               <p>Comments</p>
             </div>
           </div>

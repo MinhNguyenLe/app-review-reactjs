@@ -94,6 +94,7 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
                   >
                     <TabPane tabId="pills1" className="tab-flex-avatar">
                       <Link
+                      
                         to={
                           typePage === "mypage"
                             ? "/mypage"
@@ -103,6 +104,7 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
                                 item.idUser ? item.idUser._id : "err"
                               }`
                         }
+                        style={{flex : "1"}}
                         className="review-link-user"
                       >
                         <Avatar
@@ -116,7 +118,11 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
                           </Moment>
                         </div>
                       </Link>
-                      <div className="d-flex ">
+                      <div style={{flex : "1"}}>
+                        <p style={{margin : "0"}}>{item.comments} comments</p>
+                        <p  style={{margin : "0"}}>{item.ratePoint} scores</p>
+                      </div>
+                      <div className="d-flex " style={{flex : "1", justifyContent:"flex-end"}}>
                         <div
                           style={{
                             display: "flex",

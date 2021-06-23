@@ -1,5 +1,6 @@
 const School = require('../models/School');
 const Review = require('../models/Review');
+const Comment = require('../models/Comment');
 const User = require('../models/User');
 const path = require('path');
 const { json } = require('express');
@@ -14,6 +15,28 @@ const schoolController = {
             .catch((err) => {
                 return res.status(500).json({ msg: err.message });
             });
+    },
+     getReviewsByIdSchool: async(req, res) => {
+         try {
+            const id = req.params.id;
+            let reviews = await Review.find({idSchool: id}).populate("idUser");
+            for (let i = 0; i < reviews.length; i++) {
+                let comments = await Comment.find({ idReview: reviews[i]._id });
+                reviews[i] = { ...reviews[i]._doc, comments: comments.length };
+            }
+            return res.json(reviews);
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
+        }
+        // const id = req.params.id;
+        // Review.find({ idSchool: id })
+        //     .populate('idUser')
+        //     .then((reviews) => {
+        //         return res.json(reviews);
+        //     })
+        //     .catch((err) => {
+        //         return res.status(500).json({ msg: err.message });
+        //     });
     },
     getAll: async (req, res) => {
         try {
@@ -52,17 +75,6 @@ const schoolController = {
                 return res.status(500).json({ msg: err.message });
             });
     },
-    getReviewsByIdSchool(req, res) {
-        const id = req.params.id;
-        Review.find({ idSchool: id })
-            .populate('idUser')
-            .then((reviews) => {
-                return res.json(reviews);
-            })
-            .catch((err) => {
-                return res.status(500).json({ msg: err.message });
-            });
-    },
     create: async (req, res) => {
         try {
             const {
@@ -85,7 +97,6 @@ const schoolController = {
             const galleryPaths = req.files['gallery'].map((item) => {
                 return item.path;
             });
-            console.log(logoPath);
 
             const newSchool = new School({
                 code: code,

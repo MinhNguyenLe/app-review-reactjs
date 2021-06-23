@@ -56,7 +56,6 @@ function Register() {
         // history.push("/login");
       })
       .catch((err) => {
-        console.log(err);
       });
   }
 

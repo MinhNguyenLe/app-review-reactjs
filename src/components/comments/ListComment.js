@@ -11,7 +11,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { apiLocal } from "javascript/dataGlobal.js";
 import Avatar from "components/avatar/Avatar";
 
-const ListComment = () => {
+const ListComment = ({success ,setSuccess}) => {
   const params = useParams();
   const history = useHistory();
   const refCmt = useRef();
@@ -27,7 +27,6 @@ const ListComment = () => {
     const axiosData = () => {
       Promise.all([axios.get(`${apiLocal}/api/reviews/${params.id}/comments`)])
         .then(([cmt]) => {
-          console.log(cmt.data);
           dispatch(action.setCmt(cmt.data));
         })
         .catch();
@@ -52,6 +51,7 @@ const ListComment = () => {
         content: refCmt.current.value,
       });
     }
+    setSuccess(success + 1)
     setAddCmt(addCmt + 1);
     $(`#icon_loading_3`).addClass("hidden");
   };
@@ -145,11 +145,12 @@ const ListComment = () => {
                 justifyContent: "center",
               }}
             >
+            <div style={{ marginRight: "8px" }}>
               <i
-                style={{ marginRight: "8px" }}
                 id={`icon_loading_${item._id}`}
                 className="hidden now-ui-icons loader_refresh spin"
               ></i>
+            </div>
               <i
                 onClick={() => editCmt(item._id, item.content)}
                 style={{ marginRight: "8px", cursor: "pointer" }}
@@ -191,7 +192,7 @@ const ListComment = () => {
                 className="now-ui-icons ui-1_simple-remove"
               ></i>
             </rb.Form>
-            <p id={`comment_content_${item._id}`} className="cmt-content">
+            <p style={{margin : "0"}} id={`comment_content_${item._id}`} className="cmt-content">
               {item.content}
             </p>
           </div>
