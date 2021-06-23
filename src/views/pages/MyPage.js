@@ -34,6 +34,9 @@ function MyPage() {
     const [upAvatar, setUpAvatar] = useState(null);
     const refAvatar = useRef(null);
 
+    const [upCoverImg, setUpCoverImg] = useState(null);
+    const refCoverImg = useRef(null);
+
     const [re, setRe] = useState(0);
     const [cmt, setCmt] = useState(0);
 
@@ -135,6 +138,8 @@ function MyPage() {
     };
 
     const saveChangeUser = () => {
+        if(refAvatar.current.files[0]) {
+            $("#icon_loading_avatar").removeClass("hidden")
         let formData = new FormData();
         formData.append('avatar', refAvatar.current.files[0]);
         formData.append('id', user.id);
@@ -145,10 +150,35 @@ function MyPage() {
                 },
             }),
         ])
-            .then()
+            .then(()=>{
+                updateUser()
+            })
             .catch();
-    };
-
+    }
+    if(refCoverImg.current.files[0]) {
+            $("#icon_loading_avatar").removeClass("hidden")
+        let formData = new FormData();
+        formData.append('coverImg', refCoverImg.current.files[0]);
+        formData.append('id', user.id);
+        Promise.all([
+            axios.patch(`${apiLocal}/api/users/cover-img`, formData, {
+                headers: {
+                    'content-type': 'multipart/form-data',
+                },
+            }),
+        ])
+            .then(()=>{
+                updateUser()
+            })
+            .catch();
+    }else console.log("nooooooooooooo")
+}
+    const updateUser= async()=>{
+        Promise.all([axios.get(`${apiLocal}/api/users/${user.id}`)]).then(([newUser])=>{
+            dispatch(action.setUser(newUser.data))
+             $("#icon_loading_avatar").addClass("hidden")
+        })
+    }
     return (
         <>
             <div
@@ -217,11 +247,14 @@ function MyPage() {
                     <Container>
                         <div className="button-container d-flex justify-content-center">
                             <Button
-                                color="success"
+                                color="warning"
                                 onClick={() => saveChangeUser()}
                                 style={{ margin: '26px' }}
                             >
-                                Save
+                                Save{" "}<i
+                            id="icon_loading_avatar"
+                            className="hidden now-ui-icons loader_refresh spin"
+                        ></i>
                             </Button>
                             <UpLoadImg
                                 upAvatar={upAvatar}
@@ -229,12 +262,12 @@ function MyPage() {
                                 refAvatar={refAvatar}
                                 content="Add avatar"
                             ></UpLoadImg>
-                            <button
-                                className="btn btn-outline-primary "
-                                style={{ margin: '26px' }}
-                            >
-                                Add cover image
-                            </button>
+                            <UpLoadImg
+                                upAvatar={upCoverImg}
+                                setUpAvatar={setUpCoverImg}
+                                refAvatar={refCoverImg}
+                                content="Add cover image"
+                            ></UpLoadImg>
                         </div>
                         <h3 className="title">About me</h3>
                         <h5 className="description">

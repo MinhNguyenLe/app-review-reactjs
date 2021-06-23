@@ -104,7 +104,7 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
                                 item.idUser ? item.idUser._id : "err"
                               }`
                         }
-                        style={{flex : "1"}}
+                        style={{flex : "2"}}
                         className="review-link-user"
                       >
                         <Avatar

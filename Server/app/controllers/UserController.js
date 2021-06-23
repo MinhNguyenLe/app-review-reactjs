@@ -105,6 +105,18 @@ const userController = {
             return res.status(500).json({ msg: err.message });
         }
     },
+    updateCoverImg: async (req, res) => {
+        try {
+            let user = await User.findById(req.body.id);
+            if (!user) return res.status(500).json({ msg: 'User not exist' });
+            if (req.file) user.coverImg = req.file.path;
+            console.log(req.file)
+            await user.save();
+            return res.json({ user });
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
+        }
+    },
     updateAvatar: async (req, res) => {
         try {
             let user = await User.findById(req.body.id);

@@ -16,6 +16,12 @@ router.patch(
     userController.updateAvatar
 );
 
+router.patch(
+    '/cover-img',
+    fileUploader.single('coverImg'),
+    userController.updateCoverImg
+);
+
 router.use(multer().none());
 
 router.post('/login', userController.login);

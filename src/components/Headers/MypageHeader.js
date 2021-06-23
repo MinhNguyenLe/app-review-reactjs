@@ -31,7 +31,10 @@ function MypageHeader({ re, cmt }) {
       >
         <div
           className="page-header-image"
-          style={{
+          style={user.coverImg ? {
+            backgroundImage:
+              "url(" + user.coverImg + ")",
+          } : {
             backgroundImage:
               "url(" + require("assets/img/bg5.jpg").default + ")",
           }}
