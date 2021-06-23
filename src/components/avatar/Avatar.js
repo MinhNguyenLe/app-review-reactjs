@@ -12,7 +12,7 @@ const Avatar = ({ linkImg, type }) => {
             : { width: "36px", height: "36px" }
         }
         alt="..."
-        className="rounded-circle img-fluid"
+        className="obj-fit rounded-circle img-fluid"
         src={linkImg ? linkImg : imgDefault}
       ></img>
     </Link>

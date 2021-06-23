@@ -453,3 +453,6 @@ code {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+.obj-fit{
+  object-fit: cover;
+}

@@ -131,6 +131,7 @@ const errRegister = useSelector((state) => state.errRegister);
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
+                    maxlength="20"
                       value={valuesRegister.name || ""}
                       name="name"
                       required
@@ -155,6 +156,7 @@ const errRegister = useSelector((state) => state.errRegister);
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
+                    maxlength="20"
                       value={valuesRegister.username || ""}
                       name="username"
                       required
