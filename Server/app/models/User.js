@@ -32,6 +32,9 @@ const User = new Schema(
         avatar: {
             type: String,
         },
+        coverImg: {
+            type: String,
+        },
     },
     { timestamps: true, collection: 'users' }
 );

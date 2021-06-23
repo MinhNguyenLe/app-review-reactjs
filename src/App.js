@@ -26,7 +26,7 @@ import "assets/demo/demo.css?v=1.5.0";
 import "assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
 import "./index.css";
 import Index from "views/Index.js";
-import Avatar from "components/avatar/Avatar.js";
+import UpLoadImg from "components/input/UploadImg.js";
 import ErrPage from "views/pages/Error.js";
 import Schools from "views/pages/Schools.js";
 import MyPage from "views/pages/MyPage.js";
@@ -73,7 +73,7 @@ const App = () => {
   return (
     <>
       <Switch>
-        <Route exact path="/avatar" render={(props) => <Avatar {...props} />} />
+        <Route exact path="/avatar" render={(props) => <UpLoadImg {...props} />} />
         <Route
           exact
           path="/reviews/:id/detail"
