@@ -121,7 +121,7 @@ const reviewCtrl = {
   upvote: async (req, res) => {
     try {
       let id = req.params.id;
-      let idUser = req.user.id;
+      let idUser = req.body.id;
       const review = await Review.findById(id);
 
       if (review === null || review.length === 0 || review === undefined) {
@@ -154,7 +154,7 @@ const reviewCtrl = {
   downvote: async (req, res) => {
     try {
       let id = req.params.id;
-      let idUser = req.user.id;
+      let idUser = req.body.id;
       const review = await Review.findById(id);
 
       if (review === null || review.length === 0 || review === undefined) {

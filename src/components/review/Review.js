@@ -19,7 +19,7 @@ import {
 
 // core components
 
-function Review({ item, name, typePage, editReview, deleteReview }) {
+function Review({ upVote, downVote,item, name, typePage, editReview, deleteReview }) {
   const params = useParams();
   const user = useSelector((state) => state.user);
   const [pills, setPills] = React.useState("1");
@@ -27,7 +27,7 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
     <div key={item._id}>
       <div className="section section-tabs">
         <Container>
-          <Row>
+        <Row>
             <Col className="ml-auto mr-auto" md="10" xl="6">
               <Card>
                 <CardHeader>
@@ -104,7 +104,7 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
                                 item.idUser ? item.idUser._id : "err"
                               }`
                         }
-                        style={{flex : "2"}}
+                        style={{flex : "1.5"}}
                         className="review-link-user"
                       >
                         <Avatar
@@ -120,7 +120,9 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
                       </Link>
                       <div style={{flex : "1"}}>
                         <p style={{margin : "0"}}>{item.comments} comments</p>
-                        <p  style={{margin : "0"}}>{item.ratePoint} scores</p>
+                        <p className={`${typePage === "detail" ? "hidden" : ""}`} style={{margin : "0",fontWeight:"bold",display :"flex",justifyContent:"center",alignItems:"center"}}>
+                        {item.ratePoint} <p style={{fontSize : "13px",margin : "0px 0 0 2px"}}>(voted)</p>
+                        </p>
                       </div>
                       <div className="d-flex " style={{flex : "1", justifyContent:"flex-end"}}>
                         <div
@@ -204,7 +206,30 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
                 </CardBody>
               </Card>
             </Col>
-          </Row>
+          <Col className={`${typePage === "detail" ? "" : "hidden"}`}>
+          <div style={{margin : "10px",display:"flex",flexDirection:"column", alignItems:"center",justifyContent:"center"}}>
+                          <button onClick={()=> upVote()} className={`btn-icon btn-round btn ${!user.id ? "btn-dark prevent-event" : item.rateValue.up.idUser.includes(user.id) ? "btn-success": "btn-info"}`}>
+                          <i className="now-ui-icons arrows-1_minimal-up"></i>
+                          </button>
+                          <div style={{display : "flex",flexDirection:"column", justifyContent:"center",alignItems:"center"}}>
+                            <p
+                            id="scores_id"
+                          className={`${user.id ? "": "dark"}`}  
+                          style={{margin : "0 10px",fontSize  : "27px",fontWeight:"bold",color: '#1beb11'}}>
+                          {item.rateValue.up.idUser.length - item.rateValue.down.idUser.length}
+                          </p>
+                          <i
+                            style={{ margin: "0px",fontSize : "20px" }}
+                            id={`icon_loading_detail-vote`}
+                            className="hidden now-ui-icons loader_refresh spin"
+                          ></i>
+                          <p className={`${user.id ? "hidden" : ""}`} style={{margin : "0"}}>Vote for this review, <Link to="/login">please login at </Link></p>
+                          </div>
+                        <button onClick={()=> downVote()} className={`btn-icon btn-round ${!user.id ? "btn-dark prevent-event" : item.rateValue.down.idUser.includes(user.id) ? "btn-success": "btn-info"} btn`}>
+                          <i className="now-ui-icons arrows-1_minimal-down"></i>
+                          </button>
+                        </div></Col>
+            </Row>
         </Container>
       </div>
     </div>

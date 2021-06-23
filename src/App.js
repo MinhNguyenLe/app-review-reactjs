@@ -38,38 +38,7 @@ import LoginPage from "views/pages/LoginPage.js";
 import LandingPage from "views/pages/LandingPage.js";
 import ProfilePage from "views/pages/ProfilePage.js";
 
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import * as action from "redux/actions.js";
-import { apiLocal } from "javascript/dataGlobal.js";
-
 const App = () => {
-  const dispatch = useDispatch();
-  const arrId = useSelector((state) => state.arrId);
-
-  useEffect(() => {
-    const axiosData = () => {
-      Promise.all([
-        axios.get(`${apiLocal}/api/schools`),
-        axios.get(`${apiLocal}/api/reviews`),
-        axios.get(`${apiLocal}/api/comments`),
-        axios.get(`${apiLocal}/api/users`),
-      ])
-        .then(([schools, reviews, comments, users]) => {
-          dispatch(
-            action.setIdApp({
-              schools: schools.data.map((school) => school._id),
-              reviews: reviews.data.map((review) => review._id),
-              comments: comments.data.map((cmt) => cmt._id),
-              users: users.data.map((user) => user._id),
-            })
-          );
-        })
-        .catch();
-    };
-    axiosData();
-  }, []);
-
   return (
     <>
       <Switch>

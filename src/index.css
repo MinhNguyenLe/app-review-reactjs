@@ -456,3 +456,9 @@ code {
 .obj-fit{
   object-fit: cover;
 }
+.prevent-event{
+  pointer-events: none;
+}
+.dark{
+  color : #343a40 !important;
+}
