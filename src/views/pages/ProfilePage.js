@@ -48,17 +48,16 @@ function ProfilePage() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
 
-    $(`#icon_loading_re`).removeClass("hidden");
-    $(`#icon_loading_cmt`).removeClass("hidden");
-
     Promise.all([
       axios.get(`${apiLocal}/api/comments/users/${params.id}`),
       axios.get(`${apiLocal}/api/reviews/users/${params.id}`),
       axios.get(`${apiLocal}/api/users/${params.id}`),
     ])
       .then(([cmt, re, user]) => {
-        $(`#icon_loading_re`).addClass("hidden");
-        $(`#icon_loading_cmt`).addClass("hidden");
+        $(`#loading_1_${params.id}`).addClass("hidden");
+           $(`#loading_2_${params.id}`).addClass("hidden");
+        if(!re.data.length) $(".text-after-loading-1-re").prepend( "<h2>0</h2>" )
+        if(!cmt.data.length) $(".text-after-loading-1-cmt").prepend( "<h2>0</h2>" )
         setRe(re.data);
         setCmt(cmt.data);
         dispatch(action.setPeople(user.data));
@@ -73,16 +72,7 @@ function ProfilePage() {
     };
   }, []);
 
-  return !arrIdUser.includes(params.id) ? (
-    <ErrPage></ErrPage>
-  ) : loading ? (
-    <div
-      className="d-flex align-items-center justify-content-center"
-      style={{ height: "500px" }}
-    >
-      <Loading />
-    </div>
-  ) : (
+  return (
     <>
       <ExamplesNavbar />
       <div className="wrapper">

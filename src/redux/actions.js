@@ -25,6 +25,15 @@ export const setIdApp = (arrId) => {
   };
 };
 
+export const setErrRegister = (bool) => {
+  return {
+    type: "SET-ERR-REGISTER",
+    payload: {
+      errRegister: bool,
+    },
+  };
+};
+
 export const setErrLogin = (bool) => {
   return {
     type: "SET-ERR-LOGIN",

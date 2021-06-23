@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
-// reactstrap components
 import { Container } from "reactstrap";
-
-// core components
+import {useParams} from "react-router-dom"
+// core components 
 
 function ProfilePageHeader({ re, cmt }) {
+  const params = useParams()
   const people = useSelector((state) => state.people);
   // let pageHeader = useRef();
 
@@ -49,18 +49,24 @@ function ProfilePageHeader({ re, cmt }) {
           <h3 className="title">{people.name}</h3>
           <p className="category">{people.school || "No information"}</p>
           <div className="content">
-            <div className="social-description">
+            <div className="social-description text-after-loading-1-re">
               {
                 re.length ? (<h2>{re.length}</h2>) :  (<i
+                  id={`loading_1_${params.id}`}
                 style={{ fontSize: "32px !important" }}
                 className="now-ui-icons loader_refresh spin"
               ></i>)
               }
               <p>Reviews</p>
             </div>
-            <div className="social-description">
+            <div className="social-description text-after-loading-1-cmt">
               {
-                cmt.length ? (<h2>{cmt.length}</h2>) :  (<i
+                cmt.length 
+                ? 
+                (<h2>{cmt.length}</h2>) 
+                :  
+                (<i
+                   id={`loading_2_${params.id}`}
                 style={{ fontSize: "32px !important" }}
                 className="now-ui-icons loader_refresh spin"
               ></i>)

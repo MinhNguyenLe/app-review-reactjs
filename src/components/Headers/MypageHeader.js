@@ -49,19 +49,21 @@ function MypageHeader({ re, cmt }) {
           <h3 className="title">{user.name}</h3>
           <p className="category">{user.school || "No information"}</p>
           <div className="content">
-            <div className="social-description">
+            <div className="social-description text-after-loading-re">
               {
                 re.length ? (<h2>{re.length}</h2>) :  (<i
                 style={{ fontSize: "32px !important" }}
+                id={`loading_1_${user.id}`}
                 className="now-ui-icons loader_refresh spin"
               ></i>)
               }
               <p>Reviews</p>
             </div>
-            <div className="social-description">
+            <div className="social-description text-after-loading-cmt">
             {
                 cmt.length ? (<h2>{cmt.length}</h2>) :  (<i
                 style={{ fontSize: "32px !important" }}
+                id={`loading_2_${user.id}`}
                 className="now-ui-icons loader_refresh spin"
               ></i>)
               }

@@ -192,13 +192,13 @@ function Review({ item, name, typePage, editReview, deleteReview }) {
                       </div>
                     </TabPane>
                     <TabPane tabId="pills2">
-                      <p>{item.positive}</p>
+                      <p className={typePage !== "detail" ? "content-hidden" : ""}>{item.positive}</p>
                     </TabPane>
                     <TabPane tabId="pills3">
-                      <p>{item.negative}</p>
+                      <p className={typePage !== "detail" ? "content-hidden" : ""}>{item.negative}</p>
                     </TabPane>
                     <TabPane tabId="pills4">
-                      <p>{item.advice}</p>
+                      <p className={typePage !== "detail" ? "content-hidden" : ""}>{item.advice}</p>
                     </TabPane>
                   </TabContent>
                 </CardBody>

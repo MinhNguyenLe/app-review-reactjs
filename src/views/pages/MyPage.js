@@ -75,6 +75,10 @@ function MyPage() {
         axios.get(`${apiLocal}/api/reviews/users/${user.id}`),
       ])
         .then(([cmt, re]) => {
+          $(`#loading_1_${user.id}`).addClass("hidden");
+          $(`#loading_2_${user.id}`).addClass("hidden");
+          if(!re.data.length) $(".text-after-loading-re").prepend( "<h2>0</h2>" )
+          if(!cmt.data.length) $(".text-after-loading-cmt").prepend( "<h2>0</h2>" )
           setRe(re.data);
           setCmt(cmt.data);
         })

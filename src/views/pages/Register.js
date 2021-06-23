@@ -30,6 +30,7 @@ import {
 
 function Register() {
   const dispatch = useDispatch();
+const errRegister = useSelector((state) => state.errRegister);
 
   let location = useLocation();
   let history = useHistory();
@@ -50,12 +51,14 @@ function Register() {
       }),
     ])
       .then(() => {
+        dispatch(action.setErrRegister(false));
         dispatch(action.setToken(true));
         dispatch(action.setEmail(valuesRegister.email));
         history.push("/schools");
         // history.push("/login");
       })
       .catch((err) => {
+        if (err) dispatch(action.setErrRegister(true));
       });
   }
 
@@ -213,6 +216,11 @@ function Register() {
                   {errorsRegister.password && (
                     <p className="help is-danger">{errorsRegister.password}</p>
                   )}
+                      {errRegister && (
+                      <p className="help is-danger">
+                        Account is wrong or created 
+                      </p>
+                      )}
                 </CardBody>
                 <CardFooter className="text-center">
                   <Button

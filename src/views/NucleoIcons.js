@@ -420,7 +420,7 @@ function NucleoIcons() {
         <section id="files">
           <h2>Files &amp; Folders</h2>
           <ul>
-            <li>
+              <li>
               <i className="now-ui-icons files_box"></i>
               <p>files_box</p>
             </li>

@@ -54,9 +54,10 @@ function ReviewNav({ writeReview }) {
   const logOut = () => {
     Promise.all([axios.get(`${apiLocal}/api/users/logout`)])
       .then(() => {
-        history.push("/login");
         dispatch(action.setClear());
         localStorage.removeItem();
+        history.push("/login");
+        window.location.reload();
       })
       .catch(() => {});
   };

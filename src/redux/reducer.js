@@ -10,6 +10,7 @@ const persistConfig = {
 const INITIAL_STATE = {
   errPage: false,
   errLogin: false,
+  errRegister : false,
   idSchool: "",
   idReview: "",
   positive: "",
@@ -76,6 +77,11 @@ function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         errLogin: action.payload.errLogin,
+      };
+      case "SET-ERR-REGISTER":
+      return {
+        ...state,
+        errRegister: action.payload.errRegister,
       };
     case "SET-REVIEW":
       return {
