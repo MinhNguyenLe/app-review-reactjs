@@ -31,6 +31,9 @@ import MypageHeader from "components/Headers/MypageHeader.js";
 import DefaultFooter from "components/Footers/DefaultFooter.js";
 
 function MyPage() {
+   const [upAvatar, setUpAvatar] = useState(null);
+  const refAvatar = useRef(null);
+
   const [re, setRe] = useState(0);
   const [cmt, setCmt] = useState(0);
 
@@ -131,6 +134,17 @@ function MyPage() {
     func.enableScrolling();
   };
 
+  const saveChangeUser=()=>{
+    let formData = new FormData();
+    formData.append("file", refAvatar.current.files[0])
+    formData.append("id" , user.id)
+    Promise.all([axios.patch(`${apiLocal}/api/users/avatar`,formData, {
+      headers: {
+      'Content-Type': 'multipart/form-data'
+    }}
+    )]).then().catch()
+  }
+
   return (
     <>
       <div className={`${!showEdit ? "hidden" : "cover-background"}`}></div>
@@ -193,8 +207,10 @@ function MyPage() {
         <MypageHeader re={re} cmt={cmt} />
         <div className="section">
           <Container>
-            <div className="button-container">
-             <UpLoadImg></UpLoadImg>
+            <div className="button-container d-flex justify-content-center">
+            <Button color="success" onClick={()=> saveChangeUser()} style={{margin : "26px"}}>Save</Button>
+             <UpLoadImg upAvatar={upAvatar} setUpAvatar={setUpAvatar} refAvatar={refAvatar} content="Add avatar"></UpLoadImg>
+             <button className="btn btn-outline-primary " style={{margin : "26px"}}>Add cover image</button>
             </div>
             <h3 className="title">About me</h3>
             <h5 className="description">
@@ -207,6 +223,7 @@ function MyPage() {
               re.map((item) => {
                 return (
                   <Review
+                  key={`key_user_${item._id}`}
                     editReview={editReview}
                     deleteReview={deleteReview}
                     item={item}

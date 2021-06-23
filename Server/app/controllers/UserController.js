@@ -107,9 +107,10 @@ const userController = {
     },
     updateAvatar: async (req, res) => {
         try {
-            let user = await User.findById(req.user.id);
+            let user = await User.findById(req.body.id);
             if (!user) return res.status(500).json({ msg: 'User not exist' });
             if (req.file) user.avatar = req.file.path;
+            console.log(req.file)
             await user.save();
             return res.json({ user });
         } catch (err) {

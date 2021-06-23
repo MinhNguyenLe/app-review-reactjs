@@ -13,7 +13,6 @@ router.post(
 router.patch(
     '/avatar',
     fileUploader.single('avatar'),
-    auth,
     userController.updateAvatar
 );
 
