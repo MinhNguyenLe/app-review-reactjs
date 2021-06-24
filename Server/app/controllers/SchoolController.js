@@ -105,7 +105,7 @@ const schoolController = {
                 website: website,
                 typeOfSchool: typeOfSchool,
                 level: level,
-                typeOfMajor: JSON.parse(typeOfMajor),
+                typeOfMajor: typeOfMajor,
                 description: description,
                 logo: logoPath,
                 images: galleryPaths,

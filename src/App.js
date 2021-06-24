@@ -37,10 +37,6 @@ import LoginPage from "views/pages/LoginPage.js";
 import LandingPage from "views/pages/LandingPage.js";
 import ProfilePage from "views/pages/ProfilePage.js";
 import Navbars from "views/index-sections/Navbars.js";
-import NewSchool from "views/pages/NewSchool.js";
-import ListPost from "views/pages/forum/ListPost.js";
-import ListThread from "views/pages/forum/ListThread.js";
-import NewThread from "views/pages/forum/NewThread.js";
 
 import { apiLocal } from "javascript/dataGlobal.js";
 import axios from "axios";
@@ -111,26 +107,6 @@ const App = () => {
           exact
           path="/login"
           render={(props) => <LoginPage {...props} />}
-        />
-        <Route
-          exact
-          path="/schools/new-school"
-          component={NewSchool}
-        />
-        <Route
-          exact
-          path="/forum/new-thread"
-          component={NewThread}
-        />
-        <Route
-          exact
-          path="/forum"
-          component={ListThread}
-        />
-        <Route
-          exact
-          path="/forum/thread/:id"
-          component={ListPost}
         />
         <Route component={ErrPage}></Route>
       </Switch>

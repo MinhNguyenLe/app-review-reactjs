@@ -11,20 +11,19 @@ router.get('/:id', threadController.getById);
 
 router.get('/:id/posts', threadController.getAllPostsByIdThread);
 
-router.get('/:id/categories', threadController.getAllThreadByIdCategory);
 //router.get('/:id/comments', threadController.getCommentsByIdReview);
-router.use(authMiddleWare);
+//router.use(authMiddleWare);
 
 router.post('/', threadController.create);
 
 // router.post('/auth', threadController.createAuth);
 
-router.put('/:id', threadController.update);
+// router.put('/:id', threadController.update);
 
 // router.patch('/:id/upvote', reviewController.upvote);
 
 // router.patch('/:id/downvote', reviewController.downvote);
 
-router.delete('/:id', threadController.delete);
+// router.delete('/:id', reviewController.delete);
 
 module.exports = router;
