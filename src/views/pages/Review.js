@@ -17,6 +17,8 @@ import DarkFooter from "components/Footers/DarkFooter.js";
 import Review from "components/review/Review.js";
 import ReviewPageHeader from "components/Headers/ReviewPageHeader.js";
 
+import { FormGroup, Label, Input } from "reactstrap";
+
 function ReviewPage() {
   React.useEffect(() => {
     document.body.classList.add("index-page");
@@ -24,8 +26,6 @@ function ReviewPage() {
     document.documentElement.classList.remove("nav-open");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
-
-    if (!arrIdSchool.includes(params.id)) history.push("/error");
 
     return function cleanup() {
       document.body.classList.remove("index-page");

@@ -8,7 +8,7 @@ import * as func from "javascript/funcGlobal.js";
 import Loading from "components/loading/Loading.js";
 import { apiLocal } from "javascript/dataGlobal.js";
 
-const ListSchool = () => {
+const ListSchool = ({ data, setData }) => {
   const email = useSelector((state) => state.email);
   const userRedux = useSelector((state) => state.user);
   const arrId = useSelector((state) => state.arrId);
@@ -19,7 +19,6 @@ const ListSchool = () => {
   const [user, setUser] = useState({});
 
   const dispatch = useDispatch();
-  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -70,59 +69,63 @@ const ListSchool = () => {
       className="d-flex flex-column align-items-center"
       style={{ marginTop: "80px" }}
     >
-      {data.map((item, index) => (
-        <rb.Card
-          className="hover-shadow"
-          style={{ width: "70%", margin: "16px 0 16px 0", padding: "20px" }}
-          key={index}
-          onClick={() => goReview(item._id)}
-        >
-          <Link
-            to={`/schools/${item._id}/reviews`}
-            className="d-flex flex-row"
-            style={{ textDecoration: "none" }}
+      {data &&
+        data.map((item, index) => (
+          <rb.Card
+            className="hover-shadow"
+            style={{ width: "70%", margin: "16px 0 16px 0", padding: "20px" }}
+            key={index}
+            onClick={() => goReview(item._id)}
           >
-            <rb.Card.Img
-              src={item.images[0]}
-              className="school-img"
-            ></rb.Card.Img>
-            <rb.Card.Body style={{ margin: "0" }}>
-              <rb.Card.Text
-                className="school-name"
-                style={{ fontSize: "21px", fontWeight: "700" }}
-              >
-                {item.name}
-              </rb.Card.Text>
-              <rb.Card.Text>
-                <span style={{ fontWeight: "500", fontSize: "19px" }}>
-                  Mã trường :{" "}
-                </span>
-                <span style={{ fontSize: "16px", fontWeight: "normal" }}>
-                  {item.code}
-                </span>
-              </rb.Card.Text>
-              <rb.Card.Text className="school-name">
-                <span style={{ fontWeight: "500", fontSize: "19px" }}>
-                  Location:{" "}
-                </span>
-                {item.location}
-              </rb.Card.Text>
-              <div className="d-flex flex-row align-items-center">
-                <rb.Badge
-                  variant="success"
-                  className="d-flex justify-content-center align-items-center school-badge"
+            <Link
+              to={`/schools/${item._id}/reviews`}
+              className="d-flex flex-row"
+              style={{ textDecoration: "none" }}
+            >
+              <rb.Card.Img
+                src={item.images[0]}
+                className="school-img"
+              ></rb.Card.Img>
+              <rb.Card.Body style={{ margin: "0" }}>
+                <rb.Card.Text
+                  className="school-name"
+                  style={{ fontSize: "21px", fontWeight: "700" }}
                 >
-                  9.9
-                </rb.Badge>
-                <div>
-                  <rb.Card.Text>{item.review} bài đánh giá</rb.Card.Text>
+                  {item.name}
+                </rb.Card.Text>
+                <rb.Card.Text>
+                  <span style={{ fontWeight: "500", fontSize: "19px" }}>
+                    Mã trường :{" "}
+                  </span>
+                  <span style={{ fontSize: "16px", fontWeight: "normal" }}>
+                    {item.code}
+                  </span>
+                </rb.Card.Text>
+                <rb.Card.Text className="school-name">
+                  <span style={{ fontWeight: "500", fontSize: "19px" }}>
+                    Location:{" "}
+                  </span>
+                  {item.location}
+                </rb.Card.Text>
+                <div className="d-flex flex-row align-items-center">
+                  <rb.Badge
+                    variant="success"
+                    className="d-flex justify-content-center align-items-center school-badge"
+                  >
+                    9.9
+                  </rb.Badge>
+                  <div>
+                    <rb.Card.Text>{item.review} bài đánh giá</rb.Card.Text>
+                  </div>
                 </div>
-              </div>
-            </rb.Card.Body>
-            <rb.Card.Img src={item.logo} className="school-logo"></rb.Card.Img>
-          </Link>
-        </rb.Card>
-      ))}
+              </rb.Card.Body>
+              <rb.Card.Img
+                src={item.logo}
+                className="school-logo"
+              ></rb.Card.Img>
+            </Link>
+          </rb.Card>
+        ))}
     </div>
   );
 };

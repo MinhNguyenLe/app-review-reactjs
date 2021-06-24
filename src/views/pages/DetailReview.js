@@ -28,8 +28,6 @@ function DetailReview() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
 
-    if (!arrIdReview.includes(params.id)) history.push("/error");
-
     return function cleanup() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
