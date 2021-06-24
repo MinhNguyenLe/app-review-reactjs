@@ -32,6 +32,8 @@ router.get('/refresh_token', userController.refreshToken);
 
 router.get('/me', auth, userController.getMe);
 
+router.get('/notifications', userController.getNotifications);
+
 router.get('/username/:username', userController.getByUsername);
 
 router.get('/email/:email', userController.getByEmail);

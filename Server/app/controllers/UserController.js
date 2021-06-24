@@ -70,6 +70,16 @@ const userController = {
                 return res.status(500).json({ msg: err.message });
             });
     },
+    getNotifications: async (req, res) => {
+        try {
+            const { idUser } = req.body;
+            const user = await User.findById(idUser);
+            const notifications = user.notifications;
+            return res.json({ notifications });
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
+        }
+    },
     register: async (req, res) => {
         try {
             const { username, name, password, email, permission } = req.body; // FrontEnd submit object to BackEnd
