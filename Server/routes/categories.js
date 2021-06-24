@@ -1,23 +1,24 @@
 const router = require('express').Router();
-const postController = require('../app/controllers/PostController');
+const categoryController = require('../app/controllers/CategoryController');
 const authMiddleWare = require('../app/middleware/auth');
 const multer = require('multer');
 
 router.use(multer().none());
 
-router.get('/', postController.getAll);
+router.get('/', categoryController.getAll);
 
-router.get('/:id', postController.getById);
+router.get('/:id', categoryController.getById);
+
 
 //router.get('/:id/comments', postController.getCommentsByIdReview);
-router.use(authMiddleWare);
+//router.use(authMiddleWare);
 
-router.post('/', postController.create);
-router.delete('/:id', postController.delete);
+router.post('/', categoryController.create);
+router.delete('/:id', categoryController.delete);
 
 // router.post('/auth', threadController.createAuth);
 
-router.put('/:id', postController.update);
+router.put('/:id', categoryController.update);
 
 // router.patch('/:id/upvote', reviewController.upvote);
 

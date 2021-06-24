@@ -56,6 +56,7 @@ function ReviewNav({ writeReview }) {
       .then(() => {
         dispatch(action.setClear());
         localStorage.removeItem();
+        localStorage.removeItem('x-access-token');
         history.push("/login");
         window.location.reload();
       })

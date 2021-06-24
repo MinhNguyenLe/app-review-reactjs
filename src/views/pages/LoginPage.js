@@ -45,9 +45,10 @@ function LoginPage() {
         password: valuesLogin.passLogin,
       }),
     ])
-      .then(() => {
+      .then(([res]) => {
         dispatch(action.setErrLogin(false));
         console.log("success");
+        localStorage.setItem('x-access-token', res.headers['x-access-token']);
         dispatch(action.setToken(true));
         dispatch(action.setEmail(valuesLogin.emailLogin));
         history.push("/schools");
