@@ -46,8 +46,8 @@ function ProfilePage() {
     document.body.classList.add("profile-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
+    // window.scrollTo(0, 0);
+    // document.body.scrollTop = 0;
 
     Promise.all([
       axios.get(`${apiLocal}/api/comments/users/${params.id}`),

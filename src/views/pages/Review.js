@@ -22,8 +22,8 @@ function ReviewPage() {
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
+    // window.scrollTo(0, 0);
+    // document.body.scrollTop = 0;
     return function cleanup() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
@@ -60,21 +60,34 @@ function ReviewPage() {
   const [showEdit, setShowEdit] = useState(false);
 
   useEffect(() => {
+    const refresh = setInterval(() => {
+      setSuccess(success + 1);
+      console.log("in");
+    }, 5000);
+    Promise.all([axios.get(`${apiLocal}/api/schools/${params.id}/reviews`)])
+      .then(([listReview]) => {
+        console.log("runnnnnnnn");
+        setListReview(listReview.data);
+        setLoading(false);
+      })
+      .catch();
+    return () => {
+      console.log("out");
+      clearInterval(refresh);
+    };
+  }, [success, params.id]);
+
+  useEffect(() => {
     const axiosData = () => {
-      Promise.all([
-        axios.get(`${apiLocal}/api/schools/${params.id}`),
-        axios.get(`${apiLocal}/api/schools/${params.id}/reviews`),
-      ])
-        .then(([school, listReview]) => {
+      Promise.all([axios.get(`${apiLocal}/api/schools/${params.id}`)])
+        .then(([school]) => {
           setSchool(school.data);
-          setListReview(listReview.data);
-          setLoading(false);
         })
         .catch();
       // .catch((err) => history.push("/error"));
     };
     axiosData();
-  }, [success, params.id]);
+  }, [params.id]);
 
   const editReview = (id, po, ne, ad) => {
     refPositive.current.value = po;
