@@ -32,6 +32,8 @@ router.get('/refresh_token', userController.refreshToken);
 
 router.get('/me', auth, userController.getMe);
 
+router.get('/notifications', userController.getNotifications);
+
 router.get('/username/:username', userController.getByUsername);
 
 router.get('/email/:email', userController.getByEmail);
@@ -43,6 +45,10 @@ router.get('/:id', userController.getById);
 router.patch('/banned', userController.ban);
 
 router.patch('/unbanned', userController.unBan);
+
+router.patch('/notifications', userController.updateNotification);
+
+router.post('/notifications', userController.createNotification);
 
 router.get('/:id', userController.getById);
 

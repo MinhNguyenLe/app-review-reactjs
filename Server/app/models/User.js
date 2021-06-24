@@ -38,6 +38,17 @@ const User = new Schema(
         banned: {
             type: Boolean,
         },
+        notifications: [
+            {
+                review: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'Review',
+                },
+                seenNotification: {
+                    type: Boolean,
+                },
+            },
+        ],
     },
     { timestamps: true, collection: 'users' }
 );
