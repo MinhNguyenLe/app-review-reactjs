@@ -8,12 +8,14 @@ import { apiLocal } from "javascript/dataGlobal.js";
 import SchoolPageHeader from "components/Headers/SchoolPageHeader.js";
 import { Link, useLocation, useHistory, useParams } from "react-router-dom";
 import $ from "jquery";
+import * as func from "javascript/funcGlobal.js";
 
 function Schools() {
   const params = useParams();
   const [data, setData] = useState([]);
   const refCode = useRef();
   const refLocation = useRef();
+  const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {
     document.body.classList.add("index-page");
@@ -21,6 +23,16 @@ function Schools() {
     document.documentElement.classList.remove("nav-open");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
+
+    Promise.all([axios.get(`${apiLocal}/api/schools`)])
+      .then(([result]) => {
+        setData(result.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        // history.push("/error");
+      });
+    func.scrollTop();
     return function cleanup() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
@@ -48,7 +60,7 @@ function Schools() {
     $("#select_type_school").addClass("prevent-event");
     Promise.all([
       axios.get(
-        `${apiLocal}/api/schools/search-by-location&q=${refLocation.current.value}`
+        `${apiLocal}/api/schools/search/location?q=${refLocation.current.value}`
       ),
     ])
       .then(([school]) => {
@@ -66,12 +78,12 @@ function Schools() {
     $("#select_type_school").addClass("prevent-event");
     Promise.all([
       axios.get(
-        `${apiLocal}/api/schools/search-by-code&q=${refCode.current.value}`
+        `${apiLocal}/api/schools/search/code?q=${refCode.current.value}`
       ),
     ])
       .then(([school]) => {
-        setData(school.data);
         console.log(school.data);
+        setData(school.data || []);
         $("#search_code").removeClass("prevent-event");
         $("#search_location").removeClass("prevent-event");
         $("#select_type_school").removeClass("prevent-event");
@@ -106,7 +118,7 @@ function Schools() {
                   color: "#333",
                   borderRadius: "6px",
                 }}
-                onClick={() => searchCodeSchool()}
+                onClick={() => searchLocationSchool()}
               >
                 <i class="fas fa-search"></i>
               </button>
@@ -126,7 +138,7 @@ function Schools() {
                   color: "#333",
                   borderRadius: "6px",
                 }}
-                onClick={() => searchLocationSchool()}
+                onClick={() => searchCodeSchool()}
               >
                 <i class="fas fa-search"></i>
               </button>
@@ -158,7 +170,12 @@ function Schools() {
               </Input>
             </FormGroup>
           </div>
-          <ListSchools data={data} setData={setData}></ListSchools>
+          <ListSchools
+            loading={loading}
+            setLoading={setLoading}
+            data={data}
+            setData={setData}
+          ></ListSchools>
         </div>
         <DarkFooter />
       </div>

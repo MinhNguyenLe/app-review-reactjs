@@ -13,8 +13,8 @@ router.post(
 );
 
 router.use(multer().none());
-router.get("/search-by-location", schoolController.searchByLocation);
-router.get("/search-by-code", schoolController.searchByCode);
+router.get("/search/location", schoolController.searchByLocation);
+router.get("/search/code", schoolController.searchByCode);
 
 router.get("/test", schoolController.test);
 router.get("/search", schoolController.searchByName);

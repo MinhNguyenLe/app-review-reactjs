@@ -51,20 +51,7 @@ const schoolController = {
       return res.status(500).json({ msg: err.message });
     }
   },
-  searchByName(req, res) {
-    let q = req.query.q;
-    q = removeVietnameseTones(q);
-    School.find({})
-      .then((schools) => {
-        schools = schools.filter((item) => {
-          return removeVietnameseTones(item.name).includes(q);
-        });
-        return res.json(schools);
-      })
-      .catch((err) => {
-        return res.status(500).json({ msg: err.message });
-      });
-  },
+
   getById(req, res) {
     const id = req.params.id;
     School.findById(id)
@@ -128,31 +115,47 @@ const schoolController = {
       return res.status(500).json({ msg: err.message });
     }
   },
-  searchByLocation: async (req, res) => {
-    try {
-      let q = req.query.q;
-      q = removeVietnameseTones(q);
-      let schools = await School.find({});
-      schools = schools.filter((item, index) => {
-        return removeVietnameseTones(item.location).includes(q);
+  searchByName(req, res) {
+    let q = req.query.q;
+    q = removeVietnameseTones(q);
+    School.find({})
+      .then((schools) => {
+        schools = schools.filter((item) => {
+          return removeVietnameseTones(item.name).includes(q);
+        });
+        return res.json(schools);
+      })
+      .catch((err) => {
+        return res.status(500).json({ msg: err.message });
       });
-      return res.status(200).json(schools);
-    } catch (error) {
-      return res.status(500).json({ msg: error.message });
-    }
+  },
+  searchByLocation: async (req, res) => {
+    let q = req.query.q;
+    q = removeVietnameseTones(q);
+    School.find({})
+      .then((schools) => {
+        schools = schools.filter((item) => {
+          return removeVietnameseTones(item.location).includes(q);
+        });
+        return res.json(schools);
+      })
+      .catch((err) => {
+        return res.status(500).json({ msg: err.message });
+      });
   },
   searchByCode: async (req, res) => {
-    try {
-      let q = req.query.q;
-      q = removeVietnameseTones(q);
-      let schools = await School.find({});
-      schools = schools.filter((item, index) => {
-        return removeVietnameseTones(item.code).includes(q);
+    let q = req.query.q;
+    q = removeVietnameseTones(q);
+    School.find({})
+      .then((schools) => {
+        schools = schools.filter((item) => {
+          return removeVietnameseTones(item.code).includes(q);
+        });
+        return res.json(schools);
+      })
+      .catch((err) => {
+        return res.status(500).json({ msg: err.message });
       });
-      return res.status(200).json(schools);
-    } catch (error) {
-      return res.status(500).json({ msg: error.message });
-    }
   },
   filterByTypeOfSchool: async (req, res) => {
     try {

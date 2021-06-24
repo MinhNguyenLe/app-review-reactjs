@@ -8,7 +8,7 @@ import * as func from "javascript/funcGlobal.js";
 import Loading from "components/loading/Loading.js";
 import { apiLocal } from "javascript/dataGlobal.js";
 
-const ListSchool = ({ data, setData }) => {
+const ListSchool = ({ loading, setLoading, data, setData }) => {
   const email = useSelector((state) => state.email);
   const userRedux = useSelector((state) => state.user);
   const arrId = useSelector((state) => state.arrId);
@@ -19,22 +19,6 @@ const ListSchool = ({ data, setData }) => {
   const [user, setUser] = useState({});
 
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const axiosData = () => {
-      Promise.all([axios.get(`${apiLocal}/api/schools`)])
-        .then(([result]) => {
-          setData(result.data);
-          setLoading(false);
-        })
-        .catch((err) => {
-          // history.push("/error");
-        });
-    };
-    axiosData();
-    func.scrollTop();
-  }, []);
 
   useEffect(() => {
     if (email) {
@@ -69,7 +53,7 @@ const ListSchool = ({ data, setData }) => {
       className="d-flex flex-column align-items-center"
       style={{ marginTop: "80px" }}
     >
-      {data &&
+      {data !== [] ? (
         data.map((item, index) => (
           <rb.Card
             className="hover-shadow"
@@ -125,7 +109,10 @@ const ListSchool = ({ data, setData }) => {
               ></rb.Card.Img>
             </Link>
           </rb.Card>
-        ))}
+        ))
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
