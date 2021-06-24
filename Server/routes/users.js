@@ -16,6 +16,12 @@ router.patch(
     userController.updateAvatar
 );
 
+router.patch(
+    '/cover-img',
+    fileUploader.single('coverImg'),
+    userController.updateCoverImg
+);
+
 router.use(multer().none());
 
 router.post('/login', userController.login);
@@ -32,10 +38,16 @@ router.get('/email/:email', userController.getByEmail);
 
 router.get('/permission/:permission', userController.getByPermission);
 
+router.get('/:id', userController.getById);
+
 router.patch('/banned', userController.ban);
+
 router.patch('/unbanned', userController.unBan);
+
 router.get('/:id', userController.getById);
 
 router.get('/', userController.getAll);
+
+router.delete('/:id', userController.delete);
 
 module.exports = router;

@@ -162,9 +162,7 @@ function ReviewPage() {
     func.enableScrolling();
     $(`#icon_loading_1`).addClass("hidden");
   };
-  return !arrIdSchool.includes(params.id) ? (
-    <ErrPage></ErrPage>
-  ) : (
+  return (
     <>
       <div
         className={`${!showWriteReview ? "hidden" : "cover-background"}`}

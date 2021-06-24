@@ -28,6 +28,7 @@ const INITIAL_STATE = {
     username: "",
     name: "",
     createdAt: "",
+    coverImg : ""
   },
   user: {
     avatar: "",
@@ -37,6 +38,7 @@ const INITIAL_STATE = {
     username: "",
     name: "",
     createdAt: "",
+    coverImg : ""
   },
   cmt: [],
   arrId: {
@@ -78,6 +80,10 @@ function reducer(state = INITIAL_STATE, action) {
         ...state,
         errLogin: action.payload.errLogin,
       };
+      case "SET-AVATAR":
+        let avatar = action.payload.avatar
+        state.user.avatar = avatar
+      return state
       case "SET-ERR-REGISTER":
       return {
         ...state,
@@ -119,6 +125,7 @@ function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         people: {
+          coverImg: action.payload.coverImg,
           avatar: action.payload.avatar,
           email: action.payload.email,
           permission: action.payload.permission,
@@ -132,6 +139,7 @@ function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         user: {
+          coverImg: action.payload.coverImg,
           avatar: action.payload.avatar,
           email: action.payload.email,
           permission: action.payload.permission,

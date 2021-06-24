@@ -30,7 +30,10 @@ function ProfilePageHeader({ re, cmt }) {
       >
         <div
           className="page-header-image"
-          style={{
+          style={people.coverImg ? {
+            backgroundImage:
+              "url(" + people.coverImg + ")",
+          } : {
             backgroundImage:
               "url(" + require("assets/img/bg5.jpg").default + ")",
           }}

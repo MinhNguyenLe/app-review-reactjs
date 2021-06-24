@@ -30,7 +30,7 @@ import {
 
 function Register() {
   const dispatch = useDispatch();
-const errRegister = useSelector((state) => state.errRegister);
+  const errRegister = useSelector((state) => state.errRegister);
 
   let location = useLocation();
   let history = useHistory();
@@ -131,6 +131,7 @@ const errRegister = useSelector((state) => state.errRegister);
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
+                      maxlength="20"
                       value={valuesRegister.name || ""}
                       name="name"
                       required
@@ -155,6 +156,7 @@ const errRegister = useSelector((state) => state.errRegister);
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
+                      maxlength="20"
                       value={valuesRegister.username || ""}
                       name="username"
                       required
@@ -216,20 +218,32 @@ const errRegister = useSelector((state) => state.errRegister);
                   {errorsRegister.password && (
                     <p className="help is-danger">{errorsRegister.password}</p>
                   )}
-                      {errRegister && (
-                      <p className="help is-danger">
-                        Account is wrong or created 
-                      </p>
-                      )}
+                  {errRegister && (
+                    <p className="help is-danger">
+                      Account is wrong or created
+                    </p>
+                  )}
                 </CardBody>
                 <CardFooter className="text-center">
                   <Button
                     className="btn-neutral btn-round"
                     color="info"
                     size="lg"
+                    style={{ marginBottom: "0" }}
                   >
                     Get Started
                   </Button>
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    <Link to="/" style={{ margin: "0 10px 0 0 " }}>
+                      Đăng nhập ẩn danh
+                    </Link>
+                  </div>
                 </CardFooter>
               </Form>
             </Card>

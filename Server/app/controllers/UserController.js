@@ -105,6 +105,32 @@ const userController = {
             return res.status(500).json({ msg: err.message });
         }
     },
+    updateCoverImg: async (req, res) => {
+        try {
+            let user = await User.findById(req.body.id);
+            if (!user) return res.status(500).json({ msg: 'User not exist' });
+            if (req.file) user.coverImg = req.file.path;
+            console.log(req.file);
+            await user.save();
+            return res.json({ user });
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
+        }
+    },
+    delete: async (req, res) => {
+        try {
+            let id = req.params.id;
+            const user = await User.findById(id);
+
+            if (!user) {
+                return res.status(404).json({ msg: "Can't find user" });
+            }
+            await Review.deleteOne(user);
+            return res.json({ msg: 'Deleted user' });
+        } catch (err) {
+            res.status(500).json({ msg: err.message });
+        }
+    },
     updateAvatar: async (req, res) => {
         try {
             let user = await User.findById(req.body.id);
@@ -153,8 +179,6 @@ const userController = {
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch)
                 return res.status(400).json({ msg: 'Incorrect password' });
-            if (user.banned)
-                return res.status(400).json({ msg: 'This account was banned' });
 
             const accessToken = createAccessToken({ id: user._id });
             const refreshToken = createRefreshToken({ id: user._id });
@@ -173,46 +197,6 @@ const userController = {
             const rf_token = req.headers['x-refresh-token'];
             blackListRT.add(rf_token);
             return res.status(200).json({ msg: 'Log out successful.' });
-        } catch (err) {
-            res.status(500).json({ msg: err.message });
-        }
-    },
-    ban: async (req, res) => {
-        try {
-            const { idAdmin, idUser } = req.body;
-            let results = await Promise.all([
-                await User.findOne({ _id: idAdmin }),
-                await User.findOne({ _id: idUser }),
-            ]);
-            let admin = results[0];
-            let user = results[1];
-            if (admin.permission != 1 || user.permission == 1)
-                return res.status(500).json({
-                    msg: 'You need permission to perform this action',
-                });
-            user.banned = true;
-            await user.save();
-            return res.json({ user });
-        } catch (err) {
-            res.status(500).json({ msg: err.message });
-        }
-    },
-    unBan: async (req, res) => {
-        try {
-            const { idAdmin, idUser } = req.body;
-            let results = await Promise.all([
-                await User.findOne({ _id: idAdmin }),
-                await User.findOne({ _id: idUser }),
-            ]);
-            let admin = results[0];
-            let user = results[1];
-            if (admin.permission != 1 || user.permission == 1)
-                return res.status(500).json({
-                    msg: 'You need permission to perform this action',
-                });
-            user.banned = false;
-            await user.save();
-            return res.json({ user });
         } catch (err) {
             res.status(500).json({ msg: err.message });
         }

@@ -73,7 +73,6 @@ function LoginPage() {
 
   return (
     <>
-      <ExamplesNavbar />
       <div className="page-header clear-filter" filter-color="blue">
         <div
           className="page-header-image"
@@ -170,13 +169,9 @@ function LoginPage() {
                     </div>
                     <div className="pull-right">
                       <h6>
-                        <a
-                          className="link"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Need Help?
-                        </a>
+                        <Link className="link" to="/">
+                          Đăng nhập ẩn danh
+                        </Link>
                       </h6>
                     </div>
                   </CardFooter>
@@ -185,7 +180,6 @@ function LoginPage() {
             </Col>
           </Container>
         </div>
-        <TransparentFooter />
       </div>
     </>
   );

@@ -22,7 +22,7 @@ import {
 } from "reactstrap";
 
 import ErrPage from "views/pages/Error.js";
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+import CustomNavbar from "components/Navbars/CustomNavbar.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "components/Footers/DefaultFooter.js";
 
@@ -36,6 +36,7 @@ function ProfilePage() {
 
   const dispatch = useDispatch();
 
+  const people = useSelector((state) => state.people);
   const user = useSelector((state) => state.user);
   const arrIdUser = useSelector((state) => state.arrId.users);
 
@@ -55,9 +56,11 @@ function ProfilePage() {
     ])
       .then(([cmt, re, user]) => {
         $(`#loading_1_${params.id}`).addClass("hidden");
-           $(`#loading_2_${params.id}`).addClass("hidden");
-        if(!re.data.length) $(".text-after-loading-1-re").prepend( "<h2>0</h2>" )
-        if(!cmt.data.length) $(".text-after-loading-1-cmt").prepend( "<h2>0</h2>" )
+        $(`#loading_2_${params.id}`).addClass("hidden");
+        if (!re.data.length)
+          $(".text-after-loading-1-re").prepend("<h2>0</h2>");
+        if (!cmt.data.length)
+          $(".text-after-loading-1-cmt").prepend("<h2>0</h2>");
         setRe(re.data);
         setCmt(cmt.data);
         dispatch(action.setPeople(user.data));
@@ -71,40 +74,39 @@ function ProfilePage() {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
-
+  const deleteUser = () => {
+    Promise.all([
+      axios.delete(`${apiLocal}/api/users/${params.id}`),
+      axios.delete(`${apiLocal}/api/reviews/${params.id}/user`),
+      axios.delete(`${apiLocal}/api/comments/${params.id}/user`),
+    ])
+      .then(() => {
+        history.push("/");
+        dispatch(action.setClear());
+      })
+      .catch();
+  };
   return (
     <>
-      <ExamplesNavbar />
+      <CustomNavbar />
       <div className="wrapper">
         <ProfilePageHeader re={re} cmt={cmt} />
         <div className="section">
           <Container>
             <div className="button-container">
-              <Button className="btn-round" color="info" size="lg">
-                Follow
-              </Button>
-              <Button
-                className="btn-round btn-icon"
-                color="default"
-                id="tooltip515203352"
+              <button
+                className={`${
+                  !(user && user.permission === 1 && people.permission === 0)
+                    ? "btn btn-info"
+                    : "btn btn-dark prevent-event"
+                }`}
+                style={{ margin: 0, height: "100%" }}
+                color="info"
                 size="lg"
+                onClick={() => deleteUser()}
               >
-                <i className="fab fa-twitter"></i>
-              </Button>
-              <UncontrolledTooltip delay={0} target="tooltip515203352">
-                Follow me on Twitter
-              </UncontrolledTooltip>
-              <Button
-                className="btn-round btn-icon"
-                color="default"
-                id="tooltip340339231"
-                size="lg"
-              >
-                <i className="fab fa-instagram"></i>
-              </Button>
-              <UncontrolledTooltip delay={0} target="tooltip340339231">
-                Follow me on Instagram
-              </UncontrolledTooltip>
+                Chặn vĩnh viễn tài khoản
+              </button>
             </div>
             <h3 className="title">About me</h3>
             <h5 className="description">
@@ -123,147 +125,6 @@ function ProfilePage() {
                   ></Review>
                 );
               })}
-            <Row>
-              <Col className="ml-auto mr-auto" md="6">
-                <h4 className="title text-center">My Portfolio</h4>
-                <div className="nav-align-center">
-                  <Nav
-                    className="nav-pills-info nav-pills-just-icons"
-                    pills
-                    role="tablist"
-                  >
-                    <NavItem>
-                      <NavLink
-                        className={pills === "1" ? "active" : ""}
-                        href="#pablo"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setPills("1");
-                        }}
-                      >
-                        <i className="now-ui-icons design_image"></i>
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={pills === "2" ? "active" : ""}
-                        href="#pablo"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setPills("2");
-                        }}
-                      >
-                        <i className="now-ui-icons location_world"></i>
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={pills === "3" ? "active" : ""}
-                        href="#pablo"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setPills("3");
-                        }}
-                      >
-                        <i className="now-ui-icons sport_user-run"></i>
-                      </NavLink>
-                    </NavItem>
-                  </Nav>
-                </div>
-              </Col>
-              <TabContent className="gallery" activeTab={"pills" + pills}>
-                <TabPane tabId="pills1">
-                  <Col className="ml-auto mr-auto" md="10">
-                    <Row className="collections">
-                      <Col md="6">
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("assets/img/bg1.jpg").default}
-                        ></img>
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("assets/img/bg3.jpg").default}
-                        ></img>
-                      </Col>
-                      <Col md="6">
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("assets/img/bg8.jpg").default}
-                        ></img>
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("assets/img/bg7.jpg").default}
-                        ></img>
-                      </Col>
-                    </Row>
-                  </Col>
-                </TabPane>
-                <TabPane tabId="pills2">
-                  <Col className="ml-auto mr-auto" md="10">
-                    <Row className="collections">
-                      <Col md="6">
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("assets/img/bg6.jpg").default}
-                        ></img>
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("assets/img/bg11.jpg").default}
-                        ></img>
-                      </Col>
-                      <Col md="6">
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("assets/img/bg7.jpg").default}
-                        ></img>
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("assets/img/bg8.jpg").default}
-                        ></img>
-                      </Col>
-                    </Row>
-                  </Col>
-                </TabPane>
-                <TabPane tabId="pills3">
-                  <Col className="ml-auto mr-auto" md="10">
-                    <Row className="collections">
-                      <Col md="6">
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("assets/img/bg3.jpg").default}
-                        ></img>
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("assets/img/bg8.jpg").default}
-                        ></img>
-                      </Col>
-                      <Col md="6">
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("assets/img/bg7.jpg").default}
-                        ></img>
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("assets/img/bg6.jpg").default}
-                        ></img>
-                      </Col>
-                    </Row>
-                  </Col>
-                </TabPane>
-              </TabContent>
-            </Row>
           </Container>
         </div>
         <DefaultFooter />

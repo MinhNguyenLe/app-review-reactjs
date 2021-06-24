@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as rb from "react-bootstrap";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "redux/actions.js";
 import * as func from "javascript/funcGlobal.js";
@@ -26,6 +26,9 @@ import {
 } from "reactstrap";
 
 function CustomNavbar() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   useEffect(() => {
@@ -48,6 +51,17 @@ function CustomNavbar() {
     };
   });
   const user = useSelector((state) => state.user);
+
+  const logOut = () => {
+    Promise.all([axios.get(`${apiLocal}/api/users/logout`)])
+      .then(() => {
+        dispatch(action.setClear());
+        localStorage.removeItem();
+        history.push("/login");
+        window.location.reload();
+      })
+      .catch(() => {});
+  };
   return (
     <>
       {collapseOpen ? (
@@ -93,10 +107,69 @@ function CustomNavbar() {
             navbar
           >
             <Nav navbar>
+              <button
+                className="btn btn-primary"
+                style={{ margin: "0 8px 0 0" }}
+              >
+                <Link to="/schools">Danh sách trường</Link>
+              </button>
               {user.id ? (
-                <NavItem>
-                  <Avatar linkImg={user.avatar} type="profile"></Avatar>
-                </NavItem>
+                <>
+                  <NavItem>
+                    <Avatar linkImg={user.avatar} type="profile"></Avatar>
+                  </NavItem>
+                  <UncontrolledDropdown
+                    className="button-dropdown"
+                    style={{ marginLeft: "12px" }}
+                  >
+                    <DropdownToggle
+                      caret
+                      data-toggle="dropdown"
+                      href="#pablo"
+                      id="navbarDropdown"
+                      tag="a"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      <span className="button-bar"></span>
+                      <span className="button-bar"></span>
+                      <span className="button-bar"></span>
+                    </DropdownToggle>
+                    <DropdownMenu aria-labelledby="navbarDropdown">
+                      <DropdownItem header tag="a">
+                        Dropdown header
+                      </DropdownItem>
+                      <DropdownItem href="#pablo" onClick={(e) => logOut()}>
+                        Logout
+                      </DropdownItem>
+                      <DropdownItem
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        Another action
+                      </DropdownItem>
+                      <DropdownItem
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        Something else here
+                      </DropdownItem>
+                      <DropdownItem divider></DropdownItem>
+                      <DropdownItem
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        Separated link
+                      </DropdownItem>
+                      <DropdownItem divider></DropdownItem>
+                      <DropdownItem
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        One more separated link
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+                </>
               ) : (
                 <>
                   <NavItem>

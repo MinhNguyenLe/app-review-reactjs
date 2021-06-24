@@ -16,6 +16,15 @@ export const setErrPage = (bool) => {
   };
 };
 
+export const setAvatar = (ava) => {
+  return {
+    type: "SET-AVATAR",
+    payload: {
+      avatar: ava,
+    },
+  };
+};
+
 export const setIdApp = (arrId) => {
   return {
     type: "SET-ID-APP",
@@ -63,6 +72,7 @@ export const setUser = (user) => {
       username: user.username,
       name: user.name,
       createdAt: user.createdAt,
+      coverImg : user.coverImg
     },
   };
 };
@@ -71,12 +81,14 @@ export const setPeople = (user) => {
   return {
     type: "SET-PEOPLE",
     payload: {
+      avatar: user.avatar,
       email: user.email,
       permission: user.permission,
       id: user._id,
       username: user.username,
       name: user.name,
       createdAt: user.createdAt,
+      coverImg : user.coverImg
     },
   };
 };

@@ -27,4 +27,6 @@ router.patch("/:id/downvote", reviewController.downvote);
 
 router.delete("/:id", reviewController.delete);
 
+router.delete("/:_id/user", reviewController.deteleUserReview);
+
 module.exports = router;
