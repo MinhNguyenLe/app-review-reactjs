@@ -42,6 +42,10 @@ function ProfilePage() {
 
   const [success, setSuccess] = React.useState(0);
 
+  useEffect(() => {
+    if (!arrIdUser.includes(params.id)) history.push("/error");
+  }, []);
+
   React.useEffect(() => {
     document.body.classList.add("profile-page");
     document.body.classList.add("sidebar-collapse");

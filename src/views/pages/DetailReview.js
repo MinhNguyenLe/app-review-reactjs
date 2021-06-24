@@ -27,6 +27,9 @@ function DetailReview() {
     document.documentElement.classList.remove("nav-open");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
+
+    if (!arrIdReview.includes(params.id)) history.push("/error");
+
     return function cleanup() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
@@ -34,6 +37,7 @@ function DetailReview() {
   }, []);
 
   const user = useSelector((state) => state.user);
+  const arrIdReview = useSelector((state) => state.arrId.reviews);
 
   const [success, setSuccess] = useState(0);
   const [loading, setLoading] = useState(true);

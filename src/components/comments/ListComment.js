@@ -10,7 +10,6 @@ import $ from "jquery";
 import { useParams, useHistory } from "react-router-dom";
 import { apiLocal } from "javascript/dataGlobal.js";
 import Avatar from "components/avatar/Avatar";
-import { addSyntheticLeadingComment } from "typescript";
 
 const ListComment = ({ success, setSuccess }) => {
   const params = useParams();
