@@ -44,6 +44,10 @@ router.patch('/banned', userController.ban);
 
 router.patch('/unbanned', userController.unBan);
 
+router.patch('/notifications', userController.updateNotification);
+
+router.post('/notifications', userController.createNotification);
+
 router.get('/:id', userController.getById);
 
 router.get('/', userController.getAll);
