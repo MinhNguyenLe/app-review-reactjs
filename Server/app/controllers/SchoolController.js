@@ -160,6 +160,15 @@ const schoolController = {
         } catch (error) {
             return res.status(500).json({msg: error.message});
         }
+    },
+    filterByTypeOfSchool: async (req, res) => {
+        try {
+            const id = req.params.id;
+            let schools = await School.find({typeOfSchool: id});
+            return res.status(200).json(schools);
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
+        }
     }
 };
 
