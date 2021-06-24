@@ -32,6 +32,8 @@ router.get('/email/:email', userController.getByEmail);
 
 router.get('/permission/:permission', userController.getByPermission);
 
+router.patch('/banned', userController.ban);
+router.patch('/unbanned', userController.unBan);
 router.get('/:id', userController.getById);
 
 router.get('/', userController.getAll);
