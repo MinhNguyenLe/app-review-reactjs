@@ -25,7 +25,7 @@ const User = new Schema(
             unique: true,
         },
         permission: {
-            // Normal. 0 | Mod. 1 | Admin. 2
+            // Normal. 0 | Admin. 1
             type: Number,
             default: 0,
         },
@@ -34,6 +34,9 @@ const User = new Schema(
         },
         coverImg: {
             type: String,
+        },
+        banned: {
+            type: Boolean,
         },
     },
     { timestamps: true, collection: 'users' }
