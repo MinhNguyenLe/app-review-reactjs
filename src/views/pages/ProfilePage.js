@@ -40,7 +40,7 @@ function ProfilePage() {
   const user = useSelector((state) => state.user);
   const arrIdUser = useSelector((state) => state.arrId.users);
 
-  const [pills, setPills] = React.useState("2");
+  const [success, setSuccess] = React.useState(0);
 
   React.useEffect(() => {
     document.body.classList.add("profile-page");
@@ -73,18 +73,34 @@ function ProfilePage() {
       document.body.classList.remove("profile-page");
       document.body.classList.remove("sidebar-collapse");
     };
-  }, []);
+  }, [success]);
   const deleteUser = () => {
-    Promise.all([
-      axios.delete(`${apiLocal}/api/users/${params.id}`),
-      axios.delete(`${apiLocal}/api/reviews/${params.id}/user`),
-      axios.delete(`${apiLocal}/api/comments/${params.id}/user`),
-    ])
-      .then(() => {
-        history.push("/");
-        dispatch(action.setClear());
-      })
-      .catch();
+    $("#ban_loading").removeClass("hidden");
+    if (!people.banned) {
+      Promise.all([
+        axios.patch(`${apiLocal}/api/users/banned`, {
+          idUser: people.id,
+          idAdmin: user.id,
+        }),
+      ])
+        .then(() => {
+          setSuccess(success + 1);
+          $("#ban_loading").addClass("hidden");
+        })
+        .catch();
+    } else {
+      Promise.all([
+        axios.patch(`${apiLocal}/api/users/unbanned`, {
+          idUser: people.id,
+          idAdmin: user.id,
+        }),
+      ])
+        .then(() => {
+          setSuccess(success + 1);
+          $("#ban_loading").addClass("hidden");
+        })
+        .catch();
+    }
   };
   return (
     <>
@@ -96,16 +112,28 @@ function ProfilePage() {
             <div className="button-container">
               <button
                 className={`${
-                  !(user && user.permission === 1 && people.permission === 0)
+                  user &&
+                  user.permission === 1 &&
+                  people.permission === 0 &&
+                  !people.banned
+                    ? "btn btn-warning"
+                    : user &&
+                      user.permission === 1 &&
+                      people.permission === 0 &&
+                      people.banned
                     ? "btn btn-info"
                     : "btn btn-dark prevent-event"
                 }`}
-                style={{ margin: 0, height: "100%" }}
+                style={{ margin: 0, height: "100%", fontSize: " 16px" }}
                 color="info"
                 size="lg"
                 onClick={() => deleteUser()}
               >
-                Chặn vĩnh viễn tài khoản
+                {people.banned ? "Bỏ ban" : "Ban"} tài khoản{" "}
+                <i
+                  id="ban_loading"
+                  className="hidden now-ui-icons loader_refresh spin"
+                ></i>
               </button>
             </div>
             <h3 className="title">About me</h3>

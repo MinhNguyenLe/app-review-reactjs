@@ -11,7 +11,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { apiLocal } from "javascript/dataGlobal.js";
 import Avatar from "components/avatar/Avatar";
 
-const ListComment = ({success ,setSuccess}) => {
+const ListComment = ({ success, setSuccess }) => {
   const params = useParams();
   const history = useHistory();
   const refCmt = useRef();
@@ -51,7 +51,7 @@ const ListComment = ({success ,setSuccess}) => {
         content: refCmt.current.value,
       });
     }
-    setSuccess(success + 1)
+    setSuccess(success + 1);
     setAddCmt(addCmt + 1);
     $(`#icon_loading_3`).addClass("hidden");
   };
@@ -105,9 +105,9 @@ const ListComment = ({success ,setSuccess}) => {
         }}
       >
         <button
+          className={`btn-add-cmt ${user.banned ? "dark prevent-event" : ""}`}
           style={{ marginBottom: "6px" }}
           onClick={() => $("#writeCmt").toggle()}
-          className="btn-add-cmt"
         >
           Click to add a comment
         </button>
@@ -134,34 +134,6 @@ const ListComment = ({success ,setSuccess}) => {
       <div className="ske-cmt">
         {cmt.map((item, index) => (
           <div key={index} className="d-flex flex-row ske-cmt-c">
-            <div
-              className={
-                user && item.idUser && user.id === item.idUser._id
-                  ? ""
-                  : "hidden"
-              }
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-            <div style={{ marginRight: "8px" }}>
-              <i
-                id={`icon_loading_${item._id}`}
-                className="hidden now-ui-icons loader_refresh spin"
-              ></i>
-            </div>
-              <i
-                onClick={() => editCmt(item._id, item.content)}
-                style={{ marginRight: "8px", cursor: "pointer" }}
-                className="now-ui-icons files_single-copy-04"
-              ></i>
-              <i
-                onClick={() => deleteCmt(item._id)}
-                style={{ marginRight: "4px", cursor: "pointer" }}
-                className="now-ui-icons design_scissors"
-              ></i>
-            </div>
             <Avatar linkImg={item.idUser && item.idUser.avatar}></Avatar>
             <div className="img-tab-review">
               <Moment
@@ -174,6 +146,35 @@ const ListComment = ({success ,setSuccess}) => {
               <span className="cmt-name">
                 {(item.idUser && item.idUser.name) || "anonymous"}
               </span>
+              <div
+                className={
+                  user && item.idUser && user.id === item.idUser._id
+                    ? ""
+                    : "hidden"
+                }
+                style={{
+                  marginTop: "8px",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <i
+                  onClick={() => editCmt(item._id, item.content)}
+                  style={{ marginRight: "8px", cursor: "pointer" }}
+                  className="now-ui-icons files_single-copy-04"
+                ></i>
+                <i
+                  onClick={() => deleteCmt(item._id)}
+                  style={{ marginRight: "4px", cursor: "pointer" }}
+                  className="now-ui-icons design_scissors"
+                ></i>
+                <div style={{ marginLeft: "4px" }}>
+                  <i
+                    id={`icon_loading_${item._id}`}
+                    className="hidden now-ui-icons loader_refresh spin"
+                  ></i>
+                </div>
+              </div>
             </div>
             <rb.Form
               className="edit-cmt hidden"
@@ -192,7 +193,11 @@ const ListComment = ({success ,setSuccess}) => {
                 className="now-ui-icons ui-1_simple-remove"
               ></i>
             </rb.Form>
-            <p style={{margin : "0"}} id={`comment_content_${item._id}`} className="cmt-content">
+            <p
+              style={{ margin: "0" }}
+              id={`comment_content_${item._id}`}
+              className="cmt-content"
+            >
               {item.content}
             </p>
           </div>

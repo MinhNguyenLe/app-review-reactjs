@@ -105,7 +105,7 @@ function CustomNavbar() {
             isOpen={collapseOpen}
             navbar
           >
-            <Nav navbar>
+            <Nav navbar style={{ alignItems: "center" }}>
               <button
                 className="btn btn-primary"
                 style={{ margin: "0 8px 0 0" }}
@@ -117,57 +117,60 @@ function CustomNavbar() {
                   <NavItem>
                     <Avatar linkImg={user.avatar} type="profile"></Avatar>
                   </NavItem>
-                  <UncontrolledDropdown
-                    className="button-dropdown"
-                    style={{ marginLeft: "12px" }}
-                  >
-                    <DropdownToggle
-                      caret
-                      data-toggle="dropdown"
-                      href="#pablo"
-                      id="navbarDropdown"
-                      tag="a"
-                      onClick={(e) => e.preventDefault()}
+                  <NavItem>
+                    <UncontrolledDropdown
+                      className="button-dropdown"
+                      style={{ marginLeft: "12px" }}
                     >
-                      <span className="button-bar"></span>
-                      <span className="button-bar"></span>
-                      <span className="button-bar"></span>
-                    </DropdownToggle>
-                    <DropdownMenu aria-labelledby="navbarDropdown">
-                      <DropdownItem header tag="a">
-                        Dropdown header
-                      </DropdownItem>
-                      <DropdownItem href="#pablo" onClick={(e) => logOut()}>
-                        Logout
-                      </DropdownItem>
-                      <DropdownItem
+                      <DropdownToggle
+                        caret
+                        className="bell"
+                        data-toggle="dropdown"
                         href="#pablo"
+                        id="navbarDropdown"
+                        tag="a"
                         onClick={(e) => e.preventDefault()}
                       >
-                        Another action
-                      </DropdownItem>
-                      <DropdownItem
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
+                        <div className="notify false">
+                          <i
+                            style={{ fontSize: "24px" }}
+                            className="fas fa-bell"
+                          ></i>
+                        </div>
+                      </DropdownToggle>
+                      <DropdownMenu
+                        style={{
+                          maxHeight: "600px",
+                          // overflowY: "scroll",
+                          // overflowX: "hidden",
+                        }}
+                        aria-labelledby="navbarDropdown"
+                        right
                       >
-                        Something else here
-                      </DropdownItem>
-                      <DropdownItem divider></DropdownItem>
-                      <DropdownItem
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        Separated link
-                      </DropdownItem>
-                      <DropdownItem divider></DropdownItem>
-                      <DropdownItem
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        One more separated link
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
+                        <DropdownItem href="#pablo" onClick={(e) => logOut()}>
+                          <p
+                            style={{
+                              fontSize: "20px",
+                              color: "#a7aaaf",
+                            }}
+                          >
+                            Logout
+                          </p>
+                        </DropdownItem>
+                        <DropdownItem divider></DropdownItem>
+                        <DropdownItem onClick={(e) => e.preventDefault()}>
+                          <div>
+                            <p>hihi</p>
+                            <span>aaaa</span>
+                          </div>
+                        </DropdownItem>
+                        <DropdownItem divider></DropdownItem>
+                        <DropdownItem onClick={(e) => e.preventDefault()}>
+                          One more separated link
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
+                  </NavItem>
                 </>
               ) : (
                 <>

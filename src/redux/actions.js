@@ -65,6 +65,7 @@ export const setUser = (user) => {
   return {
     type: "SET-USER",
     payload: {
+      banned: user.banned,
       avatar: user.avatar,
       email: user.email,
       permission: user.permission,
@@ -72,7 +73,7 @@ export const setUser = (user) => {
       username: user.username,
       name: user.name,
       createdAt: user.createdAt,
-      coverImg : user.coverImg
+      coverImg: user.coverImg,
     },
   };
 };
@@ -81,6 +82,7 @@ export const setPeople = (user) => {
   return {
     type: "SET-PEOPLE",
     payload: {
+      banned: user.banned,
       avatar: user.avatar,
       email: user.email,
       permission: user.permission,
@@ -88,7 +90,7 @@ export const setPeople = (user) => {
       username: user.username,
       name: user.name,
       createdAt: user.createdAt,
-      coverImg : user.coverImg
+      coverImg: user.coverImg,
     },
   };
 };

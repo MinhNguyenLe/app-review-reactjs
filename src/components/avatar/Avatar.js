@@ -9,7 +9,7 @@ const Avatar = ({ linkImg, type }) => {
         style={
           type === "review"
             ? { width: "44px", height: "44px" }
-            : { width: "36px", height: "36px" }
+            : { width: "44px", height: "44px" }
         }
         alt="..."
         className="obj-fit rounded-circle img-fluid"
