@@ -42,9 +42,9 @@ router.get('/permission/:permission', userController.getByPermission);
 
 router.get('/:id', userController.getById);
 
-// router.patch('/banned', userController.ban);
+router.patch('/banned', userController.ban);
 
-// router.patch('/unbanned', userController.unBan);
+router.patch('/unbanned', userController.unBan);
 
 router.patch('/notifications', userController.updateNotification);
 
