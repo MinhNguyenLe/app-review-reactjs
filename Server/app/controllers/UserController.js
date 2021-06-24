@@ -73,7 +73,9 @@ const userController = {
     getNotifications: async (req, res) => {
         try {
             const { idUser } = req.body;
-            const user = await User.findById(idUser);
+            const user = await User.findById(idUser).populate({
+                path: 'notifications.review',
+            });
             const notifications = user.notifications;
             return res.json({ notifications });
         } catch (err) {
