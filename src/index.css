@@ -447,18 +447,49 @@ code {
   display: flex;
   align-items: center;
 }
-.content-hidden{
-      display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+.content-hidden {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.obj-fit{
+.obj-fit {
   object-fit: cover;
 }
-.prevent-event{
+.prevent-event {
   pointer-events: none;
 }
-.dark{
-  color : #343a40 !important;
+.text-dark {
+  color: #343a40 !important;
+}
+.notify {
+  background-color: transparent;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: none;
+  box-shadow: none;
+}
+.notify.false {
+  color: white;
+}
+.notify.true {
+  color: red;
+}
+.notify.false:hover {
+  color: #2ca8ff;
+  background-color: white;
+}
+.notify.true:hover {
+  color: white;
+  background-color: red;
+}
+.bell:hover {
+  text-decoration: none;
+}
+.dark {
+  background-color: #a7aaaf;
 }

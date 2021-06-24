@@ -118,7 +118,12 @@ function ReviewNav({ writeReview }) {
                 <div className="d-flex flex-row align-items-center justify-content-between">
                   <NavItem>
                     <div>
-                      <rb.Button onClick={writeReview}>Viết đánh giá</rb.Button>
+                      <rb.Button
+                        className={`${user.banned ? "prevent-event dark" : ""}`}
+                        onClick={writeReview}
+                      >
+                        Viết đánh giá
+                      </rb.Button>
                     </div>
                   </NavItem>
                   <NavItem
@@ -186,7 +191,12 @@ function ReviewNav({ writeReview }) {
                 <div className="d-flex flex-row align-items-center justify-content-between">
                   <NavItem>
                     <div>
-                      <rb.Button onClick={writeReview}>Viết đánh giá</rb.Button>
+                      <rb.Button
+                        className={`${user.banned ? "prevent-event dark" : ""}`}
+                        onClick={writeReview}
+                      >
+                        Viết đánh giá
+                      </rb.Button>
                     </div>
                   </NavItem>
                   <NavItem>

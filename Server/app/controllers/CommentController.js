@@ -51,7 +51,7 @@ const commentCtrl = {
   },
   update: async (req, res) => {
     try {
-      let id = req.params;
+      let id = req.params._id;
       const { content } = req.body;
       const comment = await Comment.findById(id);
 
@@ -67,12 +67,12 @@ const commentCtrl = {
   },
   detele: async (req, res) => {
     try {
-      let id = req.params.id;
+      let id = req.params._id;
       const comment = await Comment.findById(id);
       if (comment === null || comment.length === 0 || comment === undefined) {
         return res.status(404).json({ msg: "Can't find comment" });
       }
-      await Comment.deleteOne(id);
+      await Comment.deleteOne(comment);
       return res.json({ msg: "Deleted comment" });
     } catch (err) {
       res.status(500).json({ msg: err.message });

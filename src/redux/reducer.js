@@ -10,7 +10,7 @@ const persistConfig = {
 const INITIAL_STATE = {
   errPage: false,
   errLogin: false,
-  errRegister : false,
+  errRegister: false,
   idSchool: "",
   idReview: "",
   positive: "",
@@ -21,6 +21,7 @@ const INITIAL_STATE = {
   token: false,
   email: "",
   people: {
+    banned: "",
     avatar: "",
     email: "",
     permission: "",
@@ -28,9 +29,10 @@ const INITIAL_STATE = {
     username: "",
     name: "",
     createdAt: "",
-    coverImg : ""
+    coverImg: "",
   },
   user: {
+    banned: "",
     avatar: "",
     email: "",
     permission: "",
@@ -38,7 +40,7 @@ const INITIAL_STATE = {
     username: "",
     name: "",
     createdAt: "",
-    coverImg : ""
+    coverImg: "",
   },
   cmt: [],
   arrId: {
@@ -80,11 +82,11 @@ function reducer(state = INITIAL_STATE, action) {
         ...state,
         errLogin: action.payload.errLogin,
       };
-      case "SET-AVATAR":
-        let avatar = action.payload.avatar
-        state.user.avatar = avatar
-      return state
-      case "SET-ERR-REGISTER":
+    case "SET-AVATAR":
+      let avatar = action.payload.avatar;
+      state.user.avatar = avatar;
+      return state;
+    case "SET-ERR-REGISTER":
       return {
         ...state,
         errRegister: action.payload.errRegister,
@@ -125,6 +127,7 @@ function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         people: {
+          banned: action.payload.banned,
           coverImg: action.payload.coverImg,
           avatar: action.payload.avatar,
           email: action.payload.email,
@@ -139,6 +142,7 @@ function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         user: {
+          banned: action.payload.banned,
           coverImg: action.payload.coverImg,
           avatar: action.payload.avatar,
           email: action.payload.email,

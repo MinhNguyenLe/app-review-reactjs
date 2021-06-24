@@ -262,7 +262,7 @@ function Review({
                 <button
                   onClick={() => upVote()}
                   className={`btn-icon btn-round btn ${
-                    !user.id
+                    !user.id || user.banned
                       ? "btn-dark prevent-event"
                       : item.rateValue.up.idUser.includes(user.id)
                       ? "btn-success"
@@ -281,7 +281,7 @@ function Review({
                 >
                   <p
                     id="scores_id"
-                    className={`${user.id ? "" : "dark"}`}
+                    className={`${!user.id || user.banned ? "text-dark" : ""}`}
                     style={{
                       margin: "0 10px",
                       fontSize: "27px",
@@ -308,7 +308,7 @@ function Review({
                 <button
                   onClick={() => downVote()}
                   className={`btn-icon btn-round ${
-                    !user.id
+                    !user.id || user.banned
                       ? "btn-dark prevent-event"
                       : item.rateValue.down.idUser.includes(user.id)
                       ? "btn-success"
