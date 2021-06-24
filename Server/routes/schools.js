@@ -12,6 +12,8 @@ router.post(
   schoolController.create
 );
 
+router.get("/search-by-location", schoolController.searchByLocation);
+router.get("/search-by-code", schoolController.searchByCode);
 router.use(multer().none());
 router.get("/test", schoolController.test);
 router.get("/search", schoolController.searchByName);
@@ -19,5 +21,6 @@ router.get("/:id", schoolController.getById);
 router.get("/:id/reviews", schoolController.getReviewsByIdSchool);
 router.get("/", schoolController.getAll);
 router.get("/:id/number-of-reviews", schoolController.countReviewsByIdSchool);
+
 
 module.exports = router;
