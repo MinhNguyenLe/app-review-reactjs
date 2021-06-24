@@ -25,13 +25,13 @@ function DetailReview() {
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
-    // window.scrollTo(0, 0);
-    // document.body.scrollTop = 0;
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
     return function cleanup() {
       document.body.classList.remove("index-page");
       document.body.classList.remove("sidebar-collapse");
     };
-  });
+  }, []);
 
   const user = useSelector((state) => state.user);
 
@@ -43,6 +43,10 @@ function DetailReview() {
   const history = useHistory();
 
   useEffect(() => {
+    const refresh = setInterval(() => {
+      setSuccess(success + 1);
+      console.log("in");
+    }, 5000);
     const axiosData = () => {
       Promise.all([axios.get(`${apiLocal}/api/reviews/${params.id}`)])
         .then(([review]) => {
@@ -53,6 +57,10 @@ function DetailReview() {
       // .catch(() => history.push("/error"));
     };
     axiosData();
+    return () => {
+      console.log("out");
+      clearInterval(refresh);
+    };
   }, [success]);
 
   const upVote = () => {

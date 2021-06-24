@@ -10,6 +10,7 @@ import $ from "jquery";
 import { useParams, useHistory } from "react-router-dom";
 import { apiLocal } from "javascript/dataGlobal.js";
 import Avatar from "components/avatar/Avatar";
+import { addSyntheticLeadingComment } from "typescript";
 
 const ListComment = ({ success, setSuccess }) => {
   const params = useParams();
@@ -24,6 +25,10 @@ const ListComment = ({ success, setSuccess }) => {
   const [showEditCmt, setShowEditCmt] = useState(false);
 
   useEffect(() => {
+    const refresh = setInterval(() => {
+      setAddCmt(addCmt + 1);
+      console.log("in");
+    }, 5000);
     const axiosData = () => {
       Promise.all([axios.get(`${apiLocal}/api/reviews/${params.id}/comments`)])
         .then(([cmt]) => {
@@ -34,6 +39,10 @@ const ListComment = ({ success, setSuccess }) => {
     };
     axiosData();
     refCmt.current.value = "";
+    return () => {
+      console.log("out");
+      clearInterval(refresh);
+    };
   }, [addCmt]);
 
   const submitCmt = async (e) => {
