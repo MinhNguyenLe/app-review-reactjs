@@ -3,6 +3,7 @@ import Moment from "react-moment";
 import Avatar from "components/avatar/Avatar.js";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import $ from "jquery";
 import {
   Card,
   CardHeader,
@@ -39,7 +40,7 @@ function Review({
           flexDirection: "row",
           paddingBottom: "6px",
           marginBottom: "12px",
-          borderBottom: "1px solid #204572",
+          borderBottom: "1px solid rgb(210 210 210)",
         }}
       >
         <Link
@@ -173,7 +174,10 @@ function Review({
           >
             Ưu điểm
           </span>
-          <p className={typePage !== "detail" ? "content-hidden" : ""}>
+          <p
+            id={`${item._id}positive`}
+            className={typePage !== "detail" ? "content-hidden" : ""}
+          >
             {item.positive}
           </p>
         </div>
@@ -187,7 +191,10 @@ function Review({
           >
             Nhược điểm
           </span>
-          <p className={typePage !== "detail" ? "content-hidden" : ""}>
+          <p
+            id={`${item._id}negative`}
+            className={typePage !== "detail" ? "content-hidden" : ""}
+          >
             {item.negative}
           </p>
         </div>
@@ -201,10 +208,29 @@ function Review({
           >
             Lời khuyên
           </span>
-          <p className={typePage !== "detail" ? "content-hidden" : ""}>
+          <p
+            id={`${item._id}advice`}
+            className={typePage !== "detail" ? "content-hidden" : ""}
+          >
             {item.advice}
           </p>
         </div>
+      </div>
+      <div style={{ borderTop: "1px solid  rgb(210 210 210)" }}>
+        {" "}
+        <span
+          id={`${item._id}more`}
+          onClick={() => {
+            $(`#${item._id}positive`).toggleClass("content-hidden");
+            $(`#${item._id}negative`).toggleClass("content-hidden");
+            $(`#${item._id}advice`).toggleClass("content-hidden");
+            if ($(`#${item._id}more`).text() === "Xem hết") {
+              $(`#${item._id}more`).text("Ẩn bớt");
+            } else $(`#${item._id}more`).text("Xem hết");
+          }}
+        >
+          Xem hết
+        </span>
       </div>
     </div>
 
