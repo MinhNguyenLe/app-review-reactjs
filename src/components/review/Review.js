@@ -33,7 +33,7 @@ function Review({
   const user = useSelector((state) => state.user);
   const [pills, setPills] = React.useState("1");
   return (
-    <div key={item._id} style={{ width: "50%", margin: "40px 0 40px 100px" }}>
+    <div key={item._id} style={{ width: "50%", margin: "80px 0 80px 100px" }}>
       <div
         style={{
           display: "flex",
