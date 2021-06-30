@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Moment from "react-moment";
 import Avatar from "components/avatar/Avatar.js";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import $ from "jquery";
+import axios from "axios";
+import { apiLocal } from "javascript/dataGlobal.js";
 import {
   Card,
   CardHeader,
@@ -21,8 +23,8 @@ import {
 // core components
 
 function Review({
-  upVote,
-  downVote,
+  success,
+  setSuccess,
   item,
   name,
   typePage,
@@ -31,7 +33,37 @@ function Review({
 }) {
   const params = useParams();
   const user = useSelector((state) => state.user);
-  const [pills, setPills] = React.useState("1");
+
+  const upVote = (id) => {
+    $(`#${item._id}icon_loading_detail-vote`).removeClass("hidden");
+    $(`#${item._id}scores_id`).addClass("hidden");
+    Promise.all([
+      axios.patch(`${apiLocal}/api/reviews/${id}/upvote`, {
+        id: user.id,
+      }),
+    ])
+      .then(() => {
+        setSuccess(success + 1);
+        $(`#${item._id}icon_loading_detail-vote`).addClass("hidden");
+        $(`#${item._id}scores_id`).removeClass("hidden");
+      })
+      .catch();
+  };
+  const downVote = (id) => {
+    $(`#${item._id}scores_id`).addClass("hidden");
+    $(`#${item._id}icon_loading_detail-vote`).removeClass("hidden");
+    Promise.all([
+      axios.patch(`${apiLocal}/api/reviews/${id}/downvote`, {
+        id: user.id,
+      }),
+    ])
+      .then(() => {
+        setSuccess(success + 1);
+        $(`#${item._id}icon_loading_detail-vote`).addClass("hidden");
+        $(`#${item._id}scores_id`).removeClass("hidden");
+      })
+      .catch();
+  };
   return (
     <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
       <div style={{ display: "flex", flexDirection: "row" }}>
@@ -46,7 +78,7 @@ function Review({
             }}
           >
             <button
-              onClick={() => upVote()}
+              onClick={() => upVote(item._id)}
               className={`btn-icon btn-round btn ${
                 !user.id || user.banned
                   ? "btn-dark prevent-event"
@@ -66,7 +98,7 @@ function Review({
               }}
             >
               <p
-                id="scores_id"
+                id={`${item._id}scores_id`}
                 className={`${!user.id || user.banned ? "text-dark" : ""}`}
                 style={{
                   margin: "0 10px",
@@ -80,12 +112,12 @@ function Review({
               </p>
               <i
                 style={{ margin: "0px", fontSize: "20px" }}
-                id={`icon_loading_detail-vote`}
+                id={`${item._id}icon_loading_detail-vote`}
                 className="hidden now-ui-icons loader_refresh spin"
               ></i>
             </div>
             <button
-              onClick={() => downVote()}
+              onClick={() => downVote(item._id)}
               className={`btn-icon btn-round ${
                 !user.id || user.banned
                   ? "btn-dark prevent-event"

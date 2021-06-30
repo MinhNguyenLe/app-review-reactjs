@@ -147,6 +147,8 @@ function ProfilePage() {
               re.map((item) => {
                 return (
                   <Review
+                    success={success}
+                    setSuccess={setSuccess}
                     item={item}
                     typePage="profile"
                     name={item.idUser.name}

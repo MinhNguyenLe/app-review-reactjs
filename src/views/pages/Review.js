@@ -63,22 +63,13 @@ function ReviewPage() {
   const [showEdit, setShowEdit] = useState(false);
 
   useEffect(() => {
-    const refresh = setInterval(() => {
-      setSuccess(success + 1);
-      console.log("in");
-    }, 5000);
     Promise.all([axios.get(`${apiLocal}/api/schools/${params.id}/reviews`)])
       .then(([listReview]) => {
-        console.log("runnnnnnnn");
         setListReview(listReview.data);
         setLoading(false);
       })
       .catch();
-    return () => {
-      console.log("out");
-      clearInterval(refresh);
-    };
-  }, [success, params.id]);
+  }, [success]);
 
   useEffect(() => {
     const axiosData = () => {
@@ -336,6 +327,8 @@ function ReviewPage() {
               {listReview.map((item, index) => (
                 <div key={item._id}>
                   <Review
+                    success={success}
+                    setSuccess={setSuccess}
                     item={item}
                     name={item.idUser ? item.idUser.name : "Anonymous"}
                     editReview={editReview}
