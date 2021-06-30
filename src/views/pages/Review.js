@@ -277,7 +277,19 @@ function ReviewPage() {
                       type="number"
                       ref={refPointForSchool}
                       className="edit-content"
+                      onChange={(e) => {
+                        if (e.target.value > 10 || e.target.value < 0)
+                          $("#score").removeClass("hidden");
+                        else $("#score").addClass("hidden");
+                      }}
                     />
+                    <span
+                      className="hidden"
+                      id="score"
+                      style={{ color: "red" }}
+                    >
+                      Điểm số phải từ 0 đến 10
+                    </span>
                   </div>
                   <div>
                     <rb.Card.Text className="review-title">

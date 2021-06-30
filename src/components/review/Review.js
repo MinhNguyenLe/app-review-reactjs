@@ -69,27 +69,45 @@ function Review({
         </Link>
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
             flex: "1",
+            display: "flex",
+            alignItems: "center",
           }}
         >
-          <p style={{ margin: "0" }}>{item.comments} comments</p>
-          <p
-            className={`${typePage === "detail" ? "hidden" : ""}`}
+          <button
+            className="btn btn-success"
             style={{
-              margin: "0",
-              fontWeight: "bold",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              marginRight: "4px",
+              fontSize: "18px",
+              padding: "8px 16px",
             }}
           >
-            {item.rateValue.up.idUser.length -
-              item.rateValue.down.idUser.length}{" "}
-            <p style={{ fontSize: "13px", margin: "0px 0 0 2px" }}>(voted)</p>
-          </p>
+            {item.ratePoint}
+          </button>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              flex: "1",
+            }}
+          >
+            <p style={{ margin: "0" }}>{item.comments} comments</p>
+            <p
+              className={`${typePage === "detail" ? "hidden" : ""}`}
+              style={{
+                margin: "0",
+                fontWeight: "bold",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {item.rateValue.up.idUser.length -
+                item.rateValue.down.idUser.length}{" "}
+              <p style={{ fontSize: "13px", margin: "0px 0 0 2px" }}>(voted)</p>
+            </p>
+          </div>
         </div>
         <div
           className="d-flex "
