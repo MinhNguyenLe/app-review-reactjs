@@ -34,11 +34,83 @@ function Review({
   const [pills, setPills] = React.useState("1");
   return (
     <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <div style={{ marginTop: "100px" }}>
+          <div
+            style={{
+              margin: "10px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <button
+              onClick={() => upVote()}
+              className={`btn-icon btn-round btn ${
+                !user.id || user.banned
+                  ? "btn-dark prevent-event"
+                  : item.rateValue.up.idUser.includes(user.id)
+                  ? "btn-success"
+                  : "btn-info"
+              }`}
+            >
+              <i className="now-ui-icons arrows-1_minimal-up"></i>
+            </button>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <p
+                id="scores_id"
+                className={`${!user.id || user.banned ? "text-dark" : ""}`}
+                style={{
+                  margin: "0 10px",
+                  fontSize: "27px",
+                  fontWeight: "bold",
+                  color: "#1beb11",
+                }}
+              >
+                {item.rateValue.up.idUser.length -
+                  item.rateValue.down.idUser.length}
+              </p>
+              <i
+                style={{ margin: "0px", fontSize: "20px" }}
+                id={`icon_loading_detail-vote`}
+                className="hidden now-ui-icons loader_refresh spin"
+              ></i>
+            </div>
+            <button
+              onClick={() => downVote()}
+              className={`btn-icon btn-round ${
+                !user.id || user.banned
+                  ? "btn-dark prevent-event"
+                  : item.rateValue.down.idUser.includes(user.id)
+                  ? "btn-success"
+                  : "btn-info"
+              } btn`}
+            >
+              <i className="now-ui-icons arrows-1_minimal-down"></i>
+            </button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <p style={{ margin: "0" }}>{item.comments} comments</p>
+          </div>
+        </div>
+      </div>
       <div
         key={item._id}
         style={{
           width: "50%",
-          margin: "80px",
+          margin: "80px 80px 80px 20px",
         }}
       >
         <div
@@ -69,106 +141,72 @@ function Review({
               <p style={{ margin: "0", fontWeight: "600", fontSize: "20px" }}>
                 {name}
               </p>
-              <Moment className="date-content" format="YYYY/MM/DD">
-                {item.createdAt}
-              </Moment>
+              <div style={{ display: "flex" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>
+                    <i
+                      className={`fas ${
+                        item.ratePoint >= 2
+                          ? "star-show fa-star"
+                          : item.ratePoint === 1
+                          ? "star-show fa-star-half-alt"
+                          : "star-hide fa-star"
+                      }`}
+                    ></i>
+                    <i
+                      className={`fas ${
+                        item.ratePoint >= 4
+                          ? "star-show fa-star"
+                          : item.ratePoint === 3
+                          ? "star-show fa-star-half-alt"
+                          : "star-hide fa-star"
+                      }`}
+                    ></i>
+                    <i
+                      className={`fas ${
+                        item.ratePoint >= 6
+                          ? "star-show fa-star"
+                          : item.ratePoint === 5
+                          ? "star-show fa-star-half-alt"
+                          : "star-hide fa-star"
+                      }`}
+                    ></i>
+                    <i
+                      className={`fas ${
+                        item.ratePoint >= 8
+                          ? "star-show fa-star"
+                          : item.ratePoint === 7
+                          ? "star-show fa-star-half-alt"
+                          : "star-hide fa-star"
+                      }`}
+                    ></i>
+                    <i
+                      className={`fas ${
+                        item.ratePoint === 10
+                          ? "star-show fa-star"
+                          : item.ratePoint === 9
+                          ? "star-show fa-star-half-alt"
+                          : "star-hide fa-star"
+                      }`}
+                    ></i>
+                  </div>
+                </div>
+                <Moment
+                  style={{ marginLeft: "6px" }}
+                  className="date-content"
+                  format="YYYY/MM/DD"
+                >
+                  {item.createdAt}
+                </Moment>
+              </div>
             </div>
           </Link>
-          <div
-            style={{
-              flex: "1",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <button
-              className="btn btn-success"
-              style={{
-                marginRight: "4px",
-                fontSize: "18px",
-                padding: "8px 16px",
-              }}
-            >
-              {item.ratePoint}
-            </button>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                flex: "1",
-              }}
-            >
-              <p style={{ margin: "0" }}>{item.comments} comments</p>
-              <p
-                className={`${typePage === "detail" ? "hidden" : ""}`}
-                style={{
-                  margin: "0",
-                  fontWeight: "bold",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                {item.rateValue.up.idUser.length -
-                  item.rateValue.down.idUser.length}{" "}
-                <p style={{ fontSize: "13px", margin: "0px 0 0 2px" }}>
-                  (voted)
-                </p>
-              </p>
-            </div>
-            <div>
-              <i
-                className={`fas ${
-                  item.ratePoint >= 2
-                    ? "star-show fa-star"
-                    : item.ratePoint === 1
-                    ? "star-show fa-star-half-alt"
-                    : "star-hide fa-star"
-                }`}
-              ></i>
-              <i
-                className={`fas ${
-                  item.ratePoint >= 4
-                    ? "star-show fa-star"
-                    : item.ratePoint === 3
-                    ? "star-show fa-star-half-alt"
-                    : "star-hide fa-star"
-                }`}
-              ></i>
-              <i
-                className={`fas ${
-                  item.ratePoint >= 6
-                    ? "star-show fa-star"
-                    : item.ratePoint === 5
-                    ? "star-show fa-star-half-alt"
-                    : "star-hide fa-star"
-                }`}
-              ></i>
-              <i
-                className={`fas ${
-                  item.ratePoint >= 8
-                    ? "star-show fa-star"
-                    : item.ratePoint === 7
-                    ? "star-show fa-star-half-alt"
-                    : "star-hide fa-star"
-                }`}
-              ></i>
-              <i
-                className={`fas ${
-                  item.ratePoint === 10
-                    ? "star-show fa-star"
-                    : item.ratePoint === 9
-                    ? "star-show fa-star-half-alt"
-                    : "star-hide fa-star"
-                }`}
-              ></i>
-            </div>
-          </div>
-          <div
-            className="d-flex "
-            style={{ flex: "1", justifyContent: "flex-end" }}
-          >
+          <div className="d-flex " style={{ justifyContent: "flex-end" }}>
             <div
               style={{
                 display: "flex",
