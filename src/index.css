@@ -493,3 +493,9 @@ code {
 .dark {
   background-color: #a7aaaf;
 }
+.star-show {
+  color: #ffeb03;
+}
+.star-hide {
+  color: #adadad;
+}

@@ -117,6 +117,53 @@ function Review({
                 </p>
               </p>
             </div>
+            <div>
+              <i
+                className={`fas ${
+                  item.ratePoint >= 2
+                    ? "star-show fa-star"
+                    : item.ratePoint === 1
+                    ? "star-show fa-star-half-alt"
+                    : "star-hide fa-star"
+                }`}
+              ></i>
+              <i
+                className={`fas ${
+                  item.ratePoint >= 4
+                    ? "star-show fa-star"
+                    : item.ratePoint === 3
+                    ? "star-show fa-star-half-alt"
+                    : "star-hide fa-star"
+                }`}
+              ></i>
+              <i
+                className={`fas ${
+                  item.ratePoint >= 6
+                    ? "star-show fa-star"
+                    : item.ratePoint === 5
+                    ? "star-show fa-star-half-alt"
+                    : "star-hide fa-star"
+                }`}
+              ></i>
+              <i
+                className={`fas ${
+                  item.ratePoint >= 8
+                    ? "star-show fa-star"
+                    : item.ratePoint === 7
+                    ? "star-show fa-star-half-alt"
+                    : "star-hide fa-star"
+                }`}
+              ></i>
+              <i
+                className={`fas ${
+                  item.ratePoint === 10
+                    ? "star-show fa-star"
+                    : item.ratePoint === 9
+                    ? "star-show fa-star-half-alt"
+                    : "star-hide fa-star"
+                }`}
+              ></i>
+            </div>
           </div>
           <div
             className="d-flex "

@@ -59,7 +59,6 @@ const reviewCtrl = {
         positive: positive,
         negative: negative,
         advice: advice,
-        ratePoint: 0,
       });
       await newReview.save();
 
@@ -77,7 +76,6 @@ const reviewCtrl = {
         positive: positive,
         negative: negative,
         advice: advice,
-        ratePoint: 0,
       });
       await newReview.save();
 
