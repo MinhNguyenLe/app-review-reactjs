@@ -170,9 +170,11 @@ function Review({
               linkImg={item.idUser ? item.idUser.avatar : ""}
             ></Avatar>
             <div className="img-tab-review">
-              <p style={{ margin: "0", fontWeight: "600", fontSize: "20px" }}>
-                {name}
-              </p>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <p style={{ margin: "0", fontWeight: "600", fontSize: "20px" }}>
+                  {name}
+                </p>
+              </div>
               <div style={{ display: "flex" }}>
                 <div
                   style={{
@@ -246,8 +248,27 @@ function Review({
                 justifyContent: "center",
               }}
             >
+              <i
+                style={{
+                  color: "#029425",
+                  cursor: "pointer",
+                  fontSize: "18px",
+                }}
+                className="fas fa-exclamation-triangle"
+              ></i>
+              <div
+                style={{
+                  backgroundColor: "#dadada",
+                  width: "1px",
+                  height: "50%",
+                  margin: "0 12px",
+                }}
+              ></div>
               <Link to={`/reviews/${item._id}/detail`}>
-                <i className="now-ui-icons ui-1_zoom-bold"></i>
+                <i
+                  style={{ fontSize: "18px", color: "#029425" }}
+                  className="now-ui-icons ui-1_zoom-bold"
+                ></i>
               </Link>
             </div>
             <div

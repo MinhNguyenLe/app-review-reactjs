@@ -337,6 +337,44 @@ function ReviewPage() {
                   </div>
                 </div>
               </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  paddingTop: "80px",
+                }}
+              >
+                <button
+                  style={{
+                    margin: "0 20px",
+                    fontSize: "16px",
+                    padding: "12px 36px",
+                  }}
+                  className="btn btn-warning"
+                >
+                  Gần đây
+                </button>
+                <button
+                  style={{
+                    margin: "0 20px",
+                    fontSize: "16px",
+                    padding: "12px 36px",
+                  }}
+                  className="btn btn-warning"
+                >
+                  Vote cao
+                </button>
+                <button
+                  style={{
+                    margin: "0 20px",
+                    fontSize: "16px",
+                    padding: "12px 36px",
+                  }}
+                  className="btn btn-warning"
+                >
+                  Vote thấp
+                </button>
+              </div>
               {listReview.map((item, index) => (
                 <div key={item._id}>
                   <Review
