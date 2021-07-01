@@ -296,7 +296,7 @@ function ReviewPage() {
                       Điểm số phải từ 0 đến 10
                     </span>
                   </div>
-                  <div>
+                  <div style={{ margin: "16px 0" }}>
                     <TextareaAutosize
                       placeholder="Ưu điểm"
                       minRows={2}
@@ -305,7 +305,7 @@ function ReviewPage() {
                       className="edit-content"
                     />
                   </div>
-                  <div>
+                  <div style={{ margin: "16px 0" }}>
                     <TextareaAutosize
                       placeholder="Điểm cần cải thiện"
                       minRows={2}
@@ -314,7 +314,7 @@ function ReviewPage() {
                       className="edit-content"
                     />
                   </div>
-                  <div>
+                  <div style={{ margin: "16px 0" }}>
                     <TextareaAutosize
                       placeholder="Trải nghiệm và lời khuyên"
                       minRows={2}
