@@ -198,73 +198,87 @@ function ReviewPage() {
                 style={!showEdit ? { display: "none" } : {}}
                 className="editor"
               >
-                <div className="d-flex flex-row align-items-center justify-content-between">
+                <div
+                  style={{
+                    marginBottom: "20px",
+                    borderBottom: "1px solid #dbdbdb",
+                  }}
+                  className="d-flex flex-row align-items-center justify-content-between"
+                >
                   <span className="big-title">Editor</span>
                   <i
                     onClick={exitEdit}
                     className="fas fa-times"
-                    style={{ cursor: "pointer" }}
+                    style={{
+                      cursor: "pointer",
+                      color: "blue",
+                    }}
                   ></i>
                 </div>
                 <div>
-                  <div>
-                    <rb.Card.Text className="review-title">
-                      Ưu điểm
-                    </rb.Card.Text>
+                  <div style={{ margin: "12px 0" }}>
+                    <span>Ưu điểm</span>
                     <TextareaAutosize
-                      minRows={3}
-                      maxRows={6}
+                      minRows={2}
+                      maxRows={4}
                       ref={refPositive}
                       className="edit-content"
                     />
                   </div>
-                  <div>
-                    <rb.Card.Text className="review-title">
-                      Điểm cần cải thiện
-                    </rb.Card.Text>
+                  <div style={{ margin: "12px 0" }}>
+                    <span>Khuyết điểm</span>
                     <TextareaAutosize
-                      minRows={3}
-                      maxRows={6}
+                      minRows={2}
+                      maxRows={4}
                       ref={refNegative}
                       className="edit-content"
                     />
                   </div>
-                  <div>
-                    <rb.Card.Text className="review-title">
-                      Trải nghiệm và lời khuyên
-                    </rb.Card.Text>
+                  <div style={{ margin: "12px 0" }}>
+                    <span>Trải nghiệm và lời khuyên</span>
                     <TextareaAutosize
-                      minRows={3}
-                      maxRows={6}
+                      minRows={2}
+                      maxRows={4}
                       ref={refAdvice}
                       className="edit-content"
                     />
                   </div>
-                  <rb.Button onClick={saveEdit}>
-                    Save{" "}
-                    <i
-                      id="icon_loading_2"
-                      className="hidden now-ui-icons loader_refresh spin"
-                    ></i>
-                  </rb.Button>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <rb.Button
+                      style={{ fontSize: "17px", padding: "12px 40px" }}
+                      onClick={saveEdit}
+                    >
+                      Save{" "}
+                      <i
+                        id="icon_loading_2"
+                        className="hidden now-ui-icons loader_refresh spin"
+                      ></i>
+                    </rb.Button>
+                  </div>
                 </div>
               </div>
               <div
                 style={!showWriteReview ? { display: "none" } : {}}
                 className="editor"
               >
-                <div className="d-flex flex-row align-items-center justify-content-between">
+                <div
+                  style={{
+                    marginBottom: "20px",
+                    borderBottom: "1px solid #dbdbdb",
+                  }}
+                  className="d-flex flex-row align-items-center justify-content-between"
+                >
                   <span className="big-title">Write new review</span>
                   <i
                     onClick={exitWriteReview}
                     className="fas fa-times"
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer", color: "blue" }}
                   ></i>
                 </div>
                 <div>
                   <div>
-                    <rb.Card.Text className="review-title">Điểm</rb.Card.Text>
                     <input
+                      placeholder="Điểm"
                       type="number"
                       ref={refPointForSchool}
                       className="edit-content"
@@ -283,45 +297,44 @@ function ReviewPage() {
                     </span>
                   </div>
                   <div>
-                    <rb.Card.Text className="review-title">
-                      Ưu điểm
-                    </rb.Card.Text>
                     <TextareaAutosize
-                      minRows={3}
-                      maxRows={6}
+                      placeholder="Ưu điểm"
+                      minRows={2}
+                      maxRows={4}
                       ref={refNewPositive}
                       className="edit-content"
                     />
                   </div>
                   <div>
-                    <rb.Card.Text className="review-title">
-                      Điểm cần cải thiện
-                    </rb.Card.Text>
                     <TextareaAutosize
-                      minRows={3}
-                      maxRows={6}
+                      placeholder="Điểm cần cải thiện"
+                      minRows={2}
+                      maxRows={4}
                       ref={refNewNegative}
                       className="edit-content"
                     />
                   </div>
                   <div>
-                    <rb.Card.Text className="review-title">
-                      Trải nghiệm và lời khuyên
-                    </rb.Card.Text>
                     <TextareaAutosize
-                      minRows={3}
-                      maxRows={6}
+                      placeholder="Trải nghiệm và lời khuyên"
+                      minRows={2}
+                      maxRows={4}
                       ref={refNewAdvice}
                       className="edit-content"
                     />
                   </div>
-                  <rb.Button onClick={saveAddReview}>
-                    Save{" "}
-                    <i
-                      id="icon_loading_1"
-                      className="hidden now-ui-icons loader_refresh spin"
-                    ></i>
-                  </rb.Button>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <rb.Button
+                      onClick={saveAddReview}
+                      style={{ fontSize: "16px", padding: "12px 40px" }}
+                    >
+                      Save{" "}
+                      <i
+                        id="icon_loading_1"
+                        className="hidden now-ui-icons loader_refresh spin"
+                      ></i>
+                    </rb.Button>
+                  </div>
                 </div>
               </div>
               {listReview.map((item, index) => (
