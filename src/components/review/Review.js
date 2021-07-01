@@ -273,10 +273,11 @@ function Review({
             </div>
             <div
               className={
-                typePage !== "detail" &&
-                user &&
-                item.idUser &&
-                user.id === item.idUser._id
+                (user && user.permission) ||
+                (typePage !== "detail" &&
+                  user &&
+                  item.idUser &&
+                  user.id === item.idUser._id)
                   ? ""
                   : "hidden"
               }
@@ -291,14 +292,18 @@ function Review({
                 marginLeft: "8px",
               }}
             >
-              <i className="now-ui-icons files_single-copy-04"></i>
+              <i
+                className="now-ui-icons files_single-copy-04"
+                style={{ fontSize: "18px" }}
+              ></i>
             </div>
             <div
               className={
-                typePage !== "detail" &&
-                user &&
-                item.idUser &&
-                user.id === item.idUser._id
+                (user && user.permission) ||
+                (typePage !== "detail" &&
+                  user &&
+                  item.idUser &&
+                  user.id === item.idUser._id)
                   ? ""
                   : "hidden"
               }
@@ -311,7 +316,10 @@ function Review({
                 marginLeft: "8px",
               }}
             >
-              <i className="now-ui-icons design_scissors"></i>
+              <i
+                style={{ fontSize: "18px" }}
+                className="now-ui-icons design_scissors"
+              ></i>
             </div>
             <div>
               {" "}
