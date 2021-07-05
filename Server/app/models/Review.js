@@ -5,7 +5,8 @@ const ObjectId = Schema.ObjectId;
 const Review = new Schema(
     {
         idSchool: {
-            type: String,
+            type: Schema.Types.ObjectId,
+            ref: 'School',
             required: true,
         },
         idUser: {
@@ -36,11 +37,11 @@ const Review = new Schema(
             },
         },
         report: {
-            reported: {
-                type: Boolean,
-                default: false,
+            count: {
+                type: Number,
+                default: 0,
             },
-            content: [String],
+            message: [String],
         },
     },
     { timestamps: true, collection: 'reviews' }

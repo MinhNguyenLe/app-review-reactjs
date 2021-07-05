@@ -1,32 +1,38 @@
-const router = require("express").Router();
-const reviewController = require("../app/controllers/ReviewController");
-const authMiddleWare = require("../app/middleware/auth");
-const multer = require("multer");
+const router = require('express').Router();
+const reviewController = require('../app/controllers/ReviewController');
+const authMiddleWare = require('../app/middleware/auth');
+const multer = require('multer');
 
 router.use(multer().none());
 
-router.get("/", reviewController.getAll);
+router.get('/', reviewController.getAll);
 
-router.get("/users/:id", reviewController.getReviewsByIdUser);
+router.get('/reported', reviewController.getReported);
 
-router.get("/:id", reviewController.getById);
+router.get('/users/:id', reviewController.getReviewsByIdUser);
 
-router.get("/:id/comments", reviewController.getCommentsByIdReview);
+router.get('/:id', reviewController.getById);
 
-router.post("/anonymous", reviewController.createAnonymous);
+router.get('/:id/comments', reviewController.getCommentsByIdReview);
+
+router.post('/anonymous', reviewController.createAnonymous);
 
 // router.use(authMiddleWare);
 
-router.post("/auth", reviewController.createAuth);
+router.post('/auth', reviewController.createAuth);
 
-router.put("/:id", reviewController.update);
+router.post('/:idReview/report', reviewController.report);
 
-router.patch("/:id/upvote", reviewController.upvote);
+router.post('/:idReview/decline-report', reviewController.declineReport);
 
-router.patch("/:id/downvote", reviewController.downvote);
+router.put('/:id', reviewController.update);
 
-router.delete("/:id", reviewController.delete);
+router.patch('/:id/upvote', reviewController.upvote);
 
-router.delete("/:_id/user", reviewController.deteleUserReview);
+router.patch('/:id/downvote', reviewController.downvote);
+
+router.delete('/:id', reviewController.delete);
+
+router.delete('/:_id/user', reviewController.deteleUserReview);
 
 module.exports = router;
