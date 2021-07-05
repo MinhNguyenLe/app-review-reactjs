@@ -11,6 +11,7 @@ import { apiLocal } from "javascript/dataGlobal.js";
 import Loading from "components/loading/Loading.js";
 import * as func from "javascript/funcGlobal.js";
 import * as rb from "react-bootstrap";
+import { filterType, filterLevel, filterMajor } from "javascript/filter.js";
 
 import ReviewNav from "components/Navbars/ReviewNav.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
@@ -342,6 +343,14 @@ function ReviewPage() {
                   display: "flex",
                   justifyContent: "center",
                   paddingTop: "80px",
+                }}
+              >
+                {filterType(school.typeOfSchool)}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
                 }}
               >
                 <button

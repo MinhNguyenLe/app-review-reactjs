@@ -83,7 +83,7 @@ function Schools() {
                 style={{ display: "flex", margin: "0 10px" }}
                 className="btn btn-success"
               >
-                Filter
+                Lọc
                 <i
                   style={{ marginLeft: "4px" }}
                   id="icon-filter-school"
@@ -111,7 +111,7 @@ function Schools() {
                   border: "none",
                   height: "40px",
                 }}
-                placeholder="Search . . ."
+                placeholder="Tên, địa chỉ, mã trường"
               />
               <select
                 className="select-school"
@@ -119,7 +119,7 @@ function Schools() {
                 id="select-level-school"
                 type="select"
                 style={{ margin: "0 10px" }}
-                name="select"
+                name="select-level-school"
               >
                 <option selected="selected" disabled hidden>
                   Theo cấp bậc
@@ -137,7 +137,7 @@ function Schools() {
                 id="select-major-school"
                 type="select"
                 style={{ margin: "0 10px" }}
-                name="select"
+                name="select-major-school"
               >
                 <option selected="selected" disabled hidden>
                   Theo ngành học
@@ -159,11 +159,9 @@ function Schools() {
                 id="select-type-school"
                 type="select"
                 style={{ margin: "0 10px" }}
-                name="select"
+                name="select-type-school"
               >
-                <option selected="selected" disabled hidden>
-                  Theo thể loại
-                </option>
+                <label>Theo thể loại</label>
                 <option value="" selected>
                   Tất cả
                 </option>
