@@ -13,8 +13,10 @@ import * as func from "javascript/funcGlobal.js";
 function Schools() {
   const params = useParams();
   const [data, setData] = useState([]);
-  const refCode = useRef();
-  const refLocation = useRef();
+  const refSearch = useRef();
+  const refType = useRef();
+  const refLevel = useRef();
+  const refMajor = useRef();
   const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {
@@ -24,9 +26,9 @@ function Schools() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
 
-    Promise.all([axios.get(`${apiLocal}/api/schools`)])
+    Promise.all([axios.get(`${apiLocal}/api/schools/filter`)])
       .then(([result]) => {
-        setData(result.data);
+        setData(result.data.schools);
         setLoading(false);
       })
       .catch((err) => {
@@ -38,62 +40,28 @@ function Schools() {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
-  const selectTypeSchool = async (e) => {
-    $("#search_code").addClass("prevent-event");
-    $("#search_location").addClass("prevent-event");
-    $("#select_type_school").addClass("prevent-event");
-    Promise.all([
-      axios.get(`${apiLocal}/api/schools/${e.target.value}/type-of-schools`),
-    ])
-      .then(([school]) => {
-        setData(school.data);
-        console.log(school.data);
-        $("#search_code").removeClass("prevent-event");
-        $("#search_location").removeClass("prevent-event");
-        $("#select_type_school").removeClass("prevent-event");
-      })
-      .catch();
-  };
-  const searchLocationSchool = (e) => {
-    $("#search_code").addClass("prevent-event");
-    $("#search_location").addClass("prevent-event");
-    $("#select_type_school").addClass("prevent-event");
+  const filterSchool = () => {
+    $("#search").addClass("prevent-event");
+    $("#icon-filter-school").removeClass("hidden");
+    $("#select-type-school").addClass("prevent-event");
+    $("#select-major-school").removeClass("prevent-event");
+    $("#select-level-school").removeClass("prevent-event");
     Promise.all([
       axios.get(
-        `${apiLocal}/api/schools/search/location?q=${refLocation.current.value}`
-      ),
-    ])
-      .then(([school]) => {
-        setData(school.data);
-        console.log(school.data);
-        $("#search_code").removeClass("prevent-event");
-        $("#search_location").removeClass("prevent-event");
-        $("#select_type_school").removeClass("prevent-event");
-      })
-      .catch();
-  };
-  const searchCodeSchool = (e) => {
-    $("#search_code").addClass("prevent-event");
-    $("#search_location").addClass("prevent-event");
-    $("#select_type_school").addClass("prevent-event");
-    Promise.all([
-      axios.get(
-        `${apiLocal}/api/schools/search/code?q=${refCode.current.value}`
+        `${apiLocal}/api/schools/filter?q=${refSearch.current.value}&type=${refType.current.value}&major=${refMajor.current.value}&level=${refLevel.current.value}`
       ),
     ])
       .then(([school]) => {
         console.log(school.data);
-        setData(school.data || []);
-        $("#search_code").removeClass("prevent-event");
-        $("#search_location").removeClass("prevent-event");
-        $("#select_type_school").removeClass("prevent-event");
+        setData(school.data.schools || []);
+        $("#search").removeClass("prevent-event");
+        $("#icon-filter-school").addClass("hidden");
+        $("#select-type-school").removeClass("prevent-event");
+        $("#select-major-school").removeClass("prevent-event");
+        $("#select-level-school").removeClass("prevent-event");
       })
       .catch();
   };
-  // <div
-  //   className={"data-content-".concat(item._id)}
-  //   dangerouslySetInnerHTML={{ __html: item.content }}
-  // ></div>;
   return (
     <>
       <CustomNavbar />
@@ -111,25 +79,17 @@ function Schools() {
               style={{ width: "70%", display: "flex", alignItems: "center" }}
             >
               <button
-                style={{
-                  border: "none",
-                  background: "transparent",
-                  outline: "none",
-                  color: "#333",
-                  borderRadius: "6px",
-                }}
-                onClick={() => searchLocationSchool()}
+                onClick={filterSchool}
+                style={{ display: "flex", margin: "0 10px" }}
+                className="btn btn-success"
               >
-                <i class="fas fa-search"></i>
+                Filter
+                <i
+                  style={{ marginLeft: "4px" }}
+                  id="icon-filter-school"
+                  className="hidden now-ui-icons loader_refresh spin"
+                ></i>
               </button>
-              <input
-                ref={refCode}
-                id="search_code"
-                type="text"
-                name="code"
-                placeholder="Search location of school"
-                style={{ margin: "20px 20px 20px 0", border: "none" }}
-              />
               <button
                 style={{
                   border: "none",
@@ -138,13 +98,12 @@ function Schools() {
                   color: "#333",
                   borderRadius: "6px",
                 }}
-                onClick={() => searchCodeSchool()}
               >
                 <i class="fas fa-search"></i>
               </button>
               <input
-                ref={refLocation}
-                id="search_location"
+                ref={refSearch}
+                id="search-school"
                 type="text"
                 name="location"
                 style={{
@@ -152,22 +111,66 @@ function Schools() {
                   border: "none",
                   height: "40px",
                 }}
-                placeholder="Search code of school"
+                placeholder="Search . . ."
               />
-              <Input
-                id="select-type-school"
+              <select
+                className="select-school"
+                ref={refLevel}
+                id="select-level-school"
                 type="select"
-                style={{ margin: "0 20px" }}
+                style={{ margin: "0 10px" }}
                 name="select"
-                onChange={(e) => selectTypeSchool(e)}
               >
                 <option selected="selected" disabled hidden>
-                  Type of school
+                  Theo cấp bậc
                 </option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </Input>
+                <option value="" selected>
+                  Tất cả
+                </option>
+                <option value="1">Đại học</option>
+                <option value="2">Cao đẵng</option>
+                <option value="3">Trung cấp</option>
+              </select>
+              <select
+                className="select-school"
+                ref={refMajor}
+                id="select-major-school"
+                type="select"
+                style={{ margin: "0 10px" }}
+                name="select"
+              >
+                <option selected="selected" disabled hidden>
+                  Theo ngành học
+                </option>
+                <option value="" selected>
+                  Tất cả
+                </option>
+                <option value="1">Khoa học - Kỹ thuật</option>
+                <option value="2">Xã hội - Nhân văn</option>
+                <option value="3">Y dược</option>
+                <option value="4">Kinh tế- Quản lý</option>
+                <option value="5">Chính trị- Quân sự</option>
+                <option value="6">Sư phạm</option>
+                <option value="7">Năng khiếu</option>
+              </select>
+              <select
+                className="select-school"
+                ref={refType}
+                id="select-type-school"
+                type="select"
+                style={{ margin: "0 10px" }}
+                name="select"
+              >
+                <option selected="selected" disabled hidden>
+                  Theo thể loại
+                </option>
+                <option value="" selected>
+                  Tất cả
+                </option>
+                <option value="1">Công lập</option>
+                <option value="2">Dân lập</option>
+                <option value="3">Bán công</option>
+              </select>
             </FormGroup>
           </div>
           <ListSchools
