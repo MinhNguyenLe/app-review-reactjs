@@ -181,6 +181,19 @@ const schoolController = {
             let level = req.query.level;
             let major = req.query.major;
             let schools = await School.find({});
+            for (let i = 0; i < schools.length; i++) {
+                let reviews = await Review.find({ idSchool: schools[i]._id });
+                let score = 0;
+                for (let j = 0; j < reviews.length; j++) {
+                    score += reviews[j].ratePoint;
+                }
+                score = score / reviews.length;
+                schools[i] = {
+                    ...schools[i]._doc,
+                    review: reviews.length,
+                    score: score,
+                };
+            }
             if (q != '' && q != undefined) {
                 q = removeVietnameseTones(q);
                 schools = schools.filter((item) => {
