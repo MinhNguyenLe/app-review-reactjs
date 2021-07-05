@@ -504,3 +504,9 @@ code {
   font-size: 18px;
   padding: 12px;
 }
+.select-school {
+  height: 40px;
+  border-radius: 36px;
+  border: 1px solid #dfe1e6;
+  width: 200px;
+}
