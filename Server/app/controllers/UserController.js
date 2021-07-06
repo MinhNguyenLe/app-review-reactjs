@@ -227,10 +227,10 @@ const userController = {
         try {
             const { email, password } = req.body;
             const user = await User.findOne({ email });
-            if (!user) return res.status(400).json({ msg: 'User not exist' });
+            if (!user) return res.status(200).json({ msg: 'User not exist' });
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch)
-                return res.status(400).json({ msg: 'Incorrect password' });
+                return res.status(200).json({ msg: 'Incorrect password' });
 
             const accessToken = createAccessToken({ id: user._id });
             const refreshToken = createRefreshToken({ id: user._id });
@@ -239,7 +239,7 @@ const userController = {
 
             res.set({ 'x-refresh-token': refreshToken });
 
-            return res.status(200).json({ msg: 'Login successful!' });
+            return res.status(200).json({ msg: 'Login successful!', data: user });
         } catch (err) {
             res.status(500).json({ msg: err.message });
         }
@@ -306,12 +306,12 @@ const userController = {
 
 const createAccessToken = (user) => {
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '30m',
+        expiresIn: '5h',
     }); // access token expires in 5 minutes
 };
 const createRefreshToken = (user) => {
     return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {
-        expiresIn: '1h',
+        expiresIn: '20h',
     }); // refresh token expires in 1 hour => need login again
 };
 

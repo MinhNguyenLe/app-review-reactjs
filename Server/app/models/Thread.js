@@ -7,7 +7,7 @@ const Thread = new Schema(
         byUser: {
             type: Schema.Types.ObjectId,
             ref: 'User',
-            require: true,
+            require: true
         },
         title: {
             type: String,
@@ -17,30 +17,30 @@ const Thread = new Schema(
             type: [String],
         },
         category: {
-            type: String,
+            type: Schema.Types.ObjectId,
             required: true,
-            default: 'Chưa phân loại',
+            ref: 'Category'
         },
-        isOpen: {
+        isOpen:{
             type: Boolean,
-            default: true,
+            default: true
         },
         posts: {
-            type: [Schema.Types.ObjectId],
-            ref: 'Post',
+           type: [Schema.Types.ObjectId],
+           ref: 'Post'
         },
         lastedPostBy: {
             type: String,
-            required: true,
+            required: true
         },
         lastedPostAt: {
-            type: String,
-            required: true,
+            type:String,
+            required: true
         },
-        isDeleted: {
+        isDeleted : {
             type: Boolean,
-            default: false,
-        },
+            default: false
+        }
     },
     { timestamps: true, collection: 'threads' }
 );

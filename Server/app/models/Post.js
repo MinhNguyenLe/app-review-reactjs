@@ -7,7 +7,7 @@ const Post = new Schema(
         byUser: {
             type: Schema.Types.ObjectId,
             ref: 'User',
-            require: true,
+            require: true
         },
         inThread: {
             type: Schema.Types.ObjectId,
@@ -16,12 +16,26 @@ const Post = new Schema(
         },
         content: {
             type: String,
-            required: true,
+            required: true
         },
-        isDeleted: {
+        isDeleted : {
             type: Boolean,
-            default: false,
+            default: false
         },
+        reported :{
+            state: {
+                type: Boolean, // false = decline, true = approve 
+                default: false
+            },
+            reportedBy: { // username
+                type: String,
+                default: ""
+            },
+            reason: {
+                type: String,
+                default: "Nội dung không phù hợp."
+            }
+        }
     },
     { timestamps: true, collection: 'posts' }
 );
