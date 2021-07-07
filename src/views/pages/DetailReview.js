@@ -75,7 +75,10 @@ function DetailReview() {
     <>
       <CustomNavbar />
       <div className="wrapper">
-        <DetailPageHeader name={review.idUser && review.idUser.name} />
+        <DetailPageHeader
+          name={review.idUser && review.idUser.name}
+          school={review.idSchool}
+        />
         <div className="main">
           <div style={{ display: "flex", flexDirection: "row" }}>
             <Review

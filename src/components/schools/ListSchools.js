@@ -39,6 +39,7 @@ const ListSchool = ({ loading, setLoading, data, setData }) => {
     func.scrollTop();
   };
   const roundingScore = (score) => {
+    dispatch(action.setScore(score));
     return Math.round(score * 10) / 10;
   };
   return loading ? (

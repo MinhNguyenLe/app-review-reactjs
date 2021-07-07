@@ -47,7 +47,7 @@ function ReviewPage() {
   const refNewNegative = useRef();
   const refNewAdvice = useRef();
 
-  const idSchool = useSelector((state) => state.idSchool);
+  const score = useSelector((state) => state.score);
   const idReview = useSelector((state) => state.idReview);
   const user = useSelector((state) => state.user);
   const state = useSelector((state) => state);
@@ -169,6 +169,9 @@ function ReviewPage() {
     setShowWriteReview(false);
     func.enableScrolling();
     $(`#icon_loading_1`).addClass("hidden");
+  };
+  const roundingScore = (score) => {
+    return Math.round(score * 10) / 10;
   };
   return (
     <>
@@ -342,10 +345,63 @@ function ReviewPage() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  paddingTop: "80px",
                 }}
               >
-                {filterType(school.typeOfSchool)}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    padding: "80px 0",
+                    width: "70%",
+                  }}
+                >
+                  <div className="d-flex flex-row align-items-center">
+                    <rb.Badge
+                      variant="success"
+                      className="d-flex justify-content-center align-items-center school-badge"
+                    >
+                      {roundingScore(score) || 0}
+                    </rb.Badge>
+                    <div>
+                      <rb.Card.Text>
+                        {school.review || 0} bài đánh giá
+                      </rb.Card.Text>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                    }}
+                  >
+                    <p>Trường :</p>
+                    <p> {filterType(school.typeOfSchool)}</p>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <p>Cấp bậc :</p>
+                    <p> {filterLevel(school.level)}</p>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <p>Đào tạo chuyên ngành :</p>
+                    <p> {filterMajor(school.major)}</p>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <p>Mã code :</p>
+                    <p> {school.code}</p>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <p>Địa chỉ :</p>
+                    <p> {school.location}</p>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: school.description || "",
+                      }}
+                    ></p>
+                  </div>
+                </div>
               </div>
               <div
                 style={{

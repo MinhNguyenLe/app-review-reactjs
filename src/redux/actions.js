@@ -7,6 +7,15 @@ export const setIdSchool = (id) => {
   };
 };
 
+export const setScore = (score) => {
+  return {
+    type: "SET-SCORE",
+    payload: {
+      score: score,
+    },
+  };
+};
+
 export const setErrPage = (bool) => {
   return {
     type: "SET-ERR-PAGE",

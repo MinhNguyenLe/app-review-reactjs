@@ -8,6 +8,7 @@ const persistConfig = {
 };
 
 const INITIAL_STATE = {
+  score: 0,
   errPage: false,
   errLogin: false,
   errRegister: false,
@@ -76,6 +77,11 @@ function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         errPage: action.payload.errPage,
+      };
+    case "SET-SCORE":
+      return {
+        ...state,
+        score: action.payload.score,
       };
     case "SET-ERR-LOGIN":
       return {
