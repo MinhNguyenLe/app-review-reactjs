@@ -11,7 +11,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { apiLocal } from "javascript/dataGlobal.js";
 import Avatar from "components/avatar/Avatar";
 
-const ListComment = ({ success, setSuccess }) => {
+const ListComment = ({ review, success, setSuccess }) => {
   const params = useParams();
   const history = useHistory();
   const refCmt = useRef();
@@ -105,111 +105,145 @@ const ListComment = ({ success, setSuccess }) => {
     $(".edit-cmt").addClass("hidden");
   };
   return (
-    <div>
-      <div
-        style={{
-          marginTop: "20px",
-          borderBottom: "1px solid rgb(223, 222, 222)",
-        }}
-      >
-        <button
-          className={`btn-add-cmt ${user.banned ? "dark prevent-event" : ""}`}
-          style={{ marginBottom: "6px" }}
-          onClick={() => $("#writeCmt").toggle()}
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ width: "70%" }}>
+        <div
+          style={{
+            marginTop: "20px",
+            borderBottom: "1px solid rgb(223, 222, 222)",
+          }}
         >
-          Click to add a comment
-        </button>
-        <rb.Form
-          id="writeCmt"
-          onSubmit={submitCmt}
-          style={{ marginTop: "8px", display: "none", marginBottom: "8px" }}
-        >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <i
-              style={{ margin: "0 8px" }}
-              id="icon_loading_3"
-              className="hidden now-ui-icons loader_refresh spin"
-            ></i>
-            <rb.Form.Control
-              ref={refCmt}
-              onClick={() => dispatch(action.setIdReview(params.id))}
-              type="text"
-              style={{ width: "100%", fontSize: "18px" }}
-            />
-          </div>
-        </rb.Form>
-      </div>
-      <div className="ske-cmt">
-        {cmt.map((item, index) => (
-          <div key={index} className="d-flex flex-row ske-cmt-c">
-            <Avatar linkImg={item.idUser && item.idUser.avatar}></Avatar>
-            <div className="img-tab-review">
-              <Moment
-                className="date-content"
-                format="YYYY/MM/DD"
-                style={{ marginRight: "20px" }}
-              >
-                {item.createdAt}
-              </Moment>
-              <span className="cmt-name">
-                {(item.idUser && item.idUser.name) || "anonymous"}
-              </span>
-              <div
-                className={
-                  user && item.idUser && user.id === item.idUser._id
-                    ? ""
-                    : "hidden"
-                }
-                style={{
-                  marginTop: "8px",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <i
-                  onClick={() => editCmt(item._id, item.content)}
-                  style={{ marginRight: "8px", cursor: "pointer" }}
-                  className="now-ui-icons files_single-copy-04"
-                ></i>
-                <i
-                  onClick={() => deleteCmt(item._id)}
-                  style={{ marginRight: "4px", cursor: "pointer" }}
-                  className="now-ui-icons design_scissors"
-                ></i>
-                <div style={{ marginLeft: "4px" }}>
-                  <i
-                    id={`icon_loading_${item._id}`}
-                    className="hidden now-ui-icons loader_refresh spin"
-                  ></i>
-                </div>
-              </div>
-            </div>
-            <rb.Form
-              className="edit-cmt hidden"
-              id={`edit_comment_${item._id}`}
-              onSubmit={(e) => saveEditCmt(e, item._id)}
-              style={{ width: "100%" }}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <button
+              className={`btn-add-cmt ${
+                user.banned ? "dark prevent-event" : ""
+              }`}
+              style={{ marginBottom: "6px" }}
+              onClick={() => {
+                $("#detail-list-report").addClass("hidden");
+                $("#detail-list-cmt").removeClass("hidden");
+                $("#writeCmt").toggle();
+              }}
             >
+              Viết bình luận
+            </button>
+            <button
+              onClick={() => {
+                $("#detail-list-report").removeClass("hidden");
+                $("#detail-list-cmt").addClass("hidden");
+              }}
+              className={`btn-add-cmt ${
+                user.banned ? "dark prevent-event" : ""
+              } ${!user.permission ? "dark prevent-event" : ""}`}
+              style={{ marginBottom: "6px" }}
+            >
+              Xem các báo cáo bài đánh giá
+            </button>
+          </div>
+          <rb.Form
+            id="writeCmt"
+            onSubmit={submitCmt}
+            style={{ marginTop: "8px", display: "none", marginBottom: "8px" }}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <i
+                style={{ margin: "0 8px" }}
+                id="icon_loading_3"
+                className="hidden now-ui-icons loader_refresh spin"
+              ></i>
               <rb.Form.Control
-                id={`value_${item._id}`}
+                ref={refCmt}
+                onClick={() => dispatch(action.setIdReview(params.id))}
                 type="text"
                 style={{ width: "100%", fontSize: "18px" }}
               />
-              <i
-                onClick={() => exitEditCmt()}
-                style={{ marginLeft: "8px", cursor: "pointer" }}
-                className="now-ui-icons ui-1_simple-remove"
-              ></i>
-            </rb.Form>
-            <p
-              style={{ margin: "0" }}
-              id={`comment_content_${item._id}`}
-              className="cmt-content"
-            >
-              {item.content}
-            </p>
-          </div>
-        ))}
+            </div>
+          </rb.Form>
+        </div>
+        <div id="detail-list-cmt" className="ske-cmt">
+          {cmt.map((item, index) => (
+            <div key={index} className="d-flex flex-row ske-cmt-c">
+              <Avatar linkImg={item.idUser && item.idUser.avatar}></Avatar>
+              <div className="img-tab-review">
+                <Moment
+                  className="date-content"
+                  format="YYYY/MM/DD"
+                  style={{ marginRight: "20px" }}
+                >
+                  {item.createdAt}
+                </Moment>
+                <span className="cmt-name">
+                  {(item.idUser && item.idUser.name) || "anonymous"}
+                </span>
+                <div
+                  className={
+                    user && item.idUser && user.id === item.idUser._id
+                      ? ""
+                      : "hidden"
+                  }
+                  style={{
+                    marginTop: "8px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <i
+                    onClick={() => editCmt(item._id, item.content)}
+                    style={{ marginRight: "8px", cursor: "pointer" }}
+                    className="now-ui-icons files_single-copy-04"
+                  ></i>
+                  <i
+                    onClick={() => deleteCmt(item._id)}
+                    style={{ marginRight: "4px", cursor: "pointer" }}
+                    className="now-ui-icons design_scissors"
+                  ></i>
+                  <div style={{ marginLeft: "4px" }}>
+                    <i
+                      id={`icon_loading_${item._id}`}
+                      className="hidden now-ui-icons loader_refresh spin"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+              <rb.Form
+                className="edit-cmt hidden"
+                id={`edit_comment_${item._id}`}
+                onSubmit={(e) => saveEditCmt(e, item._id)}
+                style={{ width: "100%" }}
+              >
+                <rb.Form.Control
+                  id={`value_${item._id}`}
+                  type="text"
+                  style={{ width: "100%", fontSize: "18px" }}
+                />
+                <i
+                  onClick={() => exitEditCmt()}
+                  style={{ marginLeft: "8px", cursor: "pointer" }}
+                  className="now-ui-icons ui-1_simple-remove"
+                ></i>
+              </rb.Form>
+              <p
+                style={{ margin: "0" }}
+                id={`comment_content_${item._id}`}
+                className="cmt-content"
+              >
+                {item.content}
+              </p>
+            </div>
+          ))}
+        </div>
+        <div className="hidden ske-cmt" id="detail-list-report">
+          {review.report.message.map((item, index) => (
+            <div className="d-flex flex-row ske-cmt-c" key={index}>
+              {item}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

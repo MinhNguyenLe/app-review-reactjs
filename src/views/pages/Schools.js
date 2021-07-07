@@ -113,62 +113,82 @@ function Schools() {
                 }}
                 placeholder="Tên, địa chỉ, mã trường"
               />
-              <select
-                className="select-school"
-                ref={refLevel}
-                id="select-level-school"
-                type="select"
-                style={{ margin: "0 10px" }}
-                name="select-level-school"
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
-                <option selected="selected" disabled hidden>
-                  Theo cấp bậc
-                </option>
-                <option value="" selected>
-                  Tất cả
-                </option>
-                <option value="1">Đại học</option>
-                <option value="2">Cao đẵng</option>
-                <option value="3">Trung cấp</option>
-              </select>
-              <select
-                className="select-school"
-                ref={refMajor}
-                id="select-major-school"
-                type="select"
-                style={{ margin: "0 10px" }}
-                name="select-major-school"
+                <label>Theo cấp bậc</label>
+                <select
+                  className="select-school"
+                  ref={refLevel}
+                  id="select-level-school"
+                  type="select"
+                  style={{ margin: "0 10px" }}
+                  name="select-level-school"
+                >
+                  <option value="" selected>
+                    Tất cả
+                  </option>
+                  <option value="1">Đại học</option>
+                  <option value="2">Cao đẵng</option>
+                  <option value="3">Trung cấp</option>
+                </select>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
-                <option selected="selected" disabled hidden>
-                  Theo ngành học
-                </option>
-                <option value="" selected>
-                  Tất cả
-                </option>
-                <option value="1">Khoa học - Kỹ thuật</option>
-                <option value="2">Xã hội - Nhân văn</option>
-                <option value="3">Y dược</option>
-                <option value="4">Kinh tế- Quản lý</option>
-                <option value="5">Chính trị- Quân sự</option>
-                <option value="6">Sư phạm</option>
-                <option value="7">Năng khiếu</option>
-              </select>
-              <select
-                className="select-school"
-                ref={refType}
-                id="select-type-school"
-                type="select"
-                style={{ margin: "0 10px" }}
-                name="select-type-school"
+                <label>Theo ngành học</label>
+                <select
+                  className="select-school"
+                  ref={refMajor}
+                  id="select-major-school"
+                  type="select"
+                  style={{ margin: "0 10px" }}
+                  name="select-major-school"
+                >
+                  <option value="" selected>
+                    Tất cả
+                  </option>
+                  <option value="1">Khoa học - Kỹ thuật</option>
+                  <option value="2">Xã hội - Nhân văn</option>
+                  <option value="3">Y dược</option>
+                  <option value="4">Kinh tế- Quản lý</option>
+                  <option value="5">Chính trị- Quân sự</option>
+                  <option value="6">Sư phạm</option>
+                  <option value="7">Năng khiếu</option>
+                </select>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
                 <label>Theo thể loại</label>
-                <option value="" selected>
-                  Tất cả
-                </option>
-                <option value="1">Công lập</option>
-                <option value="2">Dân lập</option>
-                <option value="3">Bán công</option>
-              </select>
+                <select
+                  className="select-school"
+                  ref={refType}
+                  id="select-type-school"
+                  type="select"
+                  style={{ margin: "0 10px" }}
+                  name="select-type-school"
+                >
+                  <option value="" selected>
+                    Tất cả
+                  </option>
+                  <option value="1">Công lập</option>
+                  <option value="2">Dân lập</option>
+                  <option value="3">Bán công</option>
+                </select>
+              </div>
             </FormGroup>
           </div>
           <ListSchools

@@ -89,7 +89,11 @@ function DetailReview() {
               name={(review.idUser && review.idUser.name) || "Anonymous"}
             ></Review>
           </div>
-          <ListComment success={success} setSuccess={setSuccess}></ListComment>
+          <ListComment
+            review={review}
+            success={success}
+            setSuccess={setSuccess}
+          ></ListComment>
         </div>
         <DarkFooter />
       </div>

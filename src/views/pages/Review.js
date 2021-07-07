@@ -40,6 +40,7 @@ function ReviewPage() {
   const refPositive = useRef();
   const refNegative = useRef();
   const refAdvice = useRef();
+  const refReport = useRef();
 
   const refPointForSchool = useRef();
 
@@ -62,6 +63,7 @@ function ReviewPage() {
   const [showWriteReview, setShowWriteReview] = useState(false);
   const [success, setSuccess] = useState(0);
   const [showEdit, setShowEdit] = useState(false);
+  const [showReport, setShowReport] = useState(false);
 
   useEffect(() => {
     Promise.all([axios.get(`${apiLocal}/api/schools/${params.id}/reviews`)])
@@ -173,12 +175,35 @@ function ReviewPage() {
   const roundingScore = (score) => {
     return Math.round(score * 10) / 10;
   };
+  const exitReport = () => {
+    refReport.current.value = "";
+    setShowReport(false);
+    func.enableScrolling();
+  };
+  const writeReport = (id) => {
+    dispatch(action.setIdReview(id));
+    func.scrollTop();
+    setShowReport(true);
+    func.disableScrolling();
+  };
+  const saveReport = async () => {
+    $(`#icon_loading_report`).removeClass("hidden");
+    await axios.post(`${apiLocal}/api/reviews/${idReview}/report`, {
+      message: refReport.current.value,
+    });
+    setSuccess(success + 1);
+    setShowReport(false);
+    func.enableScrolling();
+    refReport.current.value = "";
+    $(`#icon_loading_report`).addClass("hidden");
+  };
   return (
     <>
       <div
         className={`${!showWriteReview ? "hidden" : "cover-background"}`}
       ></div>
       <div className={`${!showEdit ? "hidden" : "cover-background"}`}></div>
+      <div className={`${!showReport ? "hidden" : "cover-background"}`}></div>
       <ReviewNav writeReview={writeReview} />
       <div className="wrapper">
         <ReviewPageHeader school={school} />
@@ -197,6 +222,49 @@ function ReviewPage() {
                   style={{ fontSize: "22px", color: "#7878da" }}
                   className="fas fa-angle-double-up"
                 ></i>
+              </div>
+              <div
+                className="editor"
+                style={!showReport ? { display: "none" } : {}}
+              >
+                <div
+                  style={{
+                    marginBottom: "20px",
+                    borderBottom: "1px solid #dbdbdb",
+                  }}
+                  className="d-flex flex-row align-items-center justify-content-between"
+                >
+                  <span className="big-title">Report</span>
+                  <i
+                    onClick={exitReport}
+                    className="fas fa-times"
+                    style={{
+                      cursor: "pointer",
+                      color: "blue",
+                    }}
+                  ></i>
+                </div>
+                <div>
+                  <TextareaAutosize
+                    placeholder="Viết báo cáo tại đây"
+                    minRows={4}
+                    maxRows={8}
+                    ref={refReport}
+                    className="edit-content"
+                  />
+                </div>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <rb.Button
+                    style={{ fontSize: "17px", padding: "12px 40px" }}
+                    onClick={saveReport}
+                  >
+                    Save{" "}
+                    <i
+                      id="icon_loading_report"
+                      className="hidden now-ui-icons loader_refresh spin"
+                    ></i>
+                  </rb.Button>
+                </div>
               </div>
               <div
                 style={!showEdit ? { display: "none" } : {}}
@@ -449,6 +517,7 @@ function ReviewPage() {
                     name={item.idUser ? item.idUser.name : "Anonymous"}
                     editReview={editReview}
                     deleteReview={deleteReview}
+                    writeReport={writeReport}
                   ></Review>
                 </div>
               ))}

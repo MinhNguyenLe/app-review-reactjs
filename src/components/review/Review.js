@@ -30,6 +30,7 @@ function Review({
   typePage,
   editReview,
   deleteReview,
+  writeReport,
 }) {
   const params = useParams();
   const user = useSelector((state) => state.user);
@@ -249,12 +250,17 @@ function Review({
               }}
             >
               <i
+                onClick={() => writeReport(item._id)}
                 style={{
                   color: "#029425",
                   cursor: "pointer",
                   fontSize: "18px",
                 }}
-                className="fas fa-exclamation-triangle"
+                className={`fas fa-exclamation-triangle ${
+                  user && item.idUser && user.id === item.idUser._id
+                    ? "prevent-event"
+                    : ""
+                }`}
               ></i>
               <div
                 style={{

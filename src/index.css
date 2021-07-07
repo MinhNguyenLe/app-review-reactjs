@@ -92,7 +92,7 @@ code {
   font-weight: 500;
 }
 .cmt-content {
-  max-width: 1000px;
+  max-width: 80%;
   overflow-wrap: break-word;
   font-size: 18px;
 }
