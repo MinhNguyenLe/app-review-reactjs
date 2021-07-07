@@ -135,7 +135,7 @@ function Review({
               display: "flex",
             }}
           >
-            <p style={{ margin: "0" }}>{item.comments} comments</p>
+            <p style={{ margin: "0" }}>{item.comments} bình luận</p>
           </div>
         </div>
       </div>
@@ -344,6 +344,17 @@ function Review({
               flexDirection: "column",
             }}
           >
+            <p
+              style={{
+                color: "#2d4057",
+                fontSize: "20px",
+                marginBottom: "12px",
+              }}
+            >
+              {typePage === "mypage" || typePage === "profile"
+                ? item.idSchool.name
+                : ""}
+            </p>
             <span
               style={{
                 color: "#2d4057",

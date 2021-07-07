@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import { Container } from "reactstrap";
-import {useParams} from "react-router-dom"
-// core components 
+import { useParams } from "react-router-dom";
+// core components
 
 function ProfilePageHeader({ re, cmt }) {
-  const params = useParams()
+  const params = useParams();
   const people = useSelector((state) => state.people);
   // let pageHeader = useRef();
 
@@ -30,13 +30,16 @@ function ProfilePageHeader({ re, cmt }) {
       >
         <div
           className="page-header-image"
-          style={people.coverImg ? {
-            backgroundImage:
-              "url(" + people.coverImg + ")",
-          } : {
-            backgroundImage:
-              "url(" + require("assets/img/bg5.jpg").default + ")",
-          }}
+          style={
+            people.coverImg
+              ? {
+                  backgroundImage: "url(" + people.coverImg + ")",
+                }
+              : {
+                  backgroundImage:
+                    "url(" + require("assets/img/bg5.jpg").default + ")",
+                }
+          }
           // ref={pageHeader}
         ></div>
         <Container>
@@ -50,31 +53,30 @@ function ProfilePageHeader({ re, cmt }) {
             ></img>
           </div>
           <h3 className="title">{people.name}</h3>
-          <p className="category">{people.school || "No information"}</p>
           <div className="content">
             <div className="social-description text-after-loading-1-re">
-              {
-                re.length ? (<h2>{re.length}</h2>) :  (<i
+              {re.length ? (
+                <h2>{re.length}</h2>
+              ) : (
+                <i
                   id={`loading_1_${params.id}`}
-                style={{ fontSize: "32px !important" }}
-                className="now-ui-icons loader_refresh spin"
-              ></i>)
-              }
-              <p>Reviews</p>
+                  style={{ fontSize: "32px !important" }}
+                  className="now-ui-icons loader_refresh spin"
+                ></i>
+              )}
+              <p>Số bài đánh giá</p>
             </div>
             <div className="social-description text-after-loading-1-cmt">
-              {
-                cmt.length 
-                ? 
-                (<h2>{cmt.length}</h2>) 
-                :  
-                (<i
-                   id={`loading_2_${params.id}`}
-                style={{ fontSize: "32px !important" }}
-                className="now-ui-icons loader_refresh spin"
-              ></i>)
-              }
-              <p>Comments</p>
+              {cmt.length ? (
+                <h2>{cmt.length}</h2>
+              ) : (
+                <i
+                  id={`loading_2_${params.id}`}
+                  style={{ fontSize: "32px !important" }}
+                  className="now-ui-icons loader_refresh spin"
+                ></i>
+              )}
+              <p>Số lượt bình luận</p>
             </div>
           </div>
         </Container>

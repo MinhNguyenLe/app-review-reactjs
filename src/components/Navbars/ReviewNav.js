@@ -207,7 +207,7 @@ function ReviewNav({ writeReview }) {
                       target="_blank"
                     >
                       <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
-                      <p>Register</p>
+                      <p>Đăng ký</p>
                     </Button>
                   </NavItem>
                   <div>
@@ -217,7 +217,7 @@ function ReviewNav({ writeReview }) {
                       color="info"
                     >
                       <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
-                      <p>Login</p>
+                      <p>Đăng nhập</p>
                     </Button>
                   </div>
                 </div>

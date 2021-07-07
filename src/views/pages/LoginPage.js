@@ -116,7 +116,7 @@ function LoginPage() {
                         name="emailLogin"
                         required
                         onChange={handleChangeLogin}
-                        placeholder="Email Address..."
+                        placeholder="Địa chỉ email..."
                         type="email"
                         onFocus={() => setFirstFocus(true)}
                         onBlur={() => setFirstFocus(false)}
@@ -141,7 +141,7 @@ function LoginPage() {
                         name="passLogin"
                         required
                         onChange={handleChangeLogin}
-                        placeholder="Pass Word..."
+                        placeholder="Mật khẩu..."
                         type="password"
                         onFocus={() => setLastFocus(true)}
                         onBlur={() => setLastFocus(false)}
@@ -152,18 +152,18 @@ function LoginPage() {
                     )}
                     {errLogin && (
                       <p className="help is-danger">
-                        Account is wrong or not exist
+                        Tài khoản sai hoặc không tồn tại
                       </p>
                     )}
                   </CardBody>
                   <CardFooter className="text-center">
                     <Button block className="btn-round" color="info" size="lg">
-                      Get Started
+                      Đăng nhập
                     </Button>
                     <div className="pull-left">
                       <h6>
                         <Link className="link" to="/register">
-                          Create Account
+                          Đăng ký tài khoản
                         </Link>
                       </h6>
                     </div>

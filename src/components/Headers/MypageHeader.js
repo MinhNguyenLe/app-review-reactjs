@@ -31,13 +31,16 @@ function MypageHeader({ re, cmt }) {
       >
         <div
           className="page-header-image"
-          style={user.coverImg ? {
-            backgroundImage:
-              "url(" + user.coverImg + ")",
-          } : {
-            backgroundImage:
-              "url(" + require("assets/img/bg5.jpg").default + ")",
-          }}
+          style={
+            user.coverImg
+              ? {
+                  backgroundImage: "url(" + user.coverImg + ")",
+                }
+              : {
+                  backgroundImage:
+                    "url(" + require("assets/img/bg5.jpg").default + ")",
+                }
+          }
           // ref={pageHeader}
         ></div>
         <Container>
@@ -50,27 +53,30 @@ function MypageHeader({ re, cmt }) {
             ></img>
           </div>
           <h3 className="title">{user.name}</h3>
-          <p className="category">{user.school || "No information"}</p>
           <div className="content">
             <div className="social-description text-after-loading-re">
-              {
-                re.length ? (<h2>{re.length}</h2>) :  (<i
-                style={{ fontSize: "32px !important" }}
-                id={`loading_1_${user.id}`}
-                className="now-ui-icons loader_refresh spin"
-              ></i>)
-              }
-              <p>Reviews</p>
+              {re.length ? (
+                <h2>{re.length}</h2>
+              ) : (
+                <i
+                  style={{ fontSize: "32px !important" }}
+                  id={`loading_1_${user.id}`}
+                  className="now-ui-icons loader_refresh spin"
+                ></i>
+              )}
+              <p>Số bài đánh giá</p>
             </div>
             <div className="social-description text-after-loading-cmt">
-            {
-                cmt.length ? (<h2>{cmt.length}</h2>) :  (<i
-                style={{ fontSize: "32px !important" }}
-                id={`loading_2_${user.id}`}
-                className="now-ui-icons loader_refresh spin"
-              ></i>)
-              }
-              <p>Comments</p>
+              {cmt.length ? (
+                <h2>{cmt.length}</h2>
+              ) : (
+                <i
+                  style={{ fontSize: "32px !important" }}
+                  id={`loading_2_${user.id}`}
+                  className="now-ui-icons loader_refresh spin"
+                ></i>
+              )}
+              <p>Số lượt bình luận</p>
             </div>
           </div>
         </Container>

@@ -178,7 +178,7 @@ const ListComment = ({ review, success, setSuccess }) => {
                   {item.createdAt}
                 </Moment>
                 <span className="cmt-name">
-                  {(item.idUser && item.idUser.name) || "anonymous"}
+                  {(item.idUser && item.idUser.name) || "Người dùng ẩn danh"}
                 </span>
                 <div
                   className={

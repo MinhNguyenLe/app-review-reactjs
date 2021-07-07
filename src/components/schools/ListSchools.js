@@ -87,7 +87,7 @@ const ListSchool = ({ loading, setLoading, data, setData }) => {
               </rb.Card.Text>
               <rb.Card.Text className="school-name">
                 <span style={{ fontWeight: "500", fontSize: "19px" }}>
-                  Location:{" "}
+                  Địa chỉ:{" "}
                 </span>
                 {item.location}
               </rb.Card.Text>

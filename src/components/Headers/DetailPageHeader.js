@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 // reactstrap components
 import { Button, Container } from "reactstrap";
 
@@ -34,36 +34,15 @@ function DetailPageHeader({ name, school }) {
         ></div>
         <div className="content-center">
           <Container style={{ background: "rgb(3 3 3 / 60%)" }}>
-            <h1 className="title">
-              Bài đánh giá cho<br></br>
-              {`${school.name || "anonymous"}`}
-            </h1>
-            <div className="text-center">
-              <Button
-                className="btn-icon btn-round"
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
+            <Link to={`/schools/${school._id}/reviews`}>
+              <h1
+                className="title"
+                style={{ padding: "20px 0", color: "white" }}
               >
-                <i className="fab fa-facebook-square"></i>
-              </Button>
-              <Button
-                className="btn-icon btn-round"
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-twitter"></i>
-              </Button>
-              <Button
-                className="btn-icon btn-round"
-                color="info"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="fab fa-google-plus"></i>
-              </Button>
-            </div>
+                Bài đánh giá cho<br></br>
+                {`${school.name || "Người dùng ẩn danh"}`}
+              </h1>
+            </Link>
           </Container>
         </div>
       </div>

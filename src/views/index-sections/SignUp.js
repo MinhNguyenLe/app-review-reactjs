@@ -41,7 +41,7 @@ function SignUp() {
               <Form action="" className="form" method="">
                 <CardHeader className="text-center">
                   <CardTitle className="title-up" tag="h3">
-                    Sign Up
+                    Đăng ký
                   </CardTitle>
                   <div className="social-line">
                     <Button
@@ -147,7 +147,7 @@ function SignUp() {
               size="lg"
               tag={Link}
             >
-              View Login Page
+              Chuyển sang đăng nhập
             </Button>
           </div>
         </Container>

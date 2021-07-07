@@ -89,7 +89,7 @@ function Register() {
               >
                 <CardHeader className="text-center">
                   <CardTitle className="title-up" tag="h3">
-                    Sign Up
+                    Đăng ký
                   </CardTitle>
                   <div className="social-line">
                     <Button
@@ -136,7 +136,7 @@ function Register() {
                       name="name"
                       required
                       onChange={handleChangeRegister}
-                      placeholder="Name..."
+                      placeholder="Tên..."
                       type="text"
                       onFocus={() => setFirstFocus(true)}
                       onBlur={() => setFirstFocus(false)}
@@ -161,7 +161,7 @@ function Register() {
                       name="username"
                       required
                       onChange={handleChangeRegister}
-                      placeholder="User Name..."
+                      placeholder="Tên người dùng..."
                       type="text"
                       onFocus={() => setLastFocus(true)}
                       onBlur={() => setLastFocus(false)}
@@ -185,7 +185,7 @@ function Register() {
                       onChange={handleChangeRegister}
                       value={valuesRegister.email || ""}
                       name="email"
-                      placeholder="Email Address..."
+                      placeholder="Địa chỉ email..."
                       type="email"
                       onFocus={() => setEmailFocus(true)}
                       onBlur={() => setEmailFocus(false)}
@@ -209,7 +209,7 @@ function Register() {
                       onChange={handleChangeRegister}
                       value={valuesRegister.password || ""}
                       name="password"
-                      placeholder="Pass Word..."
+                      placeholder="Mật khẩu..."
                       type="password"
                       onFocus={() => setPassFocus(true)}
                       onBlur={() => setPassFocus(false)}
@@ -220,7 +220,7 @@ function Register() {
                   )}
                   {errRegister && (
                     <p className="help is-danger">
-                      Account is wrong or created
+                      Tài khoản sai hoặc đã tồn tại
                     </p>
                   )}
                 </CardBody>
@@ -231,7 +231,7 @@ function Register() {
                     size="lg"
                     style={{ marginBottom: "0" }}
                   >
-                    Get Started
+                    Đăng ký
                   </Button>
                   <div
                     style={{
@@ -257,7 +257,7 @@ function Register() {
               size="lg"
               tag={Link}
             >
-              Login at here
+              Đăng nhập tại đây
             </Button>
           </div>
         </Container>

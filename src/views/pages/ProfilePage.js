@@ -129,20 +129,13 @@ function ProfilePage() {
                 size="lg"
                 onClick={() => deleteUser()}
               >
-                {people.banned ? "Bỏ ban" : "Ban"} tài khoản{" "}
+                {people.banned ? "Bỏ chặn" : "Chặn"} tài khoản{" "}
                 <i
                   id="ban_loading"
                   className="hidden now-ui-icons loader_refresh spin"
                 ></i>
               </button>
             </div>
-            <h3 className="title">About me</h3>
-            <h5 className="description">
-              An artist of considerable range, Ryan — the name taken by
-              Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-              and records all of his own music, giving it a warm, intimate feel
-              with a solid groove structure. An artist of considerable range.
-            </h5>
             {re &&
               re.map((item) => {
                 return (

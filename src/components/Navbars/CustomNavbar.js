@@ -122,22 +122,6 @@ function CustomNavbar() {
                       className="button-dropdown"
                       style={{ marginLeft: "12px" }}
                     >
-                      <DropdownToggle
-                        caret
-                        className="bell"
-                        data-toggle="dropdown"
-                        href="#pablo"
-                        id="navbarDropdown"
-                        tag="a"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <div className="notify false">
-                          <i
-                            style={{ fontSize: "24px" }}
-                            className="fas fa-bell"
-                          ></i>
-                        </div>
-                      </DropdownToggle>
                       <DropdownMenu
                         style={{
                           maxHeight: "600px",
@@ -183,7 +167,7 @@ function CustomNavbar() {
                       target="_blank"
                     >
                       <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
-                      <p>Register</p>
+                      <p>Đăng ký</p>
                     </Button>
                   </NavItem>
                   <div>
@@ -193,7 +177,7 @@ function CustomNavbar() {
                       color="info"
                     >
                       <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
-                      <p>Login</p>
+                      <p>Đăng nhập</p>
                     </Button>
                   </div>
                 </>

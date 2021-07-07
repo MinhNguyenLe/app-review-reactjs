@@ -86,7 +86,9 @@ function DetailReview() {
               setSuccess={setSuccess}
               typePage="detail"
               item={review}
-              name={(review.idUser && review.idUser.name) || "Anonymous"}
+              name={
+                (review.idUser && review.idUser.name) || "Người dùng ẩn danh"
+              }
             ></Review>
           </div>
           <ListComment

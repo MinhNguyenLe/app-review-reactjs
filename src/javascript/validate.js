@@ -1,22 +1,22 @@
 export default function validate(values) {
   let errors = {};
   if (!values.email) {
-    errors.email = "Email address is required";
+    errors.email = "Địa chỉ email là bắt buộc";
   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-    errors.email = "Email address is invalid";
+    errors.email = "Địa chỉ email không tồn tại";
   }
   if (!values.password) {
-    errors.password = "Password is required";
+    errors.password = "Mật khẩu là bắt buộc";
   } else if (values.password.length < 6) {
-    errors.password = "Password must be 6 or more characters";
+    errors.password = "Mật khẩu phải nhiều hơn 6 ký tự";
   }
   if (!values.name) {
-    errors.name = "Name is required";
+    errors.name = "Tên là bắt buộc";
   } else if (values.name.length < 6) {
-    errors.name = "Your name must be 6 or more characters";
+    errors.name = "Tên phải nhiều hơn 6 ký tự";
   }
   if (!values.username) {
-    errors.username = "User is required";
+    errors.username = "Tên người dùng là bắt buộc";
   }
   return errors;
 }

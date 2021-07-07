@@ -510,3 +510,8 @@ code {
   border: 1px solid #dfe1e6;
   width: 200px;
 }
+.title:hover {
+  color: white;
+  text-decoration: none;
+  outline: none;
+}

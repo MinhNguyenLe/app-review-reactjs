@@ -258,7 +258,7 @@ function ReviewPage() {
                     style={{ fontSize: "17px", padding: "12px 40px" }}
                     onClick={saveReport}
                   >
-                    Save{" "}
+                    Lưu{" "}
                     <i
                       id="icon_loading_report"
                       className="hidden now-ui-icons loader_refresh spin"
@@ -320,7 +320,7 @@ function ReviewPage() {
                       style={{ fontSize: "17px", padding: "12px 40px" }}
                       onClick={saveEdit}
                     >
-                      Save{" "}
+                      Lưu{" "}
                       <i
                         id="icon_loading_2"
                         className="hidden now-ui-icons loader_refresh spin"
@@ -340,7 +340,7 @@ function ReviewPage() {
                   }}
                   className="d-flex flex-row align-items-center justify-content-between"
                 >
-                  <span className="big-title">Write new review</span>
+                  <span className="big-title">Viết đánh giá </span>
                   <i
                     onClick={exitWriteReview}
                     className="fas fa-times"
@@ -400,7 +400,7 @@ function ReviewPage() {
                       onClick={saveAddReview}
                       style={{ fontSize: "16px", padding: "12px 40px" }}
                     >
-                      Save{" "}
+                      Lưu{" "}
                       <i
                         id="icon_loading_1"
                         className="hidden now-ui-icons loader_refresh spin"
@@ -514,7 +514,7 @@ function ReviewPage() {
                     success={success}
                     setSuccess={setSuccess}
                     item={item}
-                    name={item.idUser ? item.idUser.name : "Anonymous"}
+                    name={item.idUser ? item.idUser.name : "Người dùng ẩn danh"}
                     editReview={editReview}
                     deleteReview={deleteReview}
                     writeReport={writeReport}
