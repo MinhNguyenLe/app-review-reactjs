@@ -53,15 +53,25 @@ const schoolController = {
     }
   },
 
-  getById(req, res) {
-    const id = req.params.id;
-    School.findById(id)
-      .then((school) => {
-        return res.json(school);
-      })
-      .catch((err) => {
-        return res.status(500).json({ msg: err.message });
-      });
+  getById: async (req, res) => {
+    try {
+      const id = req.params.id;
+      let school = await School.findOne({ _id: id });
+      let reviews = await Review.find({ idSchool: school._id });
+      let score = 0;
+      for (let j = 0; j < reviews.length; j++) {
+        score += reviews[j].ratePoint;
+      }
+      score = score / reviews.length;
+      school = {
+        ...school._doc,
+        review: reviews.length,
+        score: score,
+      };
+      return res.json(school);
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
   },
   create: async (req, res) => {
     try {

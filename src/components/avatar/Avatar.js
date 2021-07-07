@@ -1,21 +1,64 @@
 import React from "react";
 import imgDefault from "assets/img/default-avatar.png";
-import { Link } from "react-router-dom";
-
+import axios from "axios";
+import { useHistory, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { apiLocal } from "javascript/dataGlobal.js";
+import * as action from "redux/actions.js";
+import {
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
+} from "reactstrap";
 const Avatar = ({ linkImg, type }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const logOut = () => {
+    Promise.all([axios.get(`${apiLocal}/api/users/logout`)])
+      .then(() => {
+        history.push("/login");
+        dispatch(action.setClear());
+        localStorage.removeItem();
+      })
+      .catch(() => {});
+  };
   return (
-    <Link to="/mypage" style={{ cursor: "pointer" }}>
-      <img
-        style={
-          type === "review"
-            ? { width: "44px", height: "44px" }
-            : { width: "44px", height: "44px" }
-        }
-        alt="..."
-        className="obj-fit rounded-circle img-fluid"
-        src={linkImg ? linkImg : imgDefault}
-      ></img>
-    </Link>
+    <div style={{ display: "flex" }}>
+      <Link to="/mypage" style={{ cursor: "pointer" }}>
+        <img
+          style={
+            type === "review"
+              ? { width: "44px", height: "44px" }
+              : { width: "44px", height: "44px" }
+          }
+          alt="..."
+          className="obj-fit rounded-circle img-fluid"
+          src={linkImg ? linkImg : imgDefault}
+        ></img>
+      </Link>
+      <UncontrolledDropdown
+        className="button-dropdown"
+        style={{ marginLeft: "12px", display: "flex", alignItems: "center" }}
+      >
+        <DropdownToggle
+          caret
+          data-toggle="dropdown"
+          href="#pablo"
+          id="navbarDropdown"
+          tag="a"
+          onClick={(e) => e.preventDefault()}
+        >
+          <span className="button-bar"></span>
+          <span className="button-bar"></span>
+          <span className="button-bar"></span>
+        </DropdownToggle>
+        <DropdownMenu aria-labelledby="navbarDropdown">
+          <DropdownItem onClick={logOut}>Đăng xuất</DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+    </div>
   );
 };
 

@@ -51,17 +51,6 @@ function ReviewNav({ writeReview }) {
     };
   });
 
-  const logOut = () => {
-    Promise.all([axios.get(`${apiLocal}/api/users/logout`)])
-      .then(() => {
-        dispatch(action.setClear());
-        localStorage.removeItem();
-        history.push("/login");
-        window.location.reload();
-      })
-      .catch(() => {});
-  };
-
   const user = useSelector((state) => state.user);
   return (
     <>
@@ -77,13 +66,9 @@ function ReviewNav({ writeReview }) {
       <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info">
         <Container>
           <div className="navbar-translate">
-            <NavbarBrand
-              style={{ fontSize: "18px" }}
-              target="_blank"
-              id="navbar-brand"
-            >
-              EduReview
-            </NavbarBrand>
+            <Link to="/" style={{ fontSize: "18px" }} id="navbar-brand">
+              EDUREVIEW
+            </Link>
             <UncontrolledTooltip target="#navbar-brand">
               Let 's start now.
             </UncontrolledTooltip>
@@ -133,57 +118,6 @@ function ReviewNav({ writeReview }) {
                     }}
                   >
                     <Avatar linkImg={user.avatar} type="profile"></Avatar>
-                    <UncontrolledDropdown
-                      className="button-dropdown"
-                      style={{ marginLeft: "12px" }}
-                    >
-                      <DropdownToggle
-                        caret
-                        data-toggle="dropdown"
-                        href="#pablo"
-                        id="navbarDropdown"
-                        tag="a"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <span className="button-bar"></span>
-                        <span className="button-bar"></span>
-                        <span className="button-bar"></span>
-                      </DropdownToggle>
-                      <DropdownMenu aria-labelledby="navbarDropdown">
-                        <DropdownItem header tag="a">
-                          Dropdown header
-                        </DropdownItem>
-                        <DropdownItem href="#pablo" onClick={(e) => logOut()}>
-                          Logout
-                        </DropdownItem>
-                        <DropdownItem
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Another action
-                        </DropdownItem>
-                        <DropdownItem
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Something else here
-                        </DropdownItem>
-                        <DropdownItem divider></DropdownItem>
-                        <DropdownItem
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Separated link
-                        </DropdownItem>
-                        <DropdownItem divider></DropdownItem>
-                        <DropdownItem
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          One more separated link
-                        </DropdownItem>
-                      </DropdownMenu>
-                    </UncontrolledDropdown>
                   </NavItem>
                 </div>
               ) : (
@@ -204,7 +138,6 @@ function ReviewNav({ writeReview }) {
                       className="nav-link btn-neutral"
                       color="info"
                       id="upgrade-to-pro"
-                      target="_blank"
                     >
                       <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
                       <p>Đăng ký</p>

@@ -76,13 +76,9 @@ function CustomNavbar() {
       <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info">
         <Container>
           <div className="navbar-translate">
-            <NavbarBrand
-              style={{ fontSize: "18px" }}
-              target="_blank"
-              id="navbar-brand"
-            >
-              EduReview
-            </NavbarBrand>
+            <Link to="/" style={{ fontSize: "18px" }} id="navbar-brand">
+              EDUREVIEW
+            </Link>
             <UncontrolledTooltip target="#navbar-brand">
               Let 's start now.
             </UncontrolledTooltip>
@@ -138,7 +134,7 @@ function CustomNavbar() {
                               color: "#a7aaaf",
                             }}
                           >
-                            Logout
+                            Đăng xuất
                           </p>
                         </DropdownItem>
                         <DropdownItem divider></DropdownItem>
@@ -164,7 +160,6 @@ function CustomNavbar() {
                       className="nav-link btn-neutral"
                       color="info"
                       id="upgrade-to-pro"
-                      target="_blank"
                     >
                       <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
                       <p>Đăng ký</p>

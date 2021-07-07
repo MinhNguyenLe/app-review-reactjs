@@ -189,7 +189,7 @@ function MyPage() {
         className="editor-mypage"
       >
         <div className="d-flex flex-row align-items-center justify-content-between">
-          <span className="big-title">Editor</span>
+          <span className="big-title">Chỉnh sửa</span>
           <i
             onClick={exitEdit}
             className="fas fa-times"

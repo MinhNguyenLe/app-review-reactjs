@@ -234,7 +234,7 @@ function ReviewPage() {
                   }}
                   className="d-flex flex-row align-items-center justify-content-between"
                 >
-                  <span className="big-title">Report</span>
+                  <span className="big-title">Báo cáo</span>
                   <i
                     onClick={exitReport}
                     className="fas fa-times"
@@ -277,7 +277,7 @@ function ReviewPage() {
                   }}
                   className="d-flex flex-row align-items-center justify-content-between"
                 >
-                  <span className="big-title">Editor</span>
+                  <span className="big-title">Chỉnh sửa</span>
                   <i
                     onClick={exitEdit}
                     className="fas fa-times"
@@ -429,7 +429,7 @@ function ReviewPage() {
                       variant="success"
                       className="d-flex justify-content-center align-items-center school-badge"
                     >
-                      {roundingScore(score) || 0}
+                      {roundingScore(school.score) || 0}
                     </rb.Badge>
                     <div>
                       <rb.Card.Text>
