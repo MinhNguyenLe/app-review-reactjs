@@ -41,7 +41,7 @@ function IndexHeader() {
               src={require("assets/img/now-logo.png").default}
             ></img>
             <h1 className="h1-seo">App Review School.</h1>
-            <h3>Create by team 4.</h3>
+            <h3>Create by team 9.</h3>
           </div>
         </Container>
       </div>
