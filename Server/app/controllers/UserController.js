@@ -92,19 +92,12 @@ const userController = {
         user = await User.findOne({ email });
       }
 
-<<<<<<< HEAD
-      if (user)
-        return res.status(400).json({ msg: "This email or username is exist" });
-      if (password.length < 6)
-        return res.status(400).json({ msg: "Password so short" });
-=======
             if (user)
                 return res
                     .status(200)
                     .json({ msg: 'This email or username is exist' });
             if (password.length < 6)
                 return res.status(200).json({ msg: 'Password must >= 6 characters' });
->>>>>>> dff5df349fef26512b5d2e5bd45cb9b8d116e77f
 
       const passwordHash = await bcrypt.hash(password, 10);
 
