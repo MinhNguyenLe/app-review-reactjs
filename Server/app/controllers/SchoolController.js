@@ -102,7 +102,7 @@ const schoolController = {
         website: website,
         typeOfSchool: typeOfSchool,
         level: level,
-        typeOfMajor: typeOfMajor,
+        typeOfMajor: JSON.parse(typeOfMajor),
         description: description,
         logo: logoPath,
         images: galleryPaths,
@@ -223,6 +223,60 @@ const schoolController = {
         });
       }
       return res.json({ schools });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+  delete: async (req, res) => {
+    try {
+      let id = req.params.id;
+      const school = await School.findById(id);
+      console.log(school);
+      if (!school) {
+        return res.status(200).json({ msg: "Can't find school" });
+      }
+      await school.remove(); //School.deleteOne(school);
+      return res.json({ msg: 'Deleted school' });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+  update: async (req, res) => {
+    try {
+      const {
+        code,
+        name,
+        location,
+        website,
+        typeOfSchool,
+        level,
+        typeOfMajor,
+        description,
+      } = req.body; // FrontEnd submit object to BackEnd
+      const id = req.params.id
+      console.log(id)
+      const school = await School.findById(id);
+      
+      if (school) {
+        const logoPath = req.files["logo"][0].path;
+        const galleryPaths = req.files["gallery"].map((item) => {
+          return item.path;
+        });
+        school.code = code
+        school.name = name
+        school.location = location
+        school.website = website
+        school.typeOfSchool = typeOfSchool
+        school.level = level
+        school.typeOfMajor = JSON.parse(typeOfMajor)
+        school.description = description
+        school.logo = logoPath
+        school.images = galleryPaths
+        await school.save()
+        return res.json({ code: 1, msg: "Edit school successful." });
+      } else {
+        return res.json({ code: 0, msg: "Can't find school" });
+      }
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
