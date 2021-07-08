@@ -56,4 +56,6 @@ router.get('/', userController.getAll);
 
 router.delete('/:id', userController.delete);
 
+router.post('/:id/updateuser', userController.updateUser);
+
 module.exports = router;

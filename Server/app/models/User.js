@@ -31,12 +31,15 @@ const User = new Schema(
         },
         avatar: {
             type: String,
+            default: "https://2.pik.vn/20215d847251-c38f-4480-afbb-514c4680b72e.jpg"
         },
         coverImg: {
             type: String,
+            default: "https://2.pik.vn/2021f1d56074-ea90-4a37-b2dd-80f89e90bb3c.jpg"
         },
         banned: {
             type: Boolean,
+            default: false
         },
         notifications: [
             {

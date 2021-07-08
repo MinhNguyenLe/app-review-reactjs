@@ -72,6 +72,7 @@ const PostCtrl = {
             const post = await Post.findById(id);
             if(post){
                 post.isDeleted = true;
+                post.reported.state = false;
                 await post.save();
                 return res.status(200).json({code: 1, msg: "Deleted post"});
             } 

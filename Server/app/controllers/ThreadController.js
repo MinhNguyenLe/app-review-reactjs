@@ -13,11 +13,11 @@ const ThreadCtrl = {
             }
             const num_doc = await Thread.countDocuments({});
             const cur_page = pageOptions.page;
-            const threads = await Thread.find({isDeleted: false}).populate('byUser', 'name avatar username permission')
+            const threads = await Thread.find({isDeleted: false}).populate('byUser', 'name avatar username permission banned')
                 .populate('category', 'category color')
                 .skip((pageOptions.page - 1) * pageOptions.limit)
                 .limit(pageOptions.limit)
-                .sort('-updatedAt').exec();
+                .sort('-lastedPostAt').exec();
             if (threads) {
                 return res.status(200).json({ numDoc: num_doc, curPage: cur_page, threads });
             }
@@ -99,8 +99,9 @@ const ThreadCtrl = {
             }
             const num_doc = await Post.countDocuments({ inThread: id });
             const cur_page = pageOptions.page;
-            const posts = await Post.find({ inThread: id, isDeleted: false })
-                .populate('byUser', 'name avatar username permission')
+            // ,isDeleted: false 
+            const posts = await Post.find({ inThread: id })
+                .populate('byUser', 'name avatar username permission banned')
                 .skip((pageOptions.page - 1) * pageOptions.limit)
                 .limit(pageOptions.limit)
                 .exec();
@@ -132,8 +133,22 @@ const ThreadCtrl = {
     getAllThreadByIdCategory: async (req, res) => {
         try {
             const id = req.params.id;
-            const threads = await Thread.find({ category: { _id: id } }).populate('byUser', 'name avatar username permission')
-                .populate('category', 'category color').exec();;
+
+            const pageOptions = {
+                page: parseInt(req.query.page, 10) || 1,
+                limit: parseInt(req.query.limit, 10) || 10
+            }
+            const num_doc = await Thread.countDocuments({category: { _id: id }});
+            const cur_page = pageOptions.page;
+            const threads = await Thread.find({isDeleted: false,  category: { _id: id } })
+                .populate('byUser', 'name avatar username permission')
+                .populate('category', 'category color')
+                .skip((pageOptions.page - 1) * pageOptions.limit)
+                .limit(pageOptions.limit)
+                .sort('-lastedPostAt').exec();
+            if (threads) {
+                return res.status(200).json({ numDoc: num_doc, curPage: cur_page, threads });
+            }
              return res.status(200).json(threads);
 
         } catch (error) {
@@ -156,7 +171,6 @@ const ThreadCtrl = {
     unDelete: async (req, res) => {
         try {
             let id = req.params.id;
-            console.log(id)
             const thread = await Thread.findById(id);
             if (thread) {
                 thread.isDeleted = false;
@@ -164,6 +178,19 @@ const ThreadCtrl = {
                 return res.status(200).json({ msg: "Undeleted thread" });
             }
             return res.status(404).json({ msg: "Can't find thread" });
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
+        }
+    },
+    getAllSearch: async (req, res) => {
+        try {
+            const threads = await Thread.find({isDeleted: false})
+            if (threads) {
+                return res.status(200).json(threads);
+            } else {
+                return res.json(threads);
+            }
+            //return res.json(threads);
         } catch (err) {
             return res.status(500).json({ msg: err.message });
         }

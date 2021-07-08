@@ -92,10 +92,19 @@ const userController = {
         user = await User.findOne({ email });
       }
 
+<<<<<<< HEAD
       if (user)
         return res.status(400).json({ msg: "This email or username is exist" });
       if (password.length < 6)
         return res.status(400).json({ msg: "Password so short" });
+=======
+            if (user)
+                return res
+                    .status(200)
+                    .json({ msg: 'This email or username is exist' });
+            if (password.length < 6)
+                return res.status(200).json({ msg: 'Password must >= 6 characters' });
+>>>>>>> dff5df349fef26512b5d2e5bd45cb9b8d116e77f
 
       const passwordHash = await bcrypt.hash(password, 10);
 
@@ -286,6 +295,7 @@ const userController = {
           notifications[i].seenNotification = true;
           user.notifications = notifications;
         }
+<<<<<<< HEAD
       }
       await user.save();
       return res.json({ user });
@@ -299,6 +309,35 @@ const createAccessToken = (user) => {
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: "5h",
   }); // access token expires in 5 minutes
+=======
+    },
+    updateUser: async (req, res) =>{
+        try {
+            const { name, email, password } = req.body;
+            const id = req.params.id;
+            let user = await User.findById(id);
+            if(user){
+                user.name = name;
+                user.email = email;
+                if (password.length >= 6){
+                    user.password = await bcrypt.hash(password, 10);
+                }    
+                await user.save()
+            } else {
+                return res.json({code: 0, msg: "Can't not find this user",});
+            }
+            return res.json({code: 1, msg: "Updated user", data: user });
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
+        }
+    }
+};
+
+const createAccessToken = (user) => {
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: '10h',
+    }); // access token expires in 5 minutes
+>>>>>>> dff5df349fef26512b5d2e5bd45cb9b8d116e77f
 };
 const createRefreshToken = (user) => {
   return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {

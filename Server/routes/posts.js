@@ -15,6 +15,7 @@ router.use(authMiddleWare);
 
 router.post('/', postController.create);
 router.post('/:id/report', postController.report);
+router.post('/:id/decline', postController.decline);
 router.delete('/:id', postController.delete);
 
 // router.post('/auth', threadController.createAuth);
