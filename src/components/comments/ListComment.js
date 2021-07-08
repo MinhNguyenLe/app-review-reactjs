@@ -24,10 +24,6 @@ const ListComment = ({ review, success, setSuccess }) => {
   const [showEditCmt, setShowEditCmt] = useState(false);
 
   useEffect(() => {
-    const refresh = setInterval(() => {
-      setAddCmt(addCmt + 1);
-      console.log("in");
-    }, 5000);
     const axiosData = () => {
       Promise.all([axios.get(`${apiLocal}/api/reviews/${params.id}/comments`)])
         .then(([cmt]) => {
@@ -38,10 +34,6 @@ const ListComment = ({ review, success, setSuccess }) => {
     };
     axiosData();
     refCmt.current.value = "";
-    return () => {
-      console.log("out");
-      clearInterval(refresh);
-    };
   }, [addCmt]);
 
   const submitCmt = async (e) => {
@@ -166,7 +158,7 @@ const ListComment = ({ review, success, setSuccess }) => {
           </rb.Form>
         </div>
         <div id="detail-list-cmt" className="ske-cmt">
-          {cmt.map((item, index) => (
+          {[...cmt].reverse().map((item, index) => (
             <div key={index} className="d-flex flex-row ske-cmt-c">
               <Avatar linkImg={item.idUser && item.idUser.avatar}></Avatar>
               <div className="img-tab-review">
@@ -238,7 +230,7 @@ const ListComment = ({ review, success, setSuccess }) => {
           ))}
         </div>
         <div className="hidden ske-cmt" id="detail-list-report">
-          {review.report.message.map((item, index) => (
+          {[...review.report.message].reverse().map((item, index) => (
             <div className="d-flex flex-row ske-cmt-c" key={index}>
               {item}
             </div>

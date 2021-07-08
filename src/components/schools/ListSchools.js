@@ -39,7 +39,6 @@ const ListSchool = ({ loading, setLoading, data, setData }) => {
     func.scrollTop();
   };
   const roundingScore = (score) => {
-    dispatch(action.setScore(score));
     return Math.round(score * 10) / 10;
   };
   return loading ? (
@@ -54,7 +53,7 @@ const ListSchool = ({ loading, setLoading, data, setData }) => {
       className="d-flex flex-column align-items-center"
       style={{ marginTop: "80px" }}
     >
-      {data.map((item, index) => (
+      {[...data].reverse().map((item, index) => (
         <rb.Card
           className="hover-shadow"
           style={{ width: "70%", margin: "16px 0 16px 0", padding: "20px" }}
@@ -62,6 +61,7 @@ const ListSchool = ({ loading, setLoading, data, setData }) => {
           onClick={() => goReview(item._id)}
         >
           <Link
+            target="_blank"
             to={`/schools/${item._id}/reviews`}
             className="d-flex flex-row"
             style={{ textDecoration: "none" }}

@@ -8,6 +8,7 @@ import * as func from "javascript/funcGlobal.js";
 import Loading from "components/loading/Loading.js";
 import { apiLocal } from "javascript/dataGlobal.js";
 import Avatar from "components/avatar/Avatar";
+import Logout from "components/avatar/Logout";
 
 import {
   Button,
@@ -110,8 +111,9 @@ function CustomNavbar() {
               </button>
               {user.id ? (
                 <>
-                  <NavItem>
+                  <NavItem style={{ display: "flex" }}>
                     <Avatar linkImg={user.avatar} type="profile"></Avatar>
+                    <Logout></Logout>
                   </NavItem>
                   <NavItem>
                     <UncontrolledDropdown
@@ -136,17 +138,6 @@ function CustomNavbar() {
                           >
                             Đăng xuất
                           </p>
-                        </DropdownItem>
-                        <DropdownItem divider></DropdownItem>
-                        <DropdownItem onClick={(e) => e.preventDefault()}>
-                          <div>
-                            <p>hihi</p>
-                            <span>aaaa</span>
-                          </div>
-                        </DropdownItem>
-                        <DropdownItem divider></DropdownItem>
-                        <DropdownItem onClick={(e) => e.preventDefault()}>
-                          One more separated link
                         </DropdownItem>
                       </DropdownMenu>
                     </UncontrolledDropdown>

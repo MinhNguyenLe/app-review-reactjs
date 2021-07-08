@@ -8,6 +8,7 @@ import * as func from "javascript/funcGlobal.js";
 import Loading from "components/loading/Loading.js";
 import { apiLocal } from "javascript/dataGlobal.js";
 import Avatar from "components/avatar/Avatar";
+import Logout from "components/avatar/Logout";
 
 import {
   Button,
@@ -118,6 +119,7 @@ function ReviewNav({ writeReview }) {
                     }}
                   >
                     <Avatar linkImg={user.avatar} type="profile"></Avatar>
+                    <Logout></Logout>
                   </NavItem>
                 </div>
               ) : (

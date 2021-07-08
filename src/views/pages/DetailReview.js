@@ -45,10 +45,6 @@ function DetailReview() {
   const history = useHistory();
 
   useEffect(() => {
-    const refresh = setInterval(() => {
-      setSuccess(success + 1);
-      console.log("in");
-    }, 5000);
     const axiosData = () => {
       Promise.all([axios.get(`${apiLocal}/api/reviews/${params.id}`)])
         .then(([review]) => {
@@ -56,14 +52,18 @@ function DetailReview() {
           setLoading(false);
         })
         .catch();
-      // .catch(() => history.push("/error"));
     };
     axiosData();
-    return () => {
-      console.log("out");
-      clearInterval(refresh);
-    };
   }, [success]);
+  const deleteReview = (id) => {
+    $(`#icon_loading_${id}`).removeClass("hidden");
+    Promise.all([axios.delete(`${apiLocal}/api/reviews/${id}`)])
+      .then(() => {
+        setSuccess(success + 1);
+        $(`#icon_loading_${id}`).addClass("hidden");
+      })
+      .catch(() => {});
+  };
   return loading ? (
     <div
       className="d-flex align-items-center justify-content-center"
@@ -82,6 +82,7 @@ function DetailReview() {
         <div className="main">
           <div style={{ display: "flex", flexDirection: "row" }}>
             <Review
+              deleteReview={deleteReview}
               success={success}
               setSuccess={setSuccess}
               typePage="detail"

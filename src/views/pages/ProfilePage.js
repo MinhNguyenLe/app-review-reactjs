@@ -137,7 +137,7 @@ function ProfilePage() {
               </button>
             </div>
             {re &&
-              re.map((item) => {
+              [...re].reverse().map((item) => {
                 return (
                   <Review
                     success={success}

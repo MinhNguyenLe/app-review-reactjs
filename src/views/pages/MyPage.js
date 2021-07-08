@@ -269,7 +269,7 @@ function MyPage() {
               ></UpLoadImg>
             </div>
             {re &&
-              re.map((item) => {
+              [...re].reverse().map((item) => {
                 return (
                   <Review
                     key={`key_user_${item._id}`}

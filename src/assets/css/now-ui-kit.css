@@ -3609,6 +3609,9 @@ body {
   border-radius: 1px;
   background: #ffffff;
 }
+.button-bar-special {
+  background: black !important;
+}
 .button-bar + .button-bar {
   margin-top: 7px;
 }

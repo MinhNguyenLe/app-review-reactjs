@@ -3254,6 +3254,9 @@ body {
   border-radius: 1px;
   background: #fff;
 }
+.button-bat-special {
+  background: black !important;
+}
 .button-bar + .button-bar {
   margin-top: 7px;
 }

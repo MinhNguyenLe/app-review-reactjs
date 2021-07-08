@@ -420,7 +420,7 @@ function ReviewPage() {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    padding: "80px 0",
+                    padding: "80px 0 0 0",
                     width: "70%",
                   }}
                 >
@@ -465,50 +465,15 @@ function ReviewPage() {
                   <div style={{ display: "flex", flexDirection: "row" }}>
                     <p
                       dangerouslySetInnerHTML={{
-                        __html: school.description || "",
+                        __html:
+                          school.description ||
+                          "Chi tiết : Không có thông tin ",
                       }}
                     ></p>
                   </div>
                 </div>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <button
-                  style={{
-                    margin: "0 20px",
-                    fontSize: "16px",
-                    padding: "12px 36px",
-                  }}
-                  className="btn btn-warning"
-                >
-                  Gần đây
-                </button>
-                <button
-                  style={{
-                    margin: "0 20px",
-                    fontSize: "16px",
-                    padding: "12px 36px",
-                  }}
-                  className="btn btn-warning"
-                >
-                  Vote cao
-                </button>
-                <button
-                  style={{
-                    margin: "0 20px",
-                    fontSize: "16px",
-                    padding: "12px 36px",
-                  }}
-                  className="btn btn-warning"
-                >
-                  Vote thấp
-                </button>
-              </div>
-              {listReview.map((item, index) => (
+              {[...listReview].reverse().map((item, index) => (
                 <div key={item._id}>
                   <Review
                     success={success}
