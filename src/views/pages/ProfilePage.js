@@ -122,8 +122,8 @@ function ProfilePage() {
                       people.permission === 0 &&
                       people.banned
                     ? "btn btn-info"
-                    : "hidden"
-                }`}
+                    : "btn btn-dark prevent-event"
+                } ${!user.permission ? "hidden" : ""}`}
                 style={{ margin: 0, height: "100%", fontSize: " 16px" }}
                 color="info"
                 size="lg"

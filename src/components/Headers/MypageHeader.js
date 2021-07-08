@@ -52,6 +52,9 @@ function MypageHeader({ re, cmt }) {
               }
             ></img>
           </div>
+          <p className={`${user.banned ? "" : "hidden"}`}>
+            Tài khoản đã bị chặn
+          </p>
           <h3 className="title">{user.name}</h3>
           <div className="content">
             <div className="social-description text-after-loading-re">
