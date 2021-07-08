@@ -45,17 +45,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
   useEffect(() => {
-    const refresh = setInterval(() => {
-      if (user.id) {
-        Promise.all([axios.get(`${apiLocal}/api/users/${user.id}`)])
-          .then(([users]) => {
-            dispatch(action.setUser(users));
-          })
-          .catch();
-      }
-    }, 5000);
     Promise.all([
       axios.get(`${apiLocal}/api/users`),
       axios.get(`${apiLocal}/api/reviews`),
@@ -73,7 +63,6 @@ const App = () => {
       .catch();
     return () => {
       console.log("out");
-      clearInterval(refresh);
     };
   }, []);
   return (

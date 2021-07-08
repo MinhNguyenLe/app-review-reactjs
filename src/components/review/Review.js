@@ -2,24 +2,16 @@ import React, { useState, useEffect } from "react";
 import Moment from "react-moment";
 import Avatar from "components/avatar/Avatar.js";
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
 import { apiLocal } from "javascript/dataGlobal.js";
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  NavItem,
-  NavLink,
-  Nav,
-  TabContent,
-  TabPane,
-  Container,
-  Row,
-  Col,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
 } from "reactstrap";
-
 // core components
 
 function Review({
@@ -33,6 +25,7 @@ function Review({
   writeReport,
 }) {
   const params = useParams();
+  const history = useHistory();
   const user = useSelector((state) => state.user);
 
   const upVote = (id) => {
@@ -241,96 +234,133 @@ function Review({
               </div>
             </div>
           </Link>
-          <div className="d-flex " style={{ justifyContent: "flex-end" }}>
-            <div
+          <div
+            className="d-flex "
+            style={{ justifyContent: "flex-end", paddingLeft: "200px" }}
+          >
+            <UncontrolledDropdown
+              className="button-dropdown"
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
               }}
             >
+              <DropdownToggle
+                caret
+                data-toggle="dropdown"
+                href="#pablo"
+                id="navbarDropdown"
+                tag="a"
+                onClick={(e) => e.preventDefault()}
+              >
+                <span className="button-bar button-bar-special"></span>
+                <span className="button-bar button-bar-special"></span>
+                <span className="button-bar button-bar-special"></span>
+              </DropdownToggle>
+              <DropdownMenu aria-labelledby="navbarDropdown">
+                <DropdownItem
+                  className={`${
+                    (user && item.idUser && user.id === item.idUser._id) ||
+                    (user && user.banned) ||
+                    typePage === "profile" ||
+                    typePage === "detail" ||
+                    typePage === "mypage"
+                      ? "hidden"
+                      : ""
+                  }`}
+                  onClick={() => writeReport(item._id)}
+                >
+                  <i
+                    className="fas fa-exclamation-triangle"
+                    style={{
+                      color: "#898b8d",
+                      cursor: "pointer",
+                      fontSize: "18px",
+                    }}
+                  ></i>
+                  <p style={{ margin: "0px 0 0 4px" }}>Báo cáo bài viết</p>
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() => history.replace(`/reviews/${item._id}/detail`)}
+                >
+                  <i
+                    style={{ fontSize: "18px", color: "#898b8d" }}
+                    className="now-ui-icons ui-1_zoom-bold"
+                  ></i>
+                  <p
+                    style={{
+                      margin: "0px 0 0 4px",
+                    }}
+                  >
+                    Xem chi tiết
+                  </p>
+                </DropdownItem>
+                <DropdownItem
+                  className={
+                    (user && user.permission) ||
+                    (typePage !== "detail" &&
+                      typePage !== "mypage" &&
+                      typePage !== "profile" &&
+                      user &&
+                      item.idUser &&
+                      user.id === item.idUser._id)
+                      ? ""
+                      : "hidden"
+                  }
+                  onClick={() =>
+                    editReview(
+                      item._id,
+                      item.positive,
+                      item.negative,
+                      item.advice
+                    )
+                  }
+                >
+                  <i
+                    className="now-ui-icons files_single-copy-04"
+                    style={{ fontSize: "18px" }}
+                  ></i>
+                  <p
+                    style={{
+                      margin: "0px 0 0 4px",
+                    }}
+                  >
+                    Chỉnh sửa
+                  </p>
+                </DropdownItem>
+                <DropdownItem
+                  className={
+                    (user && user.permission) ||
+                    (user &&
+                      item.idUser &&
+                      user.id === item.idUser._id &&
+                      typePage !== "mypage" &&
+                      typePage !== "profile")
+                      ? ""
+                      : "hidden"
+                  }
+                  onClick={() => {
+                    deleteReview(item._id);
+                    if (typePage === "detail") history.replace(`/schools`);
+                    console.log(history.state);
+                  }}
+                >
+                  <i
+                    style={{ fontSize: "18px" }}
+                    className="now-ui-icons design_scissors"
+                  ></i>
+                  <p
+                    style={{
+                      margin: "0px 0 0 4px",
+                    }}
+                  >
+                    Xóa bài viết
+                  </p>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+            <div style={{ display: "flex", alignItems: "center" }}>
               <i
-                onClick={() => writeReport(item._id)}
-                style={{
-                  color: "#029425",
-                  cursor: "pointer",
-                  fontSize: "18px",
-                }}
-                className={`fas fa-exclamation-triangle ${
-                  user && item.idUser && user.id === item.idUser._id
-                    ? "prevent-event"
-                    : ""
-                }`}
-              ></i>
-              <div
-                style={{
-                  backgroundColor: "#dadada",
-                  width: "1px",
-                  height: "50%",
-                  margin: "0 12px",
-                }}
-              ></div>
-              <Link to={`/reviews/${item._id}/detail`}>
-                <i
-                  style={{ fontSize: "18px", color: "#029425" }}
-                  className="now-ui-icons ui-1_zoom-bold"
-                ></i>
-              </Link>
-            </div>
-            <div
-              className={
-                (user && user.permission) ||
-                (typePage !== "detail" &&
-                  user &&
-                  item.idUser &&
-                  user.id === item.idUser._id)
-                  ? ""
-                  : "hidden"
-              }
-              onClick={() =>
-                editReview(item._id, item.positive, item.negative, item.advice)
-              }
-              style={{
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginLeft: "8px",
-              }}
-            >
-              <i
-                className="now-ui-icons files_single-copy-04"
-                style={{ fontSize: "18px" }}
-              ></i>
-            </div>
-            <div
-              className={
-                (user && user.permission) ||
-                (typePage !== "detail" &&
-                  user &&
-                  item.idUser &&
-                  user.id === item.idUser._id)
-                  ? ""
-                  : "hidden"
-              }
-              onClick={() => deleteReview(item._id)}
-              style={{
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginLeft: "8px",
-              }}
-            >
-              <i
-                style={{ fontSize: "18px" }}
-                className="now-ui-icons design_scissors"
-              ></i>
-            </div>
-            <div>
-              {" "}
-              <i
-                style={{ marginLeft: "8px" }}
                 id={`icon_loading_${item._id}`}
                 className="hidden now-ui-icons loader_refresh spin"
               ></i>
