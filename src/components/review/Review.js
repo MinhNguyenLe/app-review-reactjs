@@ -149,6 +149,7 @@ function Review({
           }}
         >
           <Link
+            target="_blank"
             to={
               typePage === "mypage"
                 ? "/mypage"

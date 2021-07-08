@@ -34,7 +34,7 @@ function DetailPageHeader({ name, school }) {
         ></div>
         <div className="content-center">
           <Container style={{ background: "rgb(3 3 3 / 60%)" }}>
-            <Link to={`/schools/${school._id}/reviews`}>
+            <Link target="_blank" to={`/schools/${school._id}/reviews`}>
               <h1
                 className="title"
                 style={{ padding: "20px 0", color: "white" }}

@@ -61,6 +61,7 @@ const ListSchool = ({ loading, setLoading, data, setData }) => {
           onClick={() => goReview(item._id)}
         >
           <Link
+            target="_blank"
             to={`/schools/${item._id}/reviews`}
             className="d-flex flex-row"
             style={{ textDecoration: "none" }}

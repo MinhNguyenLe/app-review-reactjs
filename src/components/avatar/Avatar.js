@@ -26,7 +26,7 @@ const Avatar = ({ linkImg, type }) => {
   };
   return (
     <div style={{ display: "flex" }}>
-      <Link to="/mypage" style={{ cursor: "pointer" }}>
+      <Link to="/mypage" target="_blank" style={{ cursor: "pointer" }}>
         <img
           style={
             type === "review"
