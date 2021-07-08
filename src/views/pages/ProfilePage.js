@@ -144,7 +144,7 @@ function ProfilePage() {
                     setSuccess={setSuccess}
                     item={item}
                     typePage="profile"
-                    name={item.idUser.name}
+                    name={(item.idUser && item.idUser.name) || "an danh"}
                   ></Review>
                 );
               })}

@@ -170,6 +170,10 @@ function ReviewPage() {
     setSuccess(success + 1);
     setShowWriteReview(false);
     func.enableScrolling();
+    refNewPositive.current.value = "";
+    refNewNegative.current.value = "";
+    refNewAdvice.current.value = "";
+    refPointForSchool.current.value = "";
     $(`#icon_loading_1`).addClass("hidden");
   };
   const roundingScore = (score) => {

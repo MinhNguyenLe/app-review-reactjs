@@ -61,7 +61,12 @@ function Review({
   return (
     <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ marginTop: "100px" }}>
+        <div
+          style={{ marginTop: "100px" }}
+          className={`${
+            typePage === "mypage" || typePage === "profile" ? "hidden" : ""
+          }`}
+        >
           <div
             style={{
               margin: "10px",
@@ -77,7 +82,7 @@ function Review({
                 !user.id || user.banned
                   ? "btn-dark prevent-event"
                   : item.rateValue.up.idUser.includes(user.id)
-                  ? "btn-success"
+                  ? "btn-success prevent-event"
                   : "btn-info"
               }`}
             >
@@ -112,13 +117,13 @@ function Review({
             </div>
             <button
               onClick={() => downVote(item._id)}
-              className={`btn-icon btn-round ${
+              className={`btn btn-icon btn-round ${
                 !user.id || user.banned
                   ? "btn-dark prevent-event"
                   : item.rateValue.down.idUser.includes(user.id)
-                  ? "btn-success"
+                  ? "btn-success prevent-event"
                   : "btn-info"
-              } btn`}
+              }`}
             >
               <i className="now-ui-icons arrows-1_minimal-down"></i>
             </button>
@@ -261,11 +266,11 @@ function Review({
               <DropdownMenu aria-labelledby="navbarDropdown">
                 <DropdownItem
                   className={`${
-                    (user && item.idUser && user.id === item.idUser._id) ||
-                    (user && user.banned) ||
                     typePage === "profile" ||
                     typePage === "detail" ||
-                    typePage === "mypage"
+                    typePage === "mypage" ||
+                    (user && item.idUser && user.id === item.idUser._id) ||
+                    (user && user.banned)
                       ? "hidden"
                       : ""
                   }`}
@@ -298,15 +303,15 @@ function Review({
                 </DropdownItem>
                 <DropdownItem
                   className={
-                    (user && user.permission) ||
-                    (typePage !== "detail" &&
-                      typePage !== "mypage" &&
-                      typePage !== "profile" &&
-                      user &&
+                    typePage === "profile" ||
+                    typePage === "detail" ||
+                    typePage === "mypage" ||
+                    (user &&
+                      !user.permission &&
                       item.idUser &&
-                      user.id === item.idUser._id)
-                      ? ""
-                      : "hidden"
+                      user.id !== item.idUser._id)
+                      ? "hidden"
+                      : ""
                   }
                   onClick={() =>
                     editReview(
@@ -382,7 +387,8 @@ function Review({
                 marginBottom: "12px",
               }}
             >
-              {typePage === "mypage" || typePage === "profile"
+              {(typePage === "mypage" || typePage === "profile") &&
+              item.idSchool
                 ? item.idSchool.name
                 : ""}
             </p>

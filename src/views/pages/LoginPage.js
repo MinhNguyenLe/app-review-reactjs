@@ -45,15 +45,14 @@ function LoginPage() {
         password: valuesLogin.passLogin,
       }),
     ])
-      .then(() => {
+      .then((res) => {
         dispatch(action.setErrLogin(false));
-        console.log("success");
         dispatch(action.setToken(true));
         dispatch(action.setEmail(valuesLogin.emailLogin));
         history.push("/schools");
       })
-      .catch((err) => {
-        if (err) dispatch(action.setErrLogin(true));
+      .catch((e) => {
+        if (e.response.status === 400) dispatch(action.setErrLogin(true));
       });
   }
 
