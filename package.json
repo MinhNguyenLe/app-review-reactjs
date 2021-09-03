@@ -9,6 +9,7 @@
     "cloudinary": "^1.25.1",
     "concurrently": "^6.0.0",
     "cors": "^2.8.5",
+    "custom-cleave": "^1.0.6",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "gulp": "4.0.2",
@@ -51,7 +52,7 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "server": "nodemon Server/server.js",
+    "serve": "nodemon Server/server.js",
     "start": "set PORT=1000 && react-scripts start",
     "build": "react-scripts build && gulp licenses",
     "test": "react-scripts test",

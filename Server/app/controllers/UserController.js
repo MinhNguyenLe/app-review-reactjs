@@ -219,9 +219,9 @@ const userController = {
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ email });
-      if (!user) return res.status(200).json({ msg: "User not exist" });
+      if (!user) return res.status(400).json({ msg: "User not exist" });
       const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) return res.status(200).json({ msg: "Incorrect password" });
+      if (!isMatch) return res.status(400).json({ msg: "Incorrect password" });
 
       const accessToken = createAccessToken({ id: user._id });
       const refreshToken = createRefreshToken({ id: user._id });

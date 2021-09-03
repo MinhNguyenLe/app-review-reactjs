@@ -269,6 +269,7 @@ function Review({
                     typePage === "profile" ||
                     typePage === "detail" ||
                     typePage === "mypage" ||
+                    !user.id ||
                     (user && item.idUser && user.id === item.idUser._id) ||
                     (user && user.banned)
                       ? "hidden"
@@ -306,10 +307,11 @@ function Review({
                     typePage === "profile" ||
                     typePage === "detail" ||
                     typePage === "mypage" ||
+                    !user.id ||
                     (user &&
                       !user.permission &&
-                      item.idUser &&
-                      user.id !== item.idUser._id)
+                      (!item.idUser ||
+                        (item.idUser && user.id !== item.idUser._id)))
                       ? "hidden"
                       : ""
                   }

@@ -34,7 +34,7 @@ function SchoolPageHeader() {
         ></div>
         <div className="content-center">
           <Container>
-            <h1 className="title">Danh sách các trường tại Việt </h1>
+            <h1 className="title">Danh sách các trường tại Việt Nam</h1>
           </Container>
         </div>
       </div>
