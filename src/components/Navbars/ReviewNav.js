@@ -147,6 +147,7 @@ function ReviewNav({ writeReview }) {
                   </NavItem>
                   <div>
                     <Button
+                      id="test-login"
                       href="/login"
                       className="nav-link btn-neutral"
                       color="info"

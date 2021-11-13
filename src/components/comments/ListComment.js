@@ -11,9 +11,10 @@ import { useParams, useHistory } from "react-router-dom";
 import { apiLocal } from "javascript/dataGlobal.js";
 import Avatar from "components/avatar/Avatar";
 
+import socketIOClient from "socket.io-client";
+
 const ListComment = ({ review, success, setSuccess }) => {
   const params = useParams();
-  const history = useHistory();
   const refCmt = useRef();
 
   const user = useSelector((state) => state.user);
@@ -21,13 +22,27 @@ const ListComment = ({ review, success, setSuccess }) => {
   const dispatch = useDispatch();
 
   const [addCmt, setAddCmt] = useState(0);
-  const [showEditCmt, setShowEditCmt] = useState(false);
+
+  const socketRef = useRef();
+
+  useEffect(() => {
+    socketRef.current = socketIOClient.connect(apiLocal);
+
+    socketRef.current.on("sendDataServer", (dataGot) => {
+      dispatch(action.setCmt(dataGot.data.data));
+    });
+
+    return () => {
+      socketRef.current.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     const axiosData = () => {
       Promise.all([axios.get(`${apiLocal}/api/reviews/${params.id}/comments`)])
         .then(([cmt]) => {
           dispatch(action.setCmt(cmt.data));
+          socketRef.current.emit("sendDataClient", cmt);
         })
         .catch();
       // .catch((err) => history.push("/error"));
@@ -158,76 +173,80 @@ const ListComment = ({ review, success, setSuccess }) => {
           </rb.Form>
         </div>
         <div id="detail-list-cmt" className="ske-cmt">
-          {[...cmt].reverse().map((item, index) => (
-            <div key={index} className="d-flex flex-row ske-cmt-c">
-              <Avatar linkImg={item.idUser && item.idUser.avatar}></Avatar>
-              <div className="img-tab-review">
-                <Moment
-                  className="date-content"
-                  format="YYYY/MM/DD"
-                  style={{ marginRight: "20px" }}
-                >
-                  {item.createdAt}
-                </Moment>
-                <span className="cmt-name">
-                  {(item.idUser && item.idUser.name) || "Người dùng ẩn danh"}
-                </span>
-                <div
-                  className={
-                    user && item.idUser && user.id === item.idUser._id
-                      ? ""
-                      : "hidden"
-                  }
-                  style={{
-                    marginTop: "8px",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <i
-                    onClick={() => editCmt(item._id, item.content)}
-                    style={{ marginRight: "8px", cursor: "pointer" }}
-                    className="now-ui-icons files_single-copy-04"
-                  ></i>
-                  <i
-                    onClick={() => deleteCmt(item._id)}
-                    style={{ marginRight: "4px", cursor: "pointer" }}
-                    className="now-ui-icons design_scissors"
-                  ></i>
-                  <div style={{ marginLeft: "4px" }}>
+          {cmt.length ? (
+            [...cmt].reverse().map((item, index) => (
+              <div key={index} className="d-flex flex-row ske-cmt-c">
+                <Avatar linkImg={item.idUser && item.idUser.avatar}></Avatar>
+                <div className="img-tab-review">
+                  <Moment
+                    className="date-content"
+                    format="YYYY/MM/DD"
+                    style={{ marginRight: "20px" }}
+                  >
+                    {item.createdAt}
+                  </Moment>
+                  <span className="cmt-name">
+                    {(item.idUser && item.idUser.name) || "Người dùng ẩn danh"}
+                  </span>
+                  <div
+                    className={
+                      user && item.idUser && user.id === item.idUser._id
+                        ? ""
+                        : "hidden"
+                    }
+                    style={{
+                      marginTop: "8px",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
                     <i
-                      id={`icon_loading_${item._id}`}
-                      className="hidden now-ui-icons loader_refresh spin"
+                      onClick={() => editCmt(item._id, item.content)}
+                      style={{ marginRight: "8px", cursor: "pointer" }}
+                      className="now-ui-icons files_single-copy-04"
                     ></i>
+                    <i
+                      onClick={() => deleteCmt(item._id)}
+                      style={{ marginRight: "4px", cursor: "pointer" }}
+                      className="now-ui-icons design_scissors"
+                    ></i>
+                    <div style={{ marginLeft: "4px" }}>
+                      <i
+                        id={`icon_loading_${item._id}`}
+                        className="hidden now-ui-icons loader_refresh spin"
+                      ></i>
+                    </div>
                   </div>
                 </div>
+                <rb.Form
+                  className="edit-cmt hidden"
+                  id={`edit_comment_${item._id}`}
+                  onSubmit={(e) => saveEditCmt(e, item._id)}
+                  style={{ width: "100%" }}
+                >
+                  <rb.Form.Control
+                    id={`value_${item._id}`}
+                    type="text"
+                    style={{ width: "100%", fontSize: "18px" }}
+                  />
+                  <i
+                    onClick={() => exitEditCmt()}
+                    style={{ marginLeft: "8px", cursor: "pointer" }}
+                    className="now-ui-icons ui-1_simple-remove"
+                  ></i>
+                </rb.Form>
+                <p
+                  style={{ margin: "0" }}
+                  id={`comment_content_${item._id}`}
+                  className="cmt-content"
+                >
+                  {item.content}
+                </p>
               </div>
-              <rb.Form
-                className="edit-cmt hidden"
-                id={`edit_comment_${item._id}`}
-                onSubmit={(e) => saveEditCmt(e, item._id)}
-                style={{ width: "100%" }}
-              >
-                <rb.Form.Control
-                  id={`value_${item._id}`}
-                  type="text"
-                  style={{ width: "100%", fontSize: "18px" }}
-                />
-                <i
-                  onClick={() => exitEditCmt()}
-                  style={{ marginLeft: "8px", cursor: "pointer" }}
-                  className="now-ui-icons ui-1_simple-remove"
-                ></i>
-              </rb.Form>
-              <p
-                style={{ margin: "0" }}
-                id={`comment_content_${item._id}`}
-                className="cmt-content"
-              >
-                {item.content}
-              </p>
-            </div>
-          ))}
+            ))
+          ) : (
+            <div></div>
+          )}
         </div>
         <div className="hidden ske-cmt" id="detail-list-report">
           {[...review.report.message].reverse().map((item, index) => (

@@ -147,10 +147,10 @@ function CustomNavbar() {
                 <>
                   <NavItem>
                     <Button
+                      id="test-register"
                       href="/register"
                       className="nav-link btn-neutral"
                       color="info"
-                      id="upgrade-to-pro"
                     >
                       <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
                       <p>Đăng ký</p>
@@ -158,6 +158,8 @@ function CustomNavbar() {
                   </NavItem>
                   <div>
                     <Button
+                      target="_blank"
+                      id="test-login"
                       href="/login"
                       className="nav-link btn-neutral"
                       color="info"

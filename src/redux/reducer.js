@@ -4,7 +4,7 @@ import { persistReducer } from "redux-persist";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user"],
+  whitelist: ["user", "idSchool"],
 };
 
 const INITIAL_STATE = {
