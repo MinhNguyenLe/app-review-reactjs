@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
 import "moment-timezone";
-import useFormLogin from "javascript/useFormLogin";
-import validateLogin from "javascript/validateLogin";
+import useFormLogin from "../../javascript/useFormLogin";
+import validateLogin from "../../javascript/validateLogin";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import * as action from "redux/actions.js";
-import { apiLocal } from "javascript/dataGlobal.js";
+import * as action from "../../redux/actions.js";
+import { apiLocal } from "../../javascript/dataGlobal.js";
 
 // reactstrap components
 import {
@@ -26,13 +26,8 @@ import {
   Col,
 } from "reactstrap";
 
-// core components
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
-import TransparentFooter from "components/Footers/TransparentFooter.js";
-
 function LoginPage() {
   const dispatch = useDispatch();
-  let location = useLocation();
   let history = useHistory();
   const errLogin = useSelector((state) => state.errLogin);
 
@@ -77,13 +72,15 @@ function LoginPage() {
         className="page-header clear-filter"
         filter-color="blue"
       >
-        <div
-          className="page-header-image"
-          style={{
-            backgroundImage:
-              "url(" + require("assets/img/login.jpg").default + ")",
-          }}
-        ></div>
+        {
+          //   <div
+          //   className="page-header-image"
+          //   style={{
+          //     backgroundImage:
+          //       "url(" + require("../../assets/img/login.jpg").default + ")",
+          //   }}
+          // ></div>
+        }
         <div className="content">
           <Container>
             <Col className="ml-auto mr-auto" md="4">
@@ -95,12 +92,14 @@ function LoginPage() {
                   method=""
                 >
                   <CardHeader className="text-center">
-                    <div className="logo-container">
-                      <img
-                        alt="..."
-                        src={require("assets/img/now-logo.png").default}
-                      ></img>
-                    </div>
+                    {
+                      //   <div className="logo-container">
+                      //   <img
+                      //     alt="..."
+                      //     src={require("assets/img/now-logo.png").default}
+                      //   ></img>
+                      // </div>
+                    }
                   </CardHeader>
                   <CardBody>
                     <InputGroup
@@ -160,7 +159,13 @@ function LoginPage() {
                     )}
                   </CardBody>
                   <CardFooter className="text-center">
-                    <Button block className="btn-round" color="info" size="lg">
+                    <Button
+                      data-testid="test-btn-login"
+                      block
+                      className="btn-round"
+                      color="info"
+                      size="lg"
+                    >
                       Đăng nhập
                     </Button>
                     <div className="pull-left">

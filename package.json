@@ -21,6 +21,7 @@
     "gulp-append-prepend": "1.0.9",
     "http": "^0.0.1-security",
     "i": "^0.3.7",
+    "jest-config": "^26.6.3",
     "jest-dom": "^4.0.0",
     "jquery": "^3.6.0",
     "jsonwebtoken": "^8.5.1",
@@ -68,7 +69,8 @@
     "serve": "nodemon Server/server.js",
     "start": "set PORT=1000 && react-scripts start",
     "build": "react-scripts build && gulp licenses",
-    "test": "react-scripts test",
+    "test": "jest",
+    "test:watch": "npm test -- --watch",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "compile-sass": "node-sass src/assets/scss/now-ui-kit.scss src/assets/css/now-ui-kit.css",
@@ -93,5 +95,27 @@
   "optionalDependencies": {
     "@babel/core": "7.14.3",
     "typescript": "4.2.4"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "shared"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|svg)$": "./src/config/fileMock.js",
+      "\\.(css|less|scss)$": "identity-obj-proxy"
+    },
+    "setupFilesAfterEnv": [
+      "jest-enzyme"
+    ],
+    "testEnvironment": "enzyme",
+    "testEnvironmentOptions": {
+      "enzymeAdapter": "react16"
+    }
   }
 }

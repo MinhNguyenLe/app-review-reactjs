@@ -1,38 +1,30 @@
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import Enzyme from "enzyme";
-
-import { render, screen, cleanup } from "@testing-library/react";
-import { shallow } from "enzyme";
+import React from "react";
+import { screen, cleanup, render } from "@testing-library/react";
 import LoginPage from "../views/pages/LoginPage";
-import { Link } from "react-router-dom";
 
 import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
-import App from "../App";
 
-Enzyme.configure({ adapter: new Adapter() });
+import { store } from "../redux/store";
 
-describe("render login page", () => {
-  const initialState = { output: 10 };
-  const mockStore = configureStore();
-  let store, wrapper;
+import { BrowserRouter as Router } from "react-router-dom";
 
-  it("link to register", () => {
-    store = mockStore(initialState);
+import "@testing-library/jest-dom";
 
-    const { getByText } = render(
-      <Provider store={store}>
-        <App />
-      </Provider>
+const ReduxProvider = ({ children, store }) => (
+  <Provider store={store}>
+    <Router>{children}</Router>
+  </Provider>
+);
+
+describe("FootLabel", () => {
+  test("component should display label", () => {
+    const login = render(
+      <ReduxProvider store={store}>
+        <LoginPage />
+      </ReduxProvider>
     );
-
-    expect(getByText("Hello Worldd!")).toBeNull();
-    // const wrapperLogin = shallow(<LoginPage />);
-    // const registerLink = (
-    //   <Link className="link" to="/register">
-    //     Đăng ký tài khoản
-    //   </Link>
-    // );
-    // expect(wrapperLogin.contains(registerLink)).toEqual(true);
+    const btnLogin = screen.getByTestId("test-btn-login");
+    expect(btnLogin).toBeInTheDocument();
+    // expect(getByText("Test")).toBeTruthy();
   });
 });
