@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import * as action from "../../redux/actions.js";
 import { apiLocal } from "../../javascript/dataGlobal.js";
 
+// import LoginImg from "../../assets/img/login.jpg"
+
 // reactstrap components
 import {
   Button,
@@ -74,12 +76,12 @@ function LoginPage() {
       >
         {
           //   <div
-          //   className="page-header-image"
-          //   style={{
-          //     backgroundImage:
-          //       "url(" + require("../../assets/img/login.jpg").default + ")",
-          //   }}
-          // ></div>
+          //     className="page-header-image"
+          //     style={{
+          //       backgroundImage:
+          //         "url(" + LoginImg + ")",
+          //     }}
+          //   ></div>
         }
         <div className="content">
           <Container>

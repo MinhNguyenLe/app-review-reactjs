@@ -1,14 +1,14 @@
 import React, { useState, useRef } from "react";
-import ListSchools from "components/schools/ListSchools";
+import ListSchools from "../../components/schools/ListSchools";
 import axios from "axios";
 import { FormGroup, Input, Button } from "reactstrap";
-import CustomNavbar from "components/Navbars/CustomNavbar.js";
-import DarkFooter from "components/Footers/DarkFooter.js";
-import { apiLocal } from "javascript/dataGlobal.js";
-import SchoolPageHeader from "components/Headers/SchoolPageHeader.js";
+import CustomNavbar from "../../components/Navbars/CustomNavbar.js";
+import DarkFooter from "../../components/Footers/DarkFooter.js";
+import { apiLocal } from "../../javascript/dataGlobal.js";
+import SchoolPageHeader from "../../components/Headers/SchoolPageHeader.js";
 import { Link, useLocation, useHistory, useParams } from "react-router-dom";
 import $ from "jquery";
-import * as func from "javascript/funcGlobal.js";
+import * as func from "../../javascript/funcGlobal.js";
 
 function Schools() {
   const params = useParams();

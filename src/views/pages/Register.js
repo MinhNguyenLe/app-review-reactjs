@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
 import "moment-timezone";
-import useForm from "javascript/useForm";
-import validate from "javascript/validate";
+import useForm from "../../javascript/useForm";
+import validate from "../../javascript/validate";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import * as action from "redux/actions.js";
-import { apiLocal } from "javascript/dataGlobal.js";
+import * as action from "../../redux/actions.js";
+import { apiLocal } from "../../javascript/dataGlobal.js";
 
 import {
   Button,

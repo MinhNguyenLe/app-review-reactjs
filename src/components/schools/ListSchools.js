@@ -3,10 +3,10 @@ import * as rb from "react-bootstrap";
 import axios from "axios";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import * as action from "redux/actions.js";
-import * as func from "javascript/funcGlobal.js";
-import Loading from "components/loading/Loading.js";
-import { apiLocal } from "javascript/dataGlobal.js";
+import * as action from "../../redux/actions.js";
+import * as func from "../../javascript/funcGlobal.js";
+import Loading from "../loading/Loading.js";
+import { apiLocal } from "../../javascript/dataGlobal.js";
 
 const ListSchool = ({ loading, setLoading, data, setData }) => {
   const email = useSelector((state) => state.email);

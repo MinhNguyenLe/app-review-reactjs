@@ -1,30 +1,30 @@
 import React from "react";
 import { screen, cleanup, render } from "@testing-library/react";
 import LoginPage from "../views/pages/LoginPage";
-
-import { Provider } from "react-redux";
-
-import { store } from "../redux/store";
-
-import { BrowserRouter as Router } from "react-router-dom";
-
 import "@testing-library/jest-dom";
+import { store } from "../redux/store";
+import { ReduxProvider } from "./app-config"
 
-const ReduxProvider = ({ children, store }) => (
-  <Provider store={store}>
-    <Router>{children}</Router>
-  </Provider>
-);
+afterEach(cleanup)
 
-describe("FootLabel", () => {
-  test("component should display label", () => {
-    const login = render(
+describe("Login Component - check existed of elements", () => {
+  test("btn login ", () => {
+    render(
       <ReduxProvider store={store}>
         <LoginPage />
       </ReduxProvider>
     );
     const btnLogin = screen.getByTestId("test-btn-login");
     expect(btnLogin).toBeInTheDocument();
-    // expect(getByText("Test")).toBeTruthy();
+  });
+
+  test("btn login with anonymous ", () => {
+    render(
+      <ReduxProvider store={store}>
+        <LoginPage />
+      </ReduxProvider>
+    );
+    const inputEmail = screen.getByText("Đăng nhập ẩn danh")
+    expect(inputEmail).toBeInTheDocument()
   });
 });
