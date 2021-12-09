@@ -22,11 +22,11 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 
 // styles for this kit
-import "./assets/css/bootstrap.min.css";
-import "./assets/scss/now-ui-kit.scss?v=1.5.0";
-import "./assets/demo/demo.css?v=1.5.0";
-import "./assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
-import "./index.css";
+import "assets/css/bootstrap.min.css";
+import "assets/scss/now-ui-kit.scss?v=1.5.0";
+import "assets/demo/demo.css?v=1.5.0";
+import "assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
+import "index.css";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store.js";
 import AppContainer from "./views/AppContainer.js";
