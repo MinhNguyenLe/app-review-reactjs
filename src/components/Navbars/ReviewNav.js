@@ -3,12 +3,12 @@ import * as rb from "react-bootstrap";
 import axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import * as action from "redux/actions.js";
-import * as func from "javascript/funcGlobal.js";
-import Loading from "components/loading/Loading.js";
-import { apiLocal } from "javascript/dataGlobal.js";
-import Avatar from "components/avatar/Avatar";
-import Logout from "components/avatar/Logout";
+import * as action from "../../redux/actions.js";
+import * as func from "../../javascript/funcGlobal.js";
+import Loading from "../loading/Loading.js";
+import { apiLocal } from "../../javascript/dataGlobal.js";
+import Avatar from "../avatar/Avatar";
+import Logout from "../avatar/Logout";
 
 import {
   Button,

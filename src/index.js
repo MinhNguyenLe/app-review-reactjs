@@ -29,7 +29,7 @@ import "assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
 import "./index.css";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store.js";
-import AppContainer from "views/AppContainer.js";
+import AppContainer from "./views/AppContainer.js";
 import App from "./App";
 
 ReactDOM.render(

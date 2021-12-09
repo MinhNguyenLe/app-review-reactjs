@@ -7,22 +7,22 @@ import "assets/scss/now-ui-kit.scss?v=1.5.0";
 import "assets/demo/demo.css?v=1.5.0";
 import "assets/demo/nucleo-icons-page-styles.css?v=1.5.0";
 import "./index.css";
-import Index from "views/Index.js";
-import ErrPage from "views/pages/Error.js";
-import Schools from "views/pages/Schools.js";
-import MyPage from "views/pages/MyPage.js";
-import DetailReview from "views/pages/DetailReview.js";
-import ReviewPage from "views/pages/Review.js";
-import Register from "views/pages/Register.js";
-import NucleoIcons from "views/NucleoIcons.js";
-import LoginPage from "views/pages/LoginPage.js";
-import LandingPage from "views/pages/LandingPage.js";
-import ProfilePage from "views/pages/ProfilePage.js";
-import Navbars from "views/index-sections/Navbars.js";
+import Index from "./views/Index.js";
+import ErrPage from "./views/pages/Error.js";
+import Schools from "./views/pages/Schools.js";
+import MyPage from "./views/pages/MyPage.js";
+import DetailReview from "./views/pages/DetailReview.js";
+import ReviewPage from "./views/pages/Review.js";
+import Register from "./views/pages/Register.js";
+import NucleoIcons from "./views/NucleoIcons.js";
+import LoginPage from "./views/pages/LoginPage.js";
+import LandingPage from "./views/pages/LandingPage.js";
+import ProfilePage from "./views/pages/ProfilePage.js";
+import Navbars from "./views/index-sections/Navbars.js";
 
-import { apiLocal } from "javascript/dataGlobal.js";
+import { apiLocal } from "./javascript/dataGlobal.js";
 import axios from "axios";
-import * as action from "redux/actions.js";
+import * as action from "./redux/actions.js";
 import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {
