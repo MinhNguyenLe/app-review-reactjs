@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Moment from "react-moment";
-import Avatar from "components/avatar/Avatar.js";
+import Avatar from "../avatar/Avatar.js";
 import { useSelector } from "react-redux";
 import { Link, useParams, useHistory } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
-import { apiLocal } from "javascript/dataGlobal.js";
+import { apiLocal } from "../../javascript/dataGlobal.js";
 import {
   DropdownToggle,
   DropdownMenu,

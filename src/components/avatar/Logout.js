@@ -1,10 +1,10 @@
 import React from "react";
-import imgDefault from "assets/img/default-avatar.png";
+import imgDefault from "../../assets/img/default-avatar.png";
 import axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { apiLocal } from "javascript/dataGlobal.js";
-import * as action from "redux/actions.js";
+import { apiLocal } from "../../javascript/dataGlobal.js";
+import * as action from "../../redux/actions.js";
 import {
   DropdownToggle,
   DropdownMenu,
