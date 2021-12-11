@@ -118,6 +118,7 @@ function LoginPage() {
                       <Input
                         value={valuesLogin.emailLogin || ""}
                         name="emailLogin"
+                        id="emailLogin"
                         required
                         onChange={handleChangeLogin}
                         placeholder="Địa chỉ email..."
