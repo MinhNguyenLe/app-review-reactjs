@@ -144,6 +144,7 @@ function LoginPage() {
                       <Input
                         value={valuesLogin.passLogin || ""}
                         name="passLogin"
+                        id="passLogin"
                         required
                         onChange={handleChangeLogin}
                         placeholder="Mật khẩu..."
@@ -153,10 +154,10 @@ function LoginPage() {
                       ></Input>
                     </InputGroup>
                     {errorsLogin.passLogin && (
-                      <p className="help is-danger">{errorsLogin.passLogin}</p>
+                      <p id="err-validate" className="help is-danger">{errorsLogin.passLogin}</p>
                     )}
                     {errLogin && (
-                      <p className="help is-danger">
+                      <p id="err-call-api-login" className="help is-danger">
                         Tài khoản sai hoặc không tồn tại
                       </p>
                     )}
@@ -164,6 +165,7 @@ function LoginPage() {
                   <CardFooter className="text-center">
                     <Button
                       data-testid="test-btn-login"
+                      id="test-btn-login"
                       block
                       className="btn-round"
                       color="info"

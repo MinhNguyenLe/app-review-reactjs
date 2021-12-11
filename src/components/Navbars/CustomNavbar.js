@@ -131,6 +131,7 @@ function CustomNavbar() {
                       >
                         <DropdownItem href="#pablo" onClick={(e) => logOut()}>
                           <p
+                            id="test-logout"
                             style={{
                               fontSize: "20px",
                               color: "#a7aaaf",

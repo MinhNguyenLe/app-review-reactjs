@@ -1,28 +1,52 @@
 import { setupBrowser } from '@testing-library/webdriverio'
 import { screen, cleanup, render } from "@testing-library/react";
+import LoginPage from "../pageobjects/login.page"
 
-describe('My Login application', () => {
-    it('should login with valid credentials', async () => {
+import useAutomationTest from "../useAutomationTest"
+
+describe('automation login', () => {
+    it('validate fail', async () => {
         setupBrowser(browser)
-        // await LoginPage.open();
 
-        // await LoginPage.login('tomsmith', 'SuperSecretPassword!');
-        // await expect(SecurePage.flashAlert).toBeExisting();
-        // await expect(SecurePage.flashAlert).toHaveTextContaining(
-        //     'You logged into a secure area!');
+        const db = useAutomationTest("login-fail-validate")
 
-        await browser.url(`http://localhost:1000/login`)
+        await LoginPage.open();
 
-        const fieldEmail = await $("#emailLogin");
-        await fieldEmail.setValue("abc")
-        console.log("--------------------------------", fieldEmail)
+        await LoginPage.login(db.email, db.password)
 
+        const errValidate = await $('#err-validate').getText()
 
-        const button = await browser.getByText('Đăng nhập')
-        await button.click()
+        expect(errValidate).toEqual("Mật khẩu phải hơn 6 ký tự")
+    });
 
-        console.log("debug.........")
-        // await browser.debug()
+    it('call api fail', async () => {
+        setupBrowser(browser)
+
+        const db = useAutomationTest("login-fail-call-api")
+
+        await LoginPage.open();
+
+        await LoginPage.login(db.email, db.password)
+
+        const errCallApi = await $('#err-call-api-login').getText()
+
+        expect(errCallApi).toEqual("Tài khoản sai hoặc không tồn tại")
+    });
+
+    it('login success', async () => {
+        setupBrowser(browser)
+
+        const db = useAutomationTest("login-success")
+
+        await LoginPage.open();
+
+        await LoginPage.login(db.email, db.password)
+
+        await browser.newWindow("google.com")
+
+        const btnLogout = await $("#test-logout")
+
+        expect(btnLogout).toExist()
     });
 });
 
