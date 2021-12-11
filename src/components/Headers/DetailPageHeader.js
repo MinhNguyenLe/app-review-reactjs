@@ -30,7 +30,7 @@ function DetailPageHeader({ name, school }) {
             backgroundImage:
               "url(" + require("assets/img/bg6.jpg").default + ")",
           }}
-          // ref={pageHeader}
+        // ref={pageHeader}
         ></div>
         <div className="content-center">
           <Container style={{ background: "rgb(3 3 3 / 60%)" }}>

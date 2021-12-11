@@ -1,8 +1,8 @@
 import React from "react";
 import { screen, cleanup, render } from "@testing-library/react";
-import Schools from "../views/pages/Schools";
+import Schools from "../src/views/pages/Schools";
 import "@testing-library/jest-dom";
-import { store } from "../redux/store";
+import { store } from "../src/redux/store";
 import { ReduxProvider } from "./app-config"
 
 afterEach(cleanup)

@@ -1,13 +1,18 @@
 import React from "react";
 import { screen, cleanup, render } from "@testing-library/react";
-import LoginPage from "../views/pages/LoginPage";
+import LoginPage from "../src/views/pages/LoginPage";
 import "@testing-library/jest-dom";
-import { store } from "../redux/store";
+import { store } from "../src/redux/store";
 import { ReduxProvider } from "./app-config"
+
+import { setupBrowser } from '@testing-library/webdriverio'
 
 afterEach(cleanup)
 
-describe("Login Component - check existed of elements", () => {
+/**
+ * ----------------UNIT TEST - COMPONENT TEST - FUNCTION TEST LOGIN
+ */
+describe("component test login", () => {
   test("btn login ", () => {
     render(
       <ReduxProvider store={store}>
@@ -26,5 +31,19 @@ describe("Login Component - check existed of elements", () => {
     );
     const inputEmail = screen.getByText("Đăng nhập ẩn danh")
     expect(inputEmail).toBeInTheDocument()
+  });
+});
+
+/**
+ * ----------------AUTOMATION TEST EVENT LOGIN
+ */
+describe("automation test login", () => {
+  test("workflow login in Chrome", () => {
+    render(
+      <ReduxProvider store={store}>
+        <LoginPage />
+      </ReduxProvider>
+    );
+    // setupBrowser(browser)
   });
 });
