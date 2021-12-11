@@ -10,7 +10,7 @@ import Review from "components/review/Review";
 import * as rb from "react-bootstrap";
 import TextareaAutosize from "react-textarea-autosize";
 import * as func from "javascript/funcGlobal.js";
-import UpLoadImg from "components/input/UploadImg";
+import UpLoadImg from "../../components/input/UploadImg";
 
 import {
   Button,
