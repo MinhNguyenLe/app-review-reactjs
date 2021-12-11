@@ -134,6 +134,7 @@ function Register() {
                       maxlength="20"
                       value={valuesRegister.name || ""}
                       name="name"
+                      id="register-field-name"
                       required
                       onChange={handleChangeRegister}
                       placeholder="Tên..."
@@ -159,6 +160,7 @@ function Register() {
                       maxlength="20"
                       value={valuesRegister.username || ""}
                       name="username"
+                      id="register-field-username"
                       required
                       onChange={handleChangeRegister}
                       placeholder="Tên người dùng..."
@@ -185,6 +187,7 @@ function Register() {
                       onChange={handleChangeRegister}
                       value={valuesRegister.email || ""}
                       name="email"
+                      id="register-field-email"
                       placeholder="Địa chỉ email..."
                       type="email"
                       onFocus={() => setEmailFocus(true)}
@@ -209,6 +212,7 @@ function Register() {
                       onChange={handleChangeRegister}
                       value={valuesRegister.password || ""}
                       name="password"
+                      id="register-field-password"
                       placeholder="Mật khẩu..."
                       type="password"
                       onFocus={() => setPassFocus(true)}
@@ -226,6 +230,7 @@ function Register() {
                 </CardBody>
                 <CardFooter className="text-center">
                   <Button
+                    id="test-register-submit"
                     className="btn-neutral btn-round"
                     color="info"
                     size="lg"
