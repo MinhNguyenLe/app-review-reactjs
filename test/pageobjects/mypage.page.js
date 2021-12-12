@@ -2,22 +2,23 @@
 
 import Page from './page';
 
-class ProfilePage extends Page {
+class MypagePage extends Page {
   get uploadAvatar() {
-    return $('#emailLogin');
+    return $('#test-upload-ava');
   }
 
   get uploadCoverImg() {
-    return $('#passLogin');
+    return $('#test-upload-bg');
   }
 
   get buttonSave() {
-    return $('#test-btn-login');
+    return $('#test-submit-img-mypage');
   }
 
   async saveUpload(ava, bg) {
     await this.uploadAvatar.setValue(ava);
     await this.uploadCoverImg.setValue(bg);
+
     await this.buttonSave.click();
   }
 
@@ -26,4 +27,4 @@ class ProfilePage extends Page {
   }
 }
 
-export default new ProfilePage();
+export default new MypagePage();

@@ -130,7 +130,7 @@ function MyPage() {
         setSuccess(success + 1);
         $(`#icon_loading_${id}`).addClass("hidden");
       })
-      .catch(() => {});
+      .catch(() => { });
   };
   const exitEdit = () => {
     setShowEdit(false);
@@ -228,7 +228,7 @@ function MyPage() {
               className="edit-content"
             />
           </div>
-          <rb.Button onClick={saveEdit}>
+          <rb.Button onClick={saveEdit} id="test-submit-img-mypage">
             Lưu{" "}
             <i
               style={{ margin: "0 8px" }}
@@ -256,12 +256,14 @@ function MyPage() {
                 ></i>
               </Button>
               <UpLoadImg
+                id="test-upload-ava"
                 upAvatar={upAvatar}
                 setUpAvatar={setUpAvatar}
                 refAvatar={refAvatar}
                 content="Add avatar"
               ></UpLoadImg>
               <UpLoadImg
+                id="test-upload-bg"
                 upAvatar={upCoverImg}
                 setUpAvatar={setUpCoverImg}
                 refAvatar={refCoverImg}
