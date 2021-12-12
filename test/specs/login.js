@@ -42,7 +42,7 @@ describe('automation login', () => {
 
         await LoginPage.login(db.email, db.password)
 
-        await browser.newWindow("google.com")
+        await browser.newWindow("http://localhost:1000/schools")
 
         const btnLogout = await $("#test-logout")
 

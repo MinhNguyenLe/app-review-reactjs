@@ -4,50 +4,68 @@ import RegisterPage from "../pageobjects/register.page"
 
 import useAutomationTest from "../useAutomationTest"
 
-describe('automation login', () => {
-  it('validate fail', async () => {
+const { get } = require('got')
+
+
+describe('automation for register', () => {
+  it('fail call api : email', async () => {
     setupBrowser(browser)
 
-    const db = useAutomationTest("login-fail-validate")
+    const db = useAutomationTest("register-fail-call-api-email")
 
     await RegisterPage.open();
 
-    await RegisterPage.login(db.email, db.password)
+    await RegisterPage.register(db.name, db.username, db.email, db.password)
 
-    const errValidate = await $('#err-validate').getText()
+    const err = await $('#err-register-call-api').getText()
 
-    expect(errValidate).toEqual("Mật khẩu phải hơn 6 ký tự")
+    expect(err).toEqual("Tài khoản sai hoặc đã tồn tại")
   });
 
-  it('call api fail', async () => {
+  it('fail call api : username', async () => {
     setupBrowser(browser)
 
-    const db = useAutomationTest("login-fail-call-api")
+    const db = useAutomationTest("register-fail-call-api-username")
 
     await RegisterPage.open();
 
-    await RegisterPage.login(db.email, db.password)
+    await RegisterPage.register(db.name, db.username, db.email, db.password)
 
-    const errCallApi = await $('#err-call-api-login').getText()
+    const err = await $('#err-register-call-api').getText()
 
-    expect(errCallApi).toEqual("Tài khoản sai hoặc không tồn tại")
+    expect(err).toEqual("Tài khoản sai hoặc đã tồn tại")
   });
 
-  it('login success', async () => {
+  it('fail validate', async () => {
     setupBrowser(browser)
 
-    const db = useAutomationTest("login-success")
+    const db = useAutomationTest("register-fail-validate")
 
     await RegisterPage.open();
 
-    await RegisterPage.login(db.email, db.password)
+    await RegisterPage.register(db.name, db.username, db.email, db.password)
 
-    await browser.newWindow("google.com")
+    const err = await $('#err-register-validate-password').getText()
+
+    expect(err).toEqual("Mật khẩu phải nhiều hơn 6 ký tự")
+  });
+
+  it('register success', async () => {
+    setupBrowser(browser)
+
+    const db = useAutomationTest("register-success")
+
+    await RegisterPage.open();
+
+    await RegisterPage.register(db.name, db.username, db.email, db.password)
+
+    await browser.newWindow("http://localhost:1000/schools")
 
     const btnLogout = await $("#test-logout")
 
     expect(btnLogout).toExist()
   });
+
 });
 
 

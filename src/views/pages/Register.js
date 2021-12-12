@@ -220,10 +220,10 @@ function Register() {
                     ></Input>
                   </InputGroup>
                   {errorsRegister.password && (
-                    <p className="help is-danger">{errorsRegister.password}</p>
+                    <p className="help is-danger" id="err-register-validate-password">{errorsRegister.password}</p>
                   )}
                   {errRegister && (
-                    <p className="help is-danger">
+                    <p className="help is-danger" id="err-register-call-api">
                       Tài khoản sai hoặc đã tồn tại
                     </p>
                   )}

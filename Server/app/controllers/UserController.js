@@ -86,16 +86,13 @@ const userController = {
     try {
       const { username, name, password, email, permission } = req.body; // FrontEnd submit object to BackEnd
 
-      let user = await User.findOne({ username });
+      const existUserName = await User.findOne({ username });
+      const existEmail = await User.findOne({ email });
 
-      if (!user) {
-        user = await User.findOne({ email });
-      }
-
-      if (user)
-        return res.status(200).json({ msg: "This email or username is exist" });
+      if (existUserName || existEmail)
+        return res.status(400).json({ msg: "This email or username is exist" });
       if (password.length < 6)
-        return res.status(200).json({ msg: "Password must >= 6 characters" });
+        return res.status(400).json({ msg: "Password must >= 6 characters" });
 
       const passwordHash = await bcrypt.hash(password, 10);
 
