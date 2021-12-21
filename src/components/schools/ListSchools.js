@@ -61,6 +61,7 @@ const ListSchool = ({ loading, setLoading, data, setData }) => {
           onClick={() => goReview(item._id)}
         >
           <Link
+          id={`link-to-review-${index}`}
             target="_blank"
             to={`/schools/${item._id}/reviews`}
             className="d-flex flex-row"
@@ -72,6 +73,7 @@ const ListSchool = ({ loading, setLoading, data, setData }) => {
             ></rb.Card.Img>
             <rb.Card.Body style={{ margin: "0" }}>
               <rb.Card.Text
+                id={`name-school-${index}`}
                 className="school-name"
                 style={{ fontSize: "21px", fontWeight: "700" }}
               >

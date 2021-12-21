@@ -354,6 +354,7 @@ function ReviewPage() {
                 <div>
                   <div>
                     <input
+                      id="write-review-score"
                       placeholder="Điểm"
                       type="number"
                       ref={refPointForSchool}
@@ -374,6 +375,7 @@ function ReviewPage() {
                   </div>
                   <div style={{ margin: "16px 0" }}>
                     <TextareaAutosize
+                    id="write-review-u"
                       placeholder="Ưu điểm"
                       minRows={2}
                       maxRows={4}
@@ -383,6 +385,7 @@ function ReviewPage() {
                   </div>
                   <div style={{ margin: "16px 0" }}>
                     <TextareaAutosize
+                    id="write-review-n"
                       placeholder="Điểm cần cải thiện"
                       minRows={2}
                       maxRows={4}
@@ -392,6 +395,7 @@ function ReviewPage() {
                   </div>
                   <div style={{ margin: "16px 0" }}>
                     <TextareaAutosize
+                    id="write-review-k"
                       placeholder="Trải nghiệm và lời khuyên"
                       minRows={2}
                       maxRows={4}
@@ -401,6 +405,7 @@ function ReviewPage() {
                   </div>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <rb.Button
+                    id="btn-save-review"
                       onClick={saveAddReview}
                       style={{ fontSize: "16px", padding: "12px 40px" }}
                     >
@@ -480,6 +485,7 @@ function ReviewPage() {
               {[...listReview].reverse().map((item, index) => (
                 <div key={item._id}>
                   <Review
+                    index={index}
                     success={success}
                     setSuccess={setSuccess}
                     item={item}

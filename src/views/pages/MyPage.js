@@ -256,14 +256,14 @@ function MyPage() {
                 ></i>
               </Button>
               <UpLoadImg
-                id="test-upload-ava"
+                idF="test-upload-ava"
                 upAvatar={upAvatar}
                 setUpAvatar={setUpAvatar}
                 refAvatar={refAvatar}
                 content="Add avatar"
               ></UpLoadImg>
               <UpLoadImg
-                id="test-upload-bg"
+                idF="test-upload-bg"
                 upAvatar={upCoverImg}
                 setUpAvatar={setUpCoverImg}
                 refAvatar={refCoverImg}

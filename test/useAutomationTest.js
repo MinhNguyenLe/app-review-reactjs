@@ -7,7 +7,7 @@
 const mock = {
   login: {
     loginSuccess: {
-      email: "leminhdeptrai000@gmail.com", password: "000000"
+      email: "admin1@gmail.com", password: "123456"
     },
     loginFailCallApi: {
       email: "leminhdeptrai000@gmail.com", password: "1234567"
@@ -46,10 +46,16 @@ const mock = {
   },
   review: {
     validateScore: {
-
+      score:'11',
+      positive:'abcd',
+      negative:'abcd',
+      advice:'abcd'
     },
-    add: {
-
+    addSuccess: {
+      score:'9',
+      positive:'abcd',
+      negative:'abcd',
+      advice:'abcd'
     },
     edit: {
 
@@ -80,6 +86,9 @@ const useAutomationTest = (type, path) => {
     return path + mock.mypage.uploadAvatarSuccess.ava
   }
   if (type === "upload-bg-success") return path + mock.mypage.uploadBGSuccess.bg
+
+  if (type === "write-review-success") return mock.review.addSuccess
+  if (type === "write-review-validate-score") return mock.review.validateScore
 }
 
 export default useAutomationTest

@@ -79,6 +79,7 @@ function Schools() {
               style={{ width: "70%", display: "flex", alignItems: "center" }}
             >
               <button
+              id="btn-filter-school"
                 onClick={filterSchool}
                 style={{ display: "flex", margin: "0 10px" }}
                 className="btn btn-success"

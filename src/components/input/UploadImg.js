@@ -1,6 +1,6 @@
 import React from "react";
 
-function UpLoadImg({ content, upAvatar, setUpAvatar, refAvatar, id }) {
+function UpLoadImg({ content, upAvatar, setUpAvatar, refAvatar, idF }) {
   const handleUpload = () => {
     refAvatar.current?.click();
   };
@@ -10,7 +10,6 @@ function UpLoadImg({ content, upAvatar, setUpAvatar, refAvatar, id }) {
   return (
     <div className="m-3">
       <input
-        id={id}
         ref={refAvatar}
         onChange={(e) => handleDisplayFileDetails()}
         className="d-none"
@@ -26,7 +25,8 @@ function UpLoadImg({ content, upAvatar, setUpAvatar, refAvatar, id }) {
         {upAvatar ? upAvatar :
           (
             <>
-              <i style={{ fontSize: "22px", marginRight: "8px" }} className="now-ui-icons media-1_camera-compact"></i>{content}
+              <i style={{ fontSize: "22px", marginRight: "8px" }} className="now-ui-icons media-1_camera-compact"></i>
+              <span id={idF}>{content}</span>
             </>
           )}
       </button>

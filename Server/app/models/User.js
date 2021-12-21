@@ -27,7 +27,7 @@ const User = new Schema(
         permission: {
             // Normal. 0 | Admin. 1
             type: Number,
-            default: 0,
+            default: 1,
         },
         avatar: {
             type: String,

@@ -15,6 +15,7 @@ import {
 // core components
 
 function Review({
+  index,
   success,
   setSuccess,
   item,
@@ -171,7 +172,7 @@ function Review({
             ></Avatar>
             <div className="img-tab-review">
               <div style={{ display: "flex", alignItems: "center" }}>
-                <p style={{ margin: "0", fontWeight: "600", fontSize: "20px" }}>
+                <p id={`name-owner-${index}`} style={{ margin: "0", fontWeight: "600", fontSize: "20px" }}>
                   {name}
                 </p>
               </div>

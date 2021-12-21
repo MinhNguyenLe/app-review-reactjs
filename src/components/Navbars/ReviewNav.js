@@ -127,6 +127,7 @@ function ReviewNav({ writeReview }) {
                   <NavItem>
                     <div>
                       <rb.Button
+                      id="btn-write-review"
                         className={`${user.banned ? "prevent-event dark" : ""}`}
                         onClick={writeReview}
                       >
