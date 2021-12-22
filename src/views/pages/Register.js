@@ -134,6 +134,7 @@ function Register() {
                       maxlength="20"
                       value={valuesRegister.name || ""}
                       name="name"
+                      data-testid="register-field-name"
                       id="register-field-name"
                       required
                       onChange={handleChangeRegister}
@@ -144,7 +145,7 @@ function Register() {
                     ></Input>
                   </InputGroup>
                   {errorsRegister.name && (
-                    <p className="help is-danger">{errorsRegister.name}</p>
+                    <p  data-testid="error-register-name"  className="help is-danger">{errorsRegister.name}</p>
                   )}
                   <InputGroup
                     className={
@@ -160,6 +161,7 @@ function Register() {
                       maxlength="20"
                       value={valuesRegister.username || ""}
                       name="username"
+                      data-testid="register-field-username"
                       id="register-field-username"
                       required
                       onChange={handleChangeRegister}
@@ -187,6 +189,7 @@ function Register() {
                       onChange={handleChangeRegister}
                       value={valuesRegister.email || ""}
                       name="email"
+                      data-testid="register-field-email"
                       id="register-field-email"
                       placeholder="Địa chỉ email..."
                       type="email"
@@ -212,6 +215,7 @@ function Register() {
                       onChange={handleChangeRegister}
                       value={valuesRegister.password || ""}
                       name="password"
+                      data-testid="register-field-password"
                       id="register-field-password"
                       placeholder="Mật khẩu..."
                       type="password"
@@ -230,6 +234,7 @@ function Register() {
                 </CardBody>
                 <CardFooter className="text-center">
                   <Button
+                  data-testid="test-register-submit"
                     id="test-register-submit"
                     className="btn-neutral btn-round"
                     color="info"

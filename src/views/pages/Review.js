@@ -354,6 +354,7 @@ function ReviewPage() {
                 <div>
                   <div>
                     <input
+                      data-testid="write-review-score"
                       id="write-review-score"
                       placeholder="Điểm"
                       type="number"
@@ -375,6 +376,7 @@ function ReviewPage() {
                   </div>
                   <div style={{ margin: "16px 0" }}>
                     <TextareaAutosize
+                    data-testid="write-review-u"
                     id="write-review-u"
                       placeholder="Ưu điểm"
                       minRows={2}
@@ -385,7 +387,8 @@ function ReviewPage() {
                   </div>
                   <div style={{ margin: "16px 0" }}>
                     <TextareaAutosize
-                    id="write-review-n"
+                      data-testid="write-review-n"
+                      id="write-review-n"
                       placeholder="Điểm cần cải thiện"
                       minRows={2}
                       maxRows={4}
@@ -395,6 +398,7 @@ function ReviewPage() {
                   </div>
                   <div style={{ margin: "16px 0" }}>
                     <TextareaAutosize
+                    data-testid="write-review-k"
                     id="write-review-k"
                       placeholder="Trải nghiệm và lời khuyên"
                       minRows={2}
@@ -405,8 +409,9 @@ function ReviewPage() {
                   </div>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <rb.Button
+                    data-testid="btn-save-review"
                     id="btn-save-review"
-                      onClick={saveAddReview}
+                      onC lick={saveAddReview}
                       style={{ fontSize: "16px", padding: "12px 40px" }}
                     >
                       Lưu{" "}

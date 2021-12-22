@@ -73,6 +73,7 @@ const ListSchool = ({ loading, setLoading, data, setData }) => {
             ></rb.Card.Img>
             <rb.Card.Body style={{ margin: "0" }}>
               <rb.Card.Text
+              data-testid="list-school-child"
                 id={`name-school-${index}`}
                 className="school-name"
                 style={{ fontSize: "21px", fontWeight: "700" }}

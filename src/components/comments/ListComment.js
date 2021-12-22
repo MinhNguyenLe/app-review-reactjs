@@ -164,6 +164,7 @@ const ListComment = ({ review, success, setSuccess }) => {
                 className="hidden now-ui-icons loader_refresh spin"
               ></i>
               <rb.Form.Control
+                data-testid="write-comment"
                 ref={refCmt}
                 onClick={() => dispatch(action.setIdReview(params.id))}
                 type="text"
@@ -249,7 +250,7 @@ const ListComment = ({ review, success, setSuccess }) => {
           )}
         </div>
         <div className="hidden ske-cmt" id="detail-list-report">
-          {[...review.report.message].reverse().map((item, index) => (
+          {[...review?.report?.message].reverse().map((item, index) => (
             <div className="d-flex flex-row ske-cmt-c" key={index}>
               {item}
             </div>

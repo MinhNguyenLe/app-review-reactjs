@@ -118,6 +118,7 @@ function LoginPage() {
                       <Input
                         value={valuesLogin.emailLogin || ""}
                         name="emailLogin"
+                        data-testid="login-field-email"
                         id="emailLogin"
                         required
                         onChange={handleChangeLogin}
@@ -144,6 +145,7 @@ function LoginPage() {
                       <Input
                         value={valuesLogin.passLogin || ""}
                         name="passLogin"
+                        data-testid="login-field-password"
                         id="passLogin"
                         required
                         onChange={handleChangeLogin}

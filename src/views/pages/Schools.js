@@ -129,13 +129,14 @@ function Schools() {
                   type="select"
                   style={{ margin: "0 10px" }}
                   name="select-level-school"
+                  data-testid="select-level-school"
                 >
                   <option value="all">
                     Tất cả
                   </option>
-                  <option value="1">Đại học</option>
-                  <option value="2">Cao đẵng</option>
-                  <option value="3">Trung cấp</option>
+                  <option value="1" data-testid="select-level-school-option">Đại học</option>
+                  <option value="2" data-testid="select-level-school-option">Cao đẵng</option>
+                  <option value="3" data-testid="select-level-school-option">Trung cấp</option>
                 </select>
               </div>
               <div
@@ -154,17 +155,18 @@ function Schools() {
                   style={{ margin: "0 10px" }}
                   name="select-major-school"
                   defaultValue="all"
+                  data-testid="select-major-school"
                 >
                   <option value="all">
                     Tất cả
                   </option>
-                  <option value="1">Khoa học - Kỹ thuật</option>
-                  <option value="2">Xã hội - Nhân văn</option>
-                  <option value="3">Y dược</option>
-                  <option value="4">Kinh tế- Quản lý</option>
-                  <option value="5">Chính trị- Quân sự</option>
-                  <option value="6">Sư phạm</option>
-                  <option value="7">Năng khiếu</option>
+                  <option value="1" data-testid="select-major-school-option">Khoa học - Kỹ thuật</option>
+                  <option value="2" data-testid="select-major-school-option">Xã hội - Nhân văn</option>
+                  <option value="3" data-testid="select-major-school-option">Y dược</option>
+                  <option value="4" data-testid="select-major-school-option">Kinh tế- Quản lý</option>
+                  <option value="5" data-testid="select-major-school-option">Chính trị- Quân sự</option>
+                  <option value="6" data-testid="select-major-school-option">Sư phạm</option>
+                  <option value="7" data-testid="select-major-school-option">Năng khiếu</option>
                 </select>
               </div>
               <div
@@ -183,13 +185,14 @@ function Schools() {
                   style={{ margin: "0 10px" }}
                   name="select-type-school"
                   defaultValue="all"
+                  data-testid="select-type-school"
                 >
                   <option value="all">
                     Tất cả
                   </option>
-                  <option value="1">Công lập</option>
-                  <option value="2">Dân lập</option>
-                  <option value="3">Bán công</option>
+                  <option value="1" data-testid="select-type-school-option">Công lập</option>
+                  <option value="2" data-testid="select-type-school-option">Dân lập</option>
+                  <option value="3" data-testid="select-type-school-option">Bán công</option>
                 </select>
               </div>
             </FormGroup>

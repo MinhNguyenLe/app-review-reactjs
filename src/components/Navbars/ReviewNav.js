@@ -104,6 +104,7 @@ function ReviewNav({ writeReview }) {
                   <NavItem>
                     <div>
                       <rb.Button
+                      data-testid="user-write-review"
                         className={`${user.banned ? "prevent-event dark" : ""}`}
                         onClick={writeReview}
                       >
@@ -127,6 +128,7 @@ function ReviewNav({ writeReview }) {
                   <NavItem>
                     <div>
                       <rb.Button
+                      data-testid="non-user-write-review"
                       id="btn-write-review"
                         className={`${user.banned ? "prevent-event dark" : ""}`}
                         onClick={writeReview}

@@ -1,24 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
 import "moment-timezone";
 import { useLocation, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import * as action from "redux/actions.js";
-import { apiLocal } from "javascript/dataGlobal.js";
-import Loading from "components/loading/Loading.js";
-import * as func from "javascript/funcGlobal.js";
-import * as rb from "react-bootstrap";
-import ListComment from "components/comments/ListComment";
-// reactstrap components
-// import {
-// } from "reactstrap";
-import ErrPage from "views/pages/Error.js";
-import CustomNavbar from "components/Navbars/CustomNavbar.js";
-import DarkFooter from "components/Footers/DarkFooter.js";
-import Review from "components/review/Review";
-import DetailPageHeader from "components/Headers/DetailPageHeader.js";
+import { apiLocal } from "../../javascript/dataGlobal.js";
+import Loading from "../../components/loading/Loading.js";
+import ListComment from "../../components/comments/ListComment";
+
+import CustomNavbar from "../../components/Navbars/CustomNavbar.js";
+import DarkFooter from "../../components/Footers/DarkFooter.js";
+import Review from "../../components/review/Review";
+import DetailPageHeader from "../../components/Headers/DetailPageHeader.js";
 
 function DetailReview() {
   React.useEffect(() => {
