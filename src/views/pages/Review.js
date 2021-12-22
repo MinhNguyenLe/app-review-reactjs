@@ -2,21 +2,21 @@ import React, { useState, useEffect, useRef } from "react";
 import $ from "jquery";
 import axios from "axios";
 import TextareaAutosize from "react-textarea-autosize";
-import ErrPage from "views/pages/Error.js";
+import ErrPage from "./Error.js";
 import "moment-timezone";
 import { Link, useLocation, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import * as action from "redux/actions.js";
-import { apiLocal } from "javascript/dataGlobal.js";
-import Loading from "components/loading/Loading.js";
-import * as func from "javascript/funcGlobal.js";
+import * as action from "../../redux/actions.js";
+import { apiLocal } from "../../javascript/dataGlobal.js";
+import Loading from "../../components/loading/Loading.js";
+import * as func from "../../javascript/funcGlobal.js";
 import * as rb from "react-bootstrap";
-import { filterType, filterLevel, filterMajor } from "javascript/filter.js";
+import { filterType, filterLevel, filterMajor } from "../../javascript/filter.js";
 
-import ReviewNav from "components/Navbars/ReviewNav.js";
-import DarkFooter from "components/Footers/DarkFooter.js";
-import Review from "components/review/Review.js";
-import ReviewPageHeader from "components/Headers/ReviewPageHeader.js";
+import ReviewNav from "../../components/Navbars/ReviewNav.js";
+import DarkFooter from "../../components/Footers/DarkFooter.js";
+import Review from "../../components/review/Review.js";
+import ReviewPageHeader from "../../components/Headers/ReviewPageHeader.js";
 
 import { FormGroup, Label, Input } from "reactstrap";
 
@@ -25,7 +25,7 @@ function ReviewPage() {
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     document.body.scrollTop = 0;
 
     return function cleanup() {

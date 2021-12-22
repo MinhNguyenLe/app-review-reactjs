@@ -11,7 +11,6 @@ import $ from "jquery";
 import * as func from "../../javascript/funcGlobal.js";
 
 function Schools() {
-  const params = useParams();
   const [data, setData] = useState([]);
   const refSearch = useRef();
   const refType = useRef();
@@ -23,7 +22,7 @@ function Schools() {
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     document.body.scrollTop = 0;
 
     Promise.all([axios.get(`${apiLocal}/api/schools/filter`)])
@@ -100,7 +99,7 @@ function Schools() {
                   borderRadius: "6px",
                 }}
               >
-                <i class="fas fa-search"></i>
+                <i className="fas fa-search"></i>
               </button>
               <input
                 ref={refSearch}
@@ -123,6 +122,7 @@ function Schools() {
               >
                 <label>Theo cấp bậc</label>
                 <select
+                  defaultValue="all"
                   className="select-school"
                   ref={refLevel}
                   id="select-level-school"
@@ -130,7 +130,7 @@ function Schools() {
                   style={{ margin: "0 10px" }}
                   name="select-level-school"
                 >
-                  <option value="" selected>
+                  <option value="all">
                     Tất cả
                   </option>
                   <option value="1">Đại học</option>
@@ -153,8 +153,9 @@ function Schools() {
                   type="select"
                   style={{ margin: "0 10px" }}
                   name="select-major-school"
+                  defaultValue="all"
                 >
-                  <option value="" selected>
+                  <option value="all">
                     Tất cả
                   </option>
                   <option value="1">Khoa học - Kỹ thuật</option>
@@ -181,8 +182,9 @@ function Schools() {
                   type="select"
                   style={{ margin: "0 10px" }}
                   name="select-type-school"
+                  defaultValue="all"
                 >
-                  <option value="" selected>
+                  <option value="all">
                     Tất cả
                   </option>
                   <option value="1">Công lập</option>

@@ -1,5 +1,4 @@
 import React from "react";
-import imgDefault from "../../assets/img/default-avatar.png";
 import axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

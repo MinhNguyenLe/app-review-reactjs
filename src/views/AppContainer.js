@@ -9,17 +9,4 @@ const AppContainer = ({ children }) => {
   });
   return <div>{children}</div>;
 };
-// class AppContainer extends Component {
-//   componentWillMount() {
-//     this.unlisten = this.props.history.listen((location, action) => {
-//       console.log("on route change");
-//     });
-//   }
-//   componentWillUnmount() {
-//     this.unlisten();
-//   }
-//   render() {
-//     return <div>{this.props.children}</div>;
-//   }
-// }
 export default withRouter(AppContainer);

@@ -1,14 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as rb from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-import * as action from "redux/actions.js";
-import * as func from "javascript/funcGlobal.js";
-import Moment from "react-moment";
-import "moment-timezone";
-import $ from "jquery";
-import { useParams } from "react-router-dom";
-import { apiLocal } from "javascript/dataGlobal.js";
 
 const ErrPage = () => {
   const dispatch = useDispatch()
